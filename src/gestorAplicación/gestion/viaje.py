@@ -1,10 +1,14 @@
 from datetime import datetime, date, time
+import empresa
+import terminal
+from ..transporte import bus
 
 class Viaje:
     ids = 1
 
-    def __init__(self, terminal_origen: Terminal, terminal_destino: Terminal, 
-                    empresa: Empresa, fecha: date, hora: time, bus: Bus):
+    def __init__(self, terminal_origen: terminal.Terminal, 
+                    terminal_destino: terminal.Terminal, empresa: empresa.Empresa, 
+                        fecha: date, hora: time, bus: bus.Bus):
         self.terminal_origen = terminal_origen
         self.terminal_destino = terminal_destino
         self.empresa = empresa
@@ -17,7 +21,7 @@ class Viaje:
     # Método para buscar un viaje por id en una lista de viajes, 
     # usado en la funcionalidad 2
     @classmethod
-    def buscar_viaje(viajes: list[Viaje], id_: str):
+    def buscar_viaje(cls, viajes: list[Viaje], id_: str):
         for viaje in viajes:
             if viaje.get_id() == id_:
                 return viaje
@@ -60,9 +64,9 @@ class Viaje:
         return self.bus.get_asientos()
 
     # Método que devuelve una lista de tipo int, cuyos valores indican hasta que fila 
-    # van cada tipo de asiento (new int[]{5, 10} significa que los asientos preferenciales 
-    # van hasta la fila 5, los asientos premium van hasta la fila 10 y el resto de las 
-    # filas son estandar. Usado en varias funcionalidades
+    # van cada tipo de asiento (new int[]{5, 10} significa que los asientos 
+    # preferenciales van hasta la fila 5, los asientos premium van hasta la fila 10 
+    # y el resto de las filas son estandar. Usado en varias funcionalidades
     def tipos_asiento(self):
         return self.bus.get_tipos_asiento()
 
@@ -81,7 +85,7 @@ class Viaje:
 
     # Método toString que hace calcula los espacios en blanco necesarios para que 
     # la impresión en pantalla se vea uniforme
-    def __str__(self) -> str:
+    def __str__(self):
         origen_spaces = ' ' * max(0, 11 - len(self.terminal_origen.get_ubicacion()))
         destino_spaces = ' ' * max(0, 11 - len(self.terminal_destino.get_ubicacion()))
         id_spaces = ' ' * max(0, 3 - len(self.id))
@@ -95,19 +99,19 @@ class Viaje:
     def get_terminal_origen(self):
         return self.terminal_origen
     
-    def set_terminal_origen(self, terminal_origen: Terminal):
+    def set_terminal_origen(self, terminal_origen: terminal.Terminal):
         self.terminal_origen = terminal_origen
 
     def get_terminal_destino(self):
         return self.terminal_destino
 
-    def set_terminal_origen(self, terminal_destino: Terminal):
+    def set_terminal_origen(self, terminal_destino: terminal.Terminal):
         self.terminal_destino = terminal_destino
 
     def get_empresa(self):
         return self.empresa
 
-    def set_empresa(self, empresa: Empresa):
+    def set_empresa(self, empresa: empresa.Empresa):
         self.empresa = empresa
 
     def get_fecha(self):
@@ -116,7 +120,7 @@ class Viaje:
     def set_fecha(self, fecha: date):
         self.fecha = fecha
 
-    def get_hora(self) -> time:
+    def get_hora(self):
         return self.hora
 
     def set_hora(self, hora: time):
@@ -125,7 +129,7 @@ class Viaje:
     def get_bus(self):
         return self.bus
 
-    def set_bus(self, bus: Bus):
+    def set_bus(self, bus: bus.Bus):
         self.bus = bus
 
     def get_id(self):
