@@ -21,7 +21,7 @@ class Viaje:
     # Método para buscar un viaje por id en una lista de viajes, 
     # usado en la funcionalidad 2
     @classmethod
-    def buscar_viaje(cls, viajes: list[Viaje], id_: str):
+    def buscar_viaje(cls, viajes: list['Viaje'], id_: str):
         for viaje in viajes:
             if viaje.get_id() == id_:
                 return viaje

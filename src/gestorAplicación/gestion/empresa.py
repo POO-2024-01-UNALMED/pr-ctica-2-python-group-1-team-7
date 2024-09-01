@@ -2,7 +2,7 @@ from datetime import datetime, time, date
 import viaje
 
 class Empresa:
-    empresas = []
+    empresas:list['Empresa'] = []
 
     def __init__(self, nombre: str):
         self.nombre = nombre

@@ -1,10 +1,10 @@
 from datetime import datetime, timedelta
-from gestor_aplicacion.gestion import Empresa, TipoAsiento
+from gestion import Empresa, TipoAsiento
 from concurrent.futures import ThreadPoolExecutor
 import threading
 
 class Asiento:
-    asientos = []  # Lista estática para almacenar todos los asientos
+    asientos:list['Asiento'] = []  # Lista estática para almacenar todos los asientos
 
     def __init__(self, numero="Indefinido", tipo_asiento=None):
         # Inicializa un objeto Asiento con el número y tipo de asiento dados.

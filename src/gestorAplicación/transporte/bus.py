@@ -7,7 +7,7 @@ class Bus(Vehiculo):
         # Inicializa el Bus con un número de filas y un esquema de tipos de asiento.
         # Inicializa la lista de asientos vacía
         self.tipos_asiento_fila = tipos_asiento_fila
-        self.asientos = []
+        self.asientos:list[Asiento] = []
         # Crea los asientos para el bus
         self.crear_asientos(filas)
         # Genera una placa única para el bus

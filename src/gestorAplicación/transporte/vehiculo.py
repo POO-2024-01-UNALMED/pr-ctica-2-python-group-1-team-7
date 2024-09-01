@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Vehiculo(ABC):
     # Lista para almacenar las placas de vehículos generadas
-    placas = []
+    placas:list[str] = []
 
     def __init__(self, placa: str):
         # Inicializa el objeto Vehiculo con una placa específica
