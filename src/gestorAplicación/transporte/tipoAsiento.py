@@ -1,4 +1,6 @@
-import enum
+from enum import Enum
 
-class TipoAsiento(enum):
-    pass
+class TipoAsiento(Enum):
+    ESTANDAR = "Rojo"
+    PREMIUM = "Amarillo"
+    PREFERENCIAL = "Azul"

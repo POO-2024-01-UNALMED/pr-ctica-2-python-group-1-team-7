@@ -37,7 +37,7 @@ class Vehiculo(ABC):
         return cls.placas
 
     @classmethod
-    def set_placas(placas: list[str]):
+    def set_placas(cls,placas: list[str]):
         cls.placas = placas
 
     def get_placa(self):
