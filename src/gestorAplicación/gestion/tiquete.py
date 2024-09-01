@@ -1,8 +1,4 @@
-import datetime
-from gestion.empresa import Empresa
-from personas.pasajero import Pasajero
-from personas.persona import Persona
-from transporte.asiento import Asiento
+from typing import override
 
 class Tiquete:
     numeros_reserva = 1000000  # Contador para generar números de reserva únicos
