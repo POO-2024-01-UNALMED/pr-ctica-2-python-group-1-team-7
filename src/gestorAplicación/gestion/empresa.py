@@ -1,8 +1,7 @@
 from datetime import datetime, time, date
-import viaje
 
 class Empresa:
-    empresas:list['Empresa'] = []
+    empresas: list['Empresa'] = []
 
     def __init__(self, nombre: str):
         self.nombre = nombre
@@ -65,7 +64,7 @@ class Empresa:
         return None
 
     # Método para agregar un viaje a la lista de viajes
-    def agregar_viaje(self, viaje: viaje.Viaje):
+    def agregar_viaje(self, viaje: 'Viaje'):
         self.get_viajes.append(viaje)
 
     # Getters y setters 

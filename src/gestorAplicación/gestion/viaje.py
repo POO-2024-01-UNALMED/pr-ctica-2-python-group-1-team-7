@@ -1,15 +1,12 @@
 from datetime import datetime, date, time
 from typing import override
-import empresa
-import terminal
-from ..transporte import bus
 
 class Viaje:
     ids = 1
 
-    def __init__(self, terminal_origen: terminal.Terminal, 
-                    terminal_destino: terminal.Terminal, empresa: empresa.Empresa, 
-                        fecha: date, hora: time, bus: bus.Bus):
+    def __init__(self, terminal_origen: 'Terminal', 
+                    terminal_destino: 'Terminal', empresa: 'Empresa', 
+                        fecha: date, hora: time, bus: 'Bus'):
         self.terminal_origen = terminal_origen
         self.terminal_destino = terminal_destino
         self.empresa = empresa
@@ -101,43 +98,43 @@ class Viaje:
     def get_terminal_origen(self):
         return self.terminal_origen
     
-    def set_terminal_origen(self, terminal_origen: terminal.Terminal):
+    def set_terminal_origen(self, terminal_origen):
         self.terminal_origen = terminal_origen
 
     def get_terminal_destino(self):
         return self.terminal_destino
 
-    def set_terminal_origen(self, terminal_destino: terminal.Terminal):
+    def set_terminal_origen(self, terminal_destino):
         self.terminal_destino = terminal_destino
 
     def get_empresa(self):
         return self.empresa
 
-    def set_empresa(self, empresa: empresa.Empresa):
+    def set_empresa(self, empresa):
         self.empresa = empresa
 
     def get_fecha(self):
         return self.fecha
 
-    def set_fecha(self, fecha: date):
+    def set_fecha(self, fecha):
         self.fecha = fecha
 
     def get_hora(self):
         return self.hora
 
-    def set_hora(self, hora: time):
+    def set_hora(self, hora):
         self.hora = hora
 
     def get_bus(self):
         return self.bus
 
-    def set_bus(self, bus: bus.Bus):
+    def set_bus(self, bus):
         self.bus = bus
 
     def get_id(self):
         return self.id
 
-    def set_id(self, id_: str):
+    def set_id(self, id_):
         self.id = id_
 
     def get_origen(self):
@@ -145,4 +142,3 @@ class Viaje:
 
     def get_destino(self):
         return self.get_terminal_destino.get_ubicacion
-   

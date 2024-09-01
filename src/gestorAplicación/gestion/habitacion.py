@@ -1,56 +1,64 @@
 from datetime import datetime, timedelta
-from typing import List, Optional
-import threading
+from terminal import Terminal
 from typing import override
-from personas.persona import Persona
-from transporte.asiento import Asiento
-from hospedaje import Hospedaje
+import threading
 
 class Habitacion:
-    # Lista de todas las instancias de Habitacion
-    habitaciones: List['Habitacion'] = []
-
-    def __init__(self, numero_habitacion: str, hospedaje=None, ubicacion: str = ""):
+    def __init__(self, numero_habitacion: str):
         self.numero_habitacion = numero_habitacion  # Número de la habitación
-        self.hospedaje = hospedaje  # Hospedaje al que pertenece la habitación
-        self.ubicacion = ubicacion.upper()  # Ubicación de la habitación en mayúsculas
-        self.reservada = False  # Estado de reserva inicial
-        self.fecha_reserva: Optional[datetime] = None  # Fecha de reserva (si hay una)
-        Habitacion.habitaciones.append(self)  # Añade la habitación a la lista de habitaciones
+        self.reservada: bool = False  # Estado de reserva inicial
+        self.fecha_reserva: datetime = None  # Fecha de reserva (si hay una)
 
+    # Método que revisa todas las habitaciones y libera las que ya no están reservadas
+    @classmethod
+    def chequear_habitaciones(cls):
+        for terminal in Terminal.get_terminales():
+            for hospedaje in terminal.get_hospedajes():
+                for habitacion in hospedaje.get_habitaciones():
+                    if habitacion.get_fecha_reserva() is not None:
+                        if habitacion.get_fecha_reserva() <= datetime.now():
+                            # Libera la habitación si la fecha de reserva ha pasado
+                            habitacion.liberar()
+                        else:
+                            # Programa la liberación de la habitación 
+                            # # cuando la reserva expire
+                            duracion = habitacion.get_fecha_reserva() - datetime.now()
+                            minutos = int(duracion.total_seconds() // 60)
+                            threading.Timer(minutos * 60, habitacion.liberar).start()
+
+    # Método para reservar una habitación de un hospedaje por un cierto período de tiempo, 
+    # usado en la funcionalidad 4
     def reservar(self, fecha_reserva: datetime):
         # Marca la habitación como reservada y establece la fecha de reserva
         self.reservada = True
         self.fecha_reserva = fecha_reserva
 
+    # Método para liberar una habitación de un hospedaje, usado en la funcionalidad 4
     def liberar(self):
         # Marca la habitación como no reservada y elimina la fecha de reserva
         self.reservada = False
         self.fecha_reserva = None
 
+    # Método que calcula el tiempo restante hasta que la habitación esté disponible
     def disponible_en(self):
-        # Calcula el tiempo restante hasta que la habitación esté disponible
         if self.fecha_reserva:
             ahora = datetime.now()  # Obtiene la fecha y hora actuales
             duracion = self.fecha_reserva - ahora  # Calcula la diferencia de tiempo
             dias = duracion.days
-            horas, resto = divmod(duracion.seconds, 3600)  # Convierte el resto en horas y minutos
+            horas, resto = divmod(duracion.seconds, 3600)  # Convierte el resto en horas 
+                                                            # y minutos
             minutos, _ = divmod(resto, 60)
             return f"{dias} días {horas} horas {minutos} minutos"
         return None
 
+    # Representa la habitación en formato de cadena
     @override
     def __str__(self):
-        # Representa la habitación en formato de cadena
         estado_reserva = "Sí" if self.reservada else "No"
-        return f"    {self.numero_habitacion}                      {estado_reserva}            {self.disponible_en()}"
-
-    def get_hospedaje(self):
-        return self.hospedaje
-
-    def set_hospedaje(self, hospedaje):
-        self.hospedaje = hospedaje
-
+        return (f"    {self.numero_habitacion}                      {estado_reserva}" 
+                + f"            {self.disponible_en()}")
+   
+    # Getters y setters
     def get_numero_habitacion(self):
         return self.numero_habitacion
 
@@ -63,39 +71,8 @@ class Habitacion:
     def set_reservada(self, reservada):
         self.reservada = reservada
 
-    def get_ubicacion(self):
-        return self.ubicacion
-
-    def set_ubicacion(self, ubicacion):
-        self.ubicacion = ubicacion.upper()
-
-    def get_fecha_reserva(self) -> Optional[datetime]:
+    def get_fecha_reserva(self):
         return self.fecha_reserva
 
-    def set_fecha_reserva(self, fecha_reserva: datetime):
+    def set_fecha_reserva(self, fecha_reserva):
         self.fecha_reserva = fecha_reserva
-
-    @staticmethod
-    def get_habitaciones():
-        return Habitacion.habitaciones
-
-    @staticmethod
-    def set_habitaciones(habitaciones: List['Habitacion']):
-        Habitacion.habitaciones = habitaciones
-
-    @staticmethod
-    def chequear_habitaciones():
-        # Revisa todas las habitaciones y libera las que ya no están reservadas
-        for terminal in Terminal.get_terminales():
-            for hospedaje in terminal.get_hospedajes():
-                for habitacion in hospedaje.get_habitaciones():
-                    if habitacion.get_fecha_reserva() is not None:
-                        if habitacion.get_fecha_reserva() <= datetime.now():
-                            # Libera la habitación si la fecha de reserva ha pasado
-                            habitacion.liberar()
-                        else:
-                            # Programa la liberación de la habitación cuando la reserva expire
-                            duracion = habitacion.get_fecha_reserva() - datetime.now()
-                            minutos = int(duracion.total_seconds() // 60)
-                            threading.Timer(minutos * 60, habitacion.liberar).start()
-
