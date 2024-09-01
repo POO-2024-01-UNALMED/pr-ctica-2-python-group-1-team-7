@@ -18,6 +18,11 @@ from gestorAplicación.transporte.asiento import Asiento
 from gestorAplicación.transporte.bus import Bus
 from gestorAplicación.transporte.tipoAsiento import TipoAsiento
 from gestorAplicación.transporte.vehiculo import Vehiculo
+import funcionalidad_1
+import funcionalidad_2
+import funcionalidad_3
+import funcionalidad_4
+import funcionalidad_5
 
 class Interfaz:
     sc = input  # Usamos la función input como entrada de datos
@@ -62,16 +67,16 @@ class Interfaz:
             print()
 
             if opcion == "1":
-                ver_viajes()
+                funcionalidad_1.ver_viajes()
             elif opcion == "2":
-                reservar_tiquete()
+                funcionalidad_2.reservar_tiquete()
             elif opcion == "3":
-                gestionar_tiquetes()
+                funcionalidad_3.gestionar_tiquetes()
             elif opcion == "4":
-                hospedaje()
+                funcionalidad_4.hospedaje()
             elif opcion == "5":
                 print("Bienvenido Administrador")
-                administrador()
+                funcionalidad_5.administrador()
             elif opcion == "6":
                 Interfaz.salir_del_sistema()
             else:
