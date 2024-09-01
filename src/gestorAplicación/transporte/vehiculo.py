@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Vehiculo(ABC):
     # Lista para almacenar las placas de vehículos generadas
-    placas:list[str] = []
+    placas: list[str] = []
 
     def __init__(self, placa: str):
         # Inicializa el objeto Vehiculo con una placa específica
@@ -20,7 +20,9 @@ class Vehiculo(ABC):
         # Genera una nueva placa de vehículo única
         letras = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
         while True:
-            placa = f"{random.choice(letras)}{random.choice(letras)}{random.choice(letras)}-{random.randint(0, 9)}{random.randint(0, 9)}{random.randint(0, 9)}"
+            placa = (f"{random.choice(letras)}{random.choice(letras)}" 
+                    + f"{random.choice(letras)}-{random.randint(0, 9)}" 
+                    + f"{random.randint(0, 9)}{random.randint(0, 9)}")
             if cls.verificar_placa(placa):
                 cls.placas.append(placa)
                 return placa
@@ -32,7 +34,12 @@ class Vehiculo(ABC):
 
     # Getters y setters
     @classmethod
-    def set_placas(cls, placas: list[str]):
+    def get_placas(cls):
+        # Establece la lista de placas generadas
+        return cls.placas
+
+    @classmethod
+    def set_placas(cls, placas):
         # Establece la lista de placas generadas
         cls.placas = placas
 
@@ -40,6 +47,6 @@ class Vehiculo(ABC):
         # Obtiene la placa del vehículo
         return self.placa
 
-    def set_placa(self, placa: str):
+    def set_placa(self, placa):
         # Establece la placa del vehículo
         self.placa = placa

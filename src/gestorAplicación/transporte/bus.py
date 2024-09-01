@@ -1,13 +1,13 @@
 from vehiculo import Vehiculo
-from asiento import Asiento
 from tipoAsiento import TipoAsiento
+from asiento import Asiento
 
 class Bus(Vehiculo):
     def __init__(self, filas: int, tipos_asiento_fila: list[int]):
         # Inicializa el Bus con un número de filas y un esquema de tipos de asiento.
         # Inicializa la lista de asientos vacía
         self.tipos_asiento_fila = tipos_asiento_fila
-        self.asientos:list[Asiento] = []
+        self.asientos: list[Asiento] = []
         # Crea los asientos para el bus
         self.crear_asientos(filas)
         # Genera una placa única para el bus
@@ -15,7 +15,8 @@ class Bus(Vehiculo):
     
     # Método para crear los asientos al llamar al constructor
     def crear_asientos(self, filas: int):
-        # Crea los asientos del bus basándose en el número de filas y el esquema de tipos de asiento.
+        # Crea los asientos del bus basándose en el número de filas y 
+        # el esquema de tipos de asiento.
         letras = "ABCD"  # Letras que representan las columnas de los asientos
 
         for fila in range(1, filas + 1):
@@ -36,7 +37,7 @@ class Bus(Vehiculo):
         # Devuelve el esquema de tipos de asiento
         return self.tipos_asiento_fila
 
-    def set_tipos_asiento(self, tipos_asiento: list[int]):
+    def set_tipos_asiento(self, tipos_asiento):
         # Establece el esquema de tipos de asiento
         self.tipos_asiento_fila = tipos_asiento
 
@@ -44,14 +45,6 @@ class Bus(Vehiculo):
         # Devuelve la lista de asientos del bus
         return self.asientos
 
-    def set_asientos(self, asientos: list[Asiento]):
+    def set_asientos(self, asientos):
         # Establece la lista de asientos del bus
         self.asientos = asientos
-
-    def get_placa(self):
-        # Devuelve la placa del bus
-        return self.placa
-
-    def set_placa(self, placa: str):
-        # Establece la placa del bus
-        self.placa = placa
