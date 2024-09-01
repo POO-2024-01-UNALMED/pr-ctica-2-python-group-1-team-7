@@ -4,6 +4,8 @@ from typing import List, Optional
 from concurrent.futures import ThreadPoolExecutor
 import unicodedata
 import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from baseDatos import Deserializador, Serializador
 from gestorAplicación.gestion.empresa import Empresa
@@ -24,8 +26,9 @@ import funcionalidad_3
 import funcionalidad_4
 import funcionalidad_5
 
+
 class Interfaz:
-    sc = input  # Usamos la función input como entrada de datos
+    sc = input  # Usamos la funcion input como entrada de datos
 
     @staticmethod
     def input():
