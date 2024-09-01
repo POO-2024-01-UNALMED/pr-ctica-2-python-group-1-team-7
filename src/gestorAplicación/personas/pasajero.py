@@ -1,4 +1,5 @@
 from datetime import date
+from typing import override
 from gestion import Empresa, Tiquete, Viaje
 from personas.persona import Persona
 
@@ -112,6 +113,7 @@ class Pasajero(Persona):
         if pasajero:
             Pasajero.pasajeros.remove(pasajero)
 
+    @override
     def __str__(self):
         # Devuelve una representación en cadena del pasajero.
         # Muestra el nombre, ID, teléfono y correo del pasajero.

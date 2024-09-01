@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import List
+from typing import override
 from transporte.asiento import Asiento
 from habitacion import Habitacion
 
@@ -71,6 +72,7 @@ class Hospedaje:
         if habitacion:
             habitacion.liberar()  # Libera la habitación
 
+    @override
     def __str__(self):
         # Representación en cadena del objeto Hospedaje
         espacio_nombre = " " * (5 - len(self.nombre)) if len(self.nombre) < 5 else ""

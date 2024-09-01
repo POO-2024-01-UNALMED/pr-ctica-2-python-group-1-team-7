@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from gestion import Empresa, TipoAsiento
+from typing import override
 from concurrent.futures import ThreadPoolExecutor
 import threading
 
@@ -74,6 +75,7 @@ class Asiento:
         # Establece la fecha de reserva del asiento.
         self.fecha_reserva = fecha_reserva
 
+    @override
     def __str__(self):
         # Devuelve una representación en cadena del asiento.
         # Muestra el número y el tipo de asiento.

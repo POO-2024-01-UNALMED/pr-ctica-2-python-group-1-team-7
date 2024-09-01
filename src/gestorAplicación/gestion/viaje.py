@@ -1,4 +1,5 @@
 from datetime import datetime, date, time
+from typing import override
 import empresa
 import terminal
 from ..transporte import bus
@@ -85,6 +86,7 @@ class Viaje:
 
     # Método toString que hace calcula los espacios en blanco necesarios para que 
     # la impresión en pantalla se vea uniforme
+    @override
     def __str__(self):
         origen_spaces = ' ' * max(0, 11 - len(self.terminal_origen.get_ubicacion()))
         destino_spaces = ' ' * max(0, 11 - len(self.terminal_destino.get_ubicacion()))
