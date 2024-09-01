@@ -1,6 +1,6 @@
-from vehiculo import Vehiculo
-from tipoAsiento import TipoAsiento
-from asiento import Asiento
+from .vehiculo import Vehiculo
+from .tipoAsiento import TipoAsiento
+from .asiento import Asiento
 
 class Bus(Vehiculo):
     def __init__(self, filas: int, tipos_asiento_fila: list[int]):

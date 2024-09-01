@@ -1,7 +1,7 @@
 from datetime import date
 from typing import override
-from gestion import Empresa
-from personas.persona import Persona
+from ..gestion.empresa import Empresa
+from .persona import Persona
 
 class Pasajero(Persona):
     pasajeros: list['Pasajero'] = []  # Lista estática para almacenar todos los pasajeros

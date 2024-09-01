@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
-from gestion import Empresa, TipoAsiento
+from ..gestion.empresa import Empresa
+from .tipoAsiento import TipoAsiento
 from typing import override
 from concurrent.futures import ThreadPoolExecutor
 import threading
@@ -17,7 +18,7 @@ class Asiento:
     # Método para asegurarse de que los asientos se liberen en el tiempo indicado, 
     # usado en la funcionalidad 1
     @classmethod
-    def chequear_asientos():
+    def chequear_asientos(cls):
         # Utiliza hilos para programar la liberación de asientos en el futuro.
         for empresa in Empresa.get_empresas():  # Itera sobre todas las empresas
             for viaje in empresa.get_viajes():  # Itera sobre todos los 

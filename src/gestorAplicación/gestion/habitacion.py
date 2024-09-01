@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from terminal import Terminal
+from .terminal import Terminal
 from typing import override
 import threading
 
