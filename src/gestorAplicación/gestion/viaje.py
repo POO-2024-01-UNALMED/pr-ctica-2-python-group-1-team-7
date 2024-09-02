@@ -4,9 +4,9 @@ from typing import override
 class Viaje:
     ids = 1
 
-    def __init__(self, terminal_origen: 'Terminal', 
-                    terminal_destino: 'Terminal', empresa: 'Empresa', 
-                        fecha: date, hora: time, bus: 'Bus'):
+    def __init__(self, terminal_origen: 'Terminal', terminal_destino: 'Terminal', 
+                    empresa: 'Empresa' = None, fecha: date = None, 
+                        hora: time = None, bus: 'Bus' = None):
         self.terminal_origen = terminal_origen
         self.terminal_destino = terminal_destino
         self.empresa = empresa
@@ -142,3 +142,6 @@ class Viaje:
 
     def get_destino(self):
         return self.get_terminal_destino.get_ubicacion
+
+    def get_str_fecha(self):
+        return self.fecha.strftime("%d-%m-%Y")

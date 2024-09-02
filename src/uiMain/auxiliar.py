@@ -1,7 +1,11 @@
 from datetime import datetime, time
-from gestorAplicación.gestion import Empresa, Hospedaje, Terminal, Tiquete, Viaje
-from gestorAplicación.personas import Pasajero
-from gestorAplicación.transporte import Bus
+from gestorAplicación.gestion.empresa import Empresa
+from gestorAplicación.gestion.hospedaje import Hospedaje
+from gestorAplicación.gestion.terminal import Terminal
+from gestorAplicación.gestion.tiquete import Tiquete
+from gestorAplicación.gestion.viaje import Viaje
+from gestorAplicación.personas.pasajero import Pasajero
+from gestorAplicación.transporte.bus import Bus
 
 def instanciar_objetos():
     # Crear instancias de Terminal

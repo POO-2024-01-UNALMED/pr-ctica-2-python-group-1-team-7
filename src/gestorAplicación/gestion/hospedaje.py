@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import override
+from .habitacion import Habitacion
 
 class Hospedaje:
     def __init__(self, nombre: str = "Sin nombre", pisos: int = 0, 

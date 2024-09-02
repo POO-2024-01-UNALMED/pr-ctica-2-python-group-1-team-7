@@ -25,6 +25,7 @@ import funcionalidad_2
 import funcionalidad_3
 import funcionalidad_4
 import funcionalidad_5
+import auxiliar
 
 
 class Interfaz:
@@ -49,7 +50,8 @@ class Interfaz:
         sys.exit(0)
 
     def main():
-        # Deserializador.deserializar()
+        #Deserializador.deserializar()
+        auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
 
         opcion = ""
