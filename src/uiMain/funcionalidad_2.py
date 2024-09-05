@@ -3,8 +3,8 @@ from auxiliar import sc_input
 import re
 
 def reservar_tiquete():
-    origen = input("Ingrese el origen: ").strip()
-    destino = input("Ingrese el destino: ").strip()
+    origen = sc_input("Ingrese el origen: ").strip()
+    destino = sc_input("Ingrese el destino: ").strip()
 
     viajes = Empresa.buscar_viajes_por_origen_destino(origen.upper(), destino.upper())
 
@@ -20,7 +20,7 @@ def reservar_tiquete():
             print(viaje)
             print()
 
-        id = input("Ingrese el id del viaje: ").strip()
+        id = sc_input("Ingrese el id del viaje: ").strip()
 
         viaje = Viaje.buscar_viaje(viajes, id)
 
@@ -113,13 +113,13 @@ def reservar_tiquete():
 
             print("	       --\n")
 
-            numero_asiento = input("Ingrese el número del asiento: ").strip()
+            numero_asiento = sc_input("Ingrese el número del asiento: ").strip()
 
             while True:
                 asiento = viaje.buscar_asiento(numero_asiento)
                 if asiento is None or asiento.is_reservado():
                     print("\nEl asiento no está disponible\n")
-                    numero_asiento = input("Ingrese otro número de asiento: ").strip()
+                    numero_asiento = sc_input("Ingrese otro número de asiento: ").strip()
                 else:
                     break
 
@@ -127,24 +127,24 @@ def reservar_tiquete():
 
             print("Ingrese sus datos:\n")
 
-            nombre = input("Nombre completo: ").strip()
-            id_pasajero = input("Número de identificación (6 dígitos): ").strip()
+            nombre = sc_input("Nombre completo: ").strip()
+            id_pasajero = sc_input("Número de identificación (6 dígitos): ").strip()
 
             while len(id_pasajero) != 6:
-                id_pasajero = input("Número de identificación (6 dígitos): ").strip()
+                id_pasajero = sc_input("Número de identificación (6 dígitos): ").strip()
 
             pasajero = Pasajero.buscar_pasajero(id_pasajero)
 
             if not pasajero:
-                telefono = input("Teléfono: ").strip()
+                telefono = sc_input("Teléfono: ").strip()
                 while not re.match(r'^\d{10}$', telefono):
                     print("Teléfono inválido\nEl teléfono debe contener 10 dígitos\n")
-                    telefono = input("Teléfono: ").strip()
+                    telefono = sc_input("Teléfono: ").strip()
 
-                correo = input("Correo electrónico: ").strip()
+                correo = sc_input("Correo electrónico: ").strip()
                 while not re.match(r'^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$', correo):
                     print("Correo inválido\nEl correo debe tener la estructura (abcde@xyz.com)\n")
-                    correo = input("Correo electrónico: ").strip()
+                    correo = sc_input("Correo electrónico: ").strip()
 
                 pasajero = Pasajero(nombre, id_pasajero, telefono, correo)
 

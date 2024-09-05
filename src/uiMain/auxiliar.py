@@ -8,17 +8,40 @@ from gestorAplicación.personas.pasajero import Pasajero
 from gestorAplicación.transporte.bus import Bus
 import unidecode
 import tkinter as tk
+from funcionalidad_1 import ver_viajes
+#from funcionalidad_2 import reservar_tiquete
+from funcionalidad_3 import gestionar_tiquetes
+from funcionalidad_4 import hospedaje
+from funcionalidad_5 import administrador
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):
     input_value = input(mensaje)
     return unidecode.unidecode(input_value).strip()
 
-def ventanas():
+def ventana_inicio():
     ventana = tk.Tk()
     ventana.title("LussajuBus")
     ventana.geometry("500x500")
-    ventana.configure(background='lightgray')
+
+    barra_menu = tk.Menu(ventana)
+    ventana.config(menu=barra_menu) 
+
+    menu_inicio = tk.Menu(barra_menu, tearoff="off")
+    barra_menu.add_cascade(label="Inicio", menu=menu_inicio)
+
+    menu_inicio.add_command(label="Descripción")
+    menu_inicio.add_separator()
+    menu_inicio.add_command(label="Salir")
+
+    p1 = tk.Frame(ventana)
+
+    ventana.mainloop()
+
+def ventana_principal():
+    ventana = tk.Tk()
+    ventana.title("LussajuBus")
+    ventana.geometry("500x500")
 
     barra_menu = tk.Menu(ventana)
     ventana.config(menu=barra_menu) 
@@ -33,15 +56,23 @@ def ventanas():
     menu_procesos = tk.Menu(barra_menu, tearoff="off")
     barra_menu.add_cascade(label="Procesos y Consultas", menu=menu_procesos)
 
+    menu_procesos.add_command(label="Ver viajes", command=ver_viajes)
+    menu_procesos.add_separator()
+    menu_procesos.add_command(label="Reservar tiquete")
+    menu_procesos.add_separator()
+    menu_procesos.add_command(label="Gestionar tiquetes")
+    menu_procesos.add_separator()
+    menu_procesos.add_command(label="Servicio de hospedaje")
+    menu_procesos.add_separator()
+    menu_procesos.add_command(label="Administrador")
+
     menu_ayuda = tk.Menu(barra_menu, tearoff="off")
     barra_menu.add_cascade(label="Ayuda", menu=menu_ayuda)
       
-    """ frame_principal = tk.Frame(ventana, highlightbackground="black", 
+    frame_ventana = tk.Frame(ventana, highlightbackground="black", 
                                     highlightthickness=1)
-    frame_principal.pack(padx=(15, 15), pady=(30, 15), fill="both", expand=True) """
+    frame_ventana.pack(padx=(20, 20), pady=(20, 20), fill="both", expand=True)
 
-    #frameMenu = tk.Frame(frame_principal, bg="blue")
-    
     ventana.mainloop()
 
 

@@ -30,7 +30,8 @@ class Interfaz:
         auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
 
-        auxiliar.ventanas()
+        #auxiliar.ventana_inicio()
+        auxiliar.ventana_principal()
         """
         opcion = ""
 
