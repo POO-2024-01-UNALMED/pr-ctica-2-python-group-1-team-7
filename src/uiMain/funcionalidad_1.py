@@ -221,7 +221,7 @@ def ver_viajes():
         
         if respuesta2 == "si":
             id_viaje = input("Ingrese el id del viaje: ").strip()
-            viaje = Empresa.buscar_viaje(id_viaje)
+            viaje = Empresa.buscar_viaje_por_id(id_viaje)
             
             if viaje is None:
                 print(f"No se encontró ningún viaje con número de id {id_viaje}")

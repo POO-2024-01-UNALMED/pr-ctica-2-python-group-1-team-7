@@ -1,15 +1,12 @@
+from gestorAplicación.gestion.empresa import Empresa
+from auxiliar import sc_input
 import re
-
-def input():
-    # This is a placeholder for the input function.
-    # You may replace it with your custom implementation or use the built-in input() in actual usage.
-    return ""
 
 def reservar_tiquete():
     origen = input("Ingrese el origen: ").strip()
     destino = input("Ingrese el destino: ").strip()
 
-    viajes = Empresa.buscar_viajes_origen_destino(origen.upper(), destino.upper())
+    viajes = Empresa.buscar_viajes_por_origen_destino(origen.upper(), destino.upper())
 
     if not viajes:
         print("No se encontraron viajes disponibles para reservar\n")

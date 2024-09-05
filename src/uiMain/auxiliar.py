@@ -6,6 +6,44 @@ from gestorAplicación.gestion.tiquete import Tiquete
 from gestorAplicación.gestion.viaje import Viaje
 from gestorAplicación.personas.pasajero import Pasajero
 from gestorAplicación.transporte.bus import Bus
+import unidecode
+import tkinter as tk
+
+# Normaliza la entrada eliminando acentos y caracteres especiales
+def sc_input(mensaje: str):
+    input_value = input(mensaje)
+    return unidecode.unidecode(input_value).strip()
+
+def ventanas():
+    ventana = tk.Tk()
+    ventana.title("LussajuBus")
+    ventana.geometry("500x500")
+    ventana.configure(background='lightgray')
+
+    barra_menu = tk.Menu(ventana)
+    ventana.config(menu=barra_menu) 
+
+    menu_archivo = tk.Menu(barra_menu, tearoff="off")
+    barra_menu.add_cascade(label="Archivo", menu=menu_archivo)
+
+    menu_archivo.add_command(label="Aplicación")
+    menu_archivo.add_separator()
+    menu_archivo.add_command(label="Salir")
+
+    menu_procesos = tk.Menu(barra_menu, tearoff="off")
+    barra_menu.add_cascade(label="Procesos y Consultas", menu=menu_procesos)
+
+    menu_ayuda = tk.Menu(barra_menu, tearoff="off")
+    barra_menu.add_cascade(label="Ayuda", menu=menu_ayuda)
+      
+    """ frame_principal = tk.Frame(ventana, highlightbackground="black", 
+                                    highlightthickness=1)
+    frame_principal.pack(padx=(15, 15), pady=(30, 15), fill="both", expand=True) """
+
+    #frameMenu = tk.Frame(frame_principal, bg="blue")
+    
+    ventana.mainloop()
+
 
 def instanciar_objetos():
     # Crear instancias de Terminal
