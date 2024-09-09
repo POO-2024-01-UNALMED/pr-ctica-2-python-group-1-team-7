@@ -8,7 +8,7 @@ import funcionalidad1
 import funcionalidad2
 import funcionalidad3
 import funcionalidad4
-import funcionalidad5
+#import funcionalidad5
 import auxiliar
 from auxiliar import sc_input
 

@@ -8,10 +8,8 @@ from gestorAplicación.personas.pasajero import Pasajero
 # Definir la ruta a la carpeta temporal
 ruta_temp = os.path.join(os.getcwd(), "src", "baseDatos", "temp")
 
+#Limpia el contenido de todos los archivos en la carpeta temporal
 def limpiar_archivos():
-    """
-    Limpia el contenido de todos los archivos en la carpeta temporal.
-    """
     try:
         docs = os.listdir(ruta_temp)
         for doc in docs:

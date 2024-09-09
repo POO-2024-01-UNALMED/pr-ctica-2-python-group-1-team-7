@@ -8,11 +8,11 @@ from gestorAplicación.personas.pasajero import Pasajero
 from gestorAplicación.transporte.bus import Bus
 import unidecode
 import tkinter as tk
-from funcionalidad1 import ver_viajes
+#from funcionalidad1 import ver_viajes
 #from funcionalidad_2 import reservar_tiquete
 from funcionalidad3 import gestionar_tiquetes
 from funcionalidad4 import hospedaje
-from funcionalidad5 import administrador
+#from funcionalidad5 import administrador
 from PIL import ImageTk, Image
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
@@ -69,19 +69,19 @@ def ventana_inicio():
     p6.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
     p6.pack_propagate(False)
 
-    foto1 = Image.open("download.png")
+    """     foto1 = Image.open("src//uiMain//imágenes//download.png")
     label_foto1 = tk.Label(p6, image=foto1, width=p6.winfo_reqwidth(), height=p6.winfo_reqheight())
-    label_foto1.grid(row=0, column=0, padx=(10, 5), pady=(10, 5))
+    label_foto1.grid(row=0, column=0, padx=(10, 5), pady=(10, 5)) """
 
-    foto2 = tk.PhotoImage(file="download.png")
+    foto2 = tk.PhotoImage(file="src//uiMain//imágenes//download.png")
     label_foto2 = tk.Label(p6, image=foto2)
     label_foto2.grid(row=0, column=1, padx=(5, 10), pady=(10, 5))
 
-    foto3 = tk.PhotoImage(file="download.png")
+    foto3 = tk.PhotoImage(file="src//uiMain//imágenes//download.png")
     label_foto3 = tk.Label(p6, image=foto3)
     label_foto3.grid(row=1, column=0, padx=(10, 5), pady=(5, 10))
 
-    foto4 = tk.PhotoImage(file="download.png")
+    foto4 = tk.PhotoImage(file="src//uiMain//imágenes//download.png")
     label_foto4 = tk.Label(p6, image=foto4)
     label_foto4.grid(row=1, column=1, padx=(5, 10), pady=(5, 10))
 
