@@ -68,7 +68,7 @@ class Interfaz:
             print()
             opcion = input("Ingrese el número de la operación: ")
             print()
-
+ 
             if opcion == "1":
                 funcionalidad_1.ver_viajes()
             elif opcion == "2":
