@@ -4,11 +4,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from baseDatos import Serializador, Deserializador
 from gestorAplicación.gestion.habitacion import Habitacion
 from gestorAplicación.transporte.asiento import Asiento
-import funcionalidad_1
-import funcionalidad_2
-import funcionalidad_3
-import funcionalidad_4
-import funcionalidad_5
+import funcionalidad1
+import funcionalidad2
+import funcionalidad3
+import funcionalidad4
+import funcionalidad5
 import auxiliar
 from auxiliar import sc_input
 
@@ -30,8 +30,8 @@ class Interfaz:
         auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
 
-        #auxiliar.ventana_inicio()
-        auxiliar.ventana_principal()
+        auxiliar.ventana_inicio()
+        #auxiliar.ventana_principal()
         """
         opcion = ""
 
@@ -52,16 +52,16 @@ class Interfaz:
 
             match opcion:
                 case "1":
-                    funcionalidad_1.ver_viajes()
+                    funcionalidad1.ver_viajes()
                 case "2":
-                    funcionalidad_2.reservar_tiquete()
+                    funcionalidad2.reservar_tiquete()
                 case "3":
-                    funcionalidad_3.gestionar_tiquetes()
+                    funcionalidad3.gestionar_tiquetes()
                 case "4":
-                    funcionalidad_4.hospedaje()
+                    funcionalidad4.hospedaje()
                 case "5":
                     print("Bienvenido Administrador")
-                    funcionalidad_5.administrador()
+                    funcionalidad5.administrador()
                 case "6":
                     sc_input.salir_del_sistema()
                 case _:
