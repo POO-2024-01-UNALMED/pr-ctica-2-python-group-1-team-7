@@ -1,65 +1,61 @@
-import os
-import pickle
 from gestorAplicación.gestion.empresa import Empresa
+from gestorAplicación.personas.pasajero import Pasajero
 from gestorAplicación.gestion.terminal import Terminal
 from gestorAplicación.gestion.tiquete import Tiquete
-from gestorAplicación.personas.pasajero import Pasajero
+
+import pickle
+import os
 
 # Definir la ruta a la carpeta temporal
-ruta_temp = os.path.join(os.getcwd(), "src", "baseDatos", "temp")
+ruta_temp = os.path.abspath("src\\baseDatos\\temp")
 
 #Limpia el contenido de todos los archivos en la carpeta temporal
 def limpiar_archivos():
     try:
-        docs = os.listdir(ruta_temp)
-        for doc in docs:
-            file_path = os.path.join(ruta_temp, doc)
-            if os.path.isfile(file_path):
-                with open(file_path, 'w') as file:
-                    # Limpia el contenido del archivo
-                    pass
+        archivos = os.listdir(ruta_temp)
+        for archivo in archivos:
+            file_path = ruta_temp + "\\" + archivo
+            open(file_path, "w").close()
     except Exception as e:
         print(f"Error al limpiar archivos: {e}")
 
+# Serializa los objetos de diferentes clases 
+# y los guarda en los archivos correspondientes.
 def serializar():
-    """
-    Serializa los objetos de diferentes clases y los guarda en los archivos correspondientes.
-    """
     try:
-        docs = os.listdir(ruta_temp)
-        for doc in docs:
-            file_path = os.path.join(ruta_temp, doc)
+        archivos = os.listdir(ruta_temp)
+        for archivo in archivos:
+            file_path = ruta_temp + "\\" + archivo
             if "empresas" in file_path:
                 try:
-                    with open(file_path, 'wb') as file:
-                        # Serializa las empresas
-                        pickle.dump(Empresa.get_empresas(), file)
+                    # Serializa las empresas
+                    picklefile = open(file_path, "wb")
+                    pickle.dump(Empresa.get_empresas(), picklefile)
                 except Exception as e:
                     print(f"Error al serializar empresas: {e}")
 
             elif "pasajeros" in file_path:
                 try:
-                    with open(file_path, 'wb') as file:
-                        # Serializa los pasajeros
-                        pickle.dump(Pasajero.get_pasajeros(), file)
+                    # Serializa los pasajeros
+                    picklefile = open(file_path, "wb")
+                    pickle.dump(Pasajero.get_pasajeros(), picklefile)
                 except Exception as e:
                     print(f"Error al serializar pasajeros: {e}")
 
             elif "terminales" in file_path:
                 try:
-                    with open(file_path, 'wb') as file:
-                        # Serializa las terminales
-                        pickle.dump(Terminal.get_terminales(), file)
+                    # Serializa las terminales
+                    picklefile = open(file_path, "wb")
+                    pickle.dump(Terminal.get_terminales(), picklefile)
                 except Exception as e:
                     print(f"Error al serializar terminales: {e}")
-
             elif "tiquetes" in file_path:
                 try:
-                    with open(file_path, 'wb') as file:
-                        # Serializa los tiquetes (aquí se asume que se serializa un objeto de Tiquete)
-                        pickle.dump(Tiquete(), file)
+                    # Serializa el último tiquete creado para llevar 
+                    # la cuenta de los números de reserva
+                    picklefile = open(file_path, "wb")
+                    pickle.dump(Tiquete(), picklefile)
                 except Exception as e:
                     print(f"Error al serializar tiquetes: {e}")
-
     except Exception as e:
         print(f"Error al serializar archivos: {e}")
