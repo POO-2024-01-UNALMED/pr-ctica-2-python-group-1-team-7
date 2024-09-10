@@ -42,8 +42,7 @@ class Interfaz:
             print()
             print("1. Ver viajes disponibles")
             print("2. Reservar tiquete")
-            print("3. Gestionar tiquetes")
-            print("4. Agregar servicio de hospedaje")
+            print("3. Gestionar ti de hospedaje")
             print("5. Opciones de administrador")
             print("6. Salir")
             print()
@@ -59,7 +58,8 @@ class Interfaz:
                     funcionalidad3.gestionar_tiquetes()
                 case "4":
                     funcionalidad4.hospedaje()
-                case "5":
+                case "5":quetes")
+            print("4. Agregar servicio
                     print("Bienvenido Administrador")
                     funcionalidad5.administrador()
                 case "6":

@@ -13,7 +13,7 @@ import tkinter as tk
 from funcionalidad3 import gestionar_tiquetes
 from funcionalidad4 import hospedaje
 #from funcionalidad5 import administrador
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):
