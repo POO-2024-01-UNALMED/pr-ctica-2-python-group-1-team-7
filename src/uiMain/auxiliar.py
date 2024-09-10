@@ -10,8 +10,8 @@ import unidecode
 import tkinter as tk
 #from funcionalidad1 import ver_viajes
 #from funcionalidad_2 import reservar_tiquete
-from funcionalidad3 import gestionar_tiquetes
-from funcionalidad4 import hospedaje
+from uiMain.funcionalidades.funcionalidad3 import gestionar_tiquetes
+from uiMain.funcionalidades.funcionalidad4 import hospedaje
 #from funcionalidad5 import administrador
 #from PIL import ImageTk, Image
 

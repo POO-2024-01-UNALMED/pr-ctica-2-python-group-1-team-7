@@ -1,3 +1,5 @@
+
+
 def gestionar_tiquetes():
     id_pasajero = input("Ingrese el número de identificación del pasajero: ")
 
