@@ -8,7 +8,7 @@ import uiMain.funcionalidades.funcionalidad1 as funcionalidad1
 import uiMain.funcionalidades.funcionalidad2 as funcionalidad2
 import uiMain.funcionalidades.funcionalidad3 as funcionalidad3
 import uiMain.funcionalidades.funcionalidad4 as funcionalidad4
-from Ventanas import ventana_inicio
+from ventanas import ventana_inicio
 #import funcionalidad5
 import auxiliar
 from auxiliar import sc_input

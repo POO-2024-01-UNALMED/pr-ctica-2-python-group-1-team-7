@@ -15,7 +15,7 @@ from uiMain.funcionalidades.funcionalidad3 import gestionar_tiquetes
 from uiMain.funcionalidades.funcionalidad4 import hospedaje
 #from funcionalidad5 import administrador
 from PIL import Image, ImageTk
-from Ventanas import ventana_inicio
+from ventanas import ventana_inicio
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):

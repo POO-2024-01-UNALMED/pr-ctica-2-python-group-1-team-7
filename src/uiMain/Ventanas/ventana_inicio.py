@@ -1,20 +1,7 @@
-from datetime import datetime, time
-from gestorAplicación.gestion.empresa import Empresa
-from gestorAplicación.gestion.hospedaje import Hospedaje
-from gestorAplicación.gestion.terminal import Terminal
-from gestorAplicación.gestion.tiquete import Tiquete
-from gestorAplicación.gestion.viaje import Viaje
-from gestorAplicación.personas.pasajero import Pasajero
-from gestorAplicación.transporte.bus import Bus
-import unidecode
-import tkinter as tk
-from Ventanas import ventana_principal
-#from funcionalidad1 import ver_viajes
-#from funcionalidad_2 import reservar_tiquete
-from uiMain.funcionalidades.funcionalidad3 import gestionar_tiquetes
-from uiMain.funcionalidades.funcionalidad4 import hospedaje
-#from funcionalidad5 import administrador
+from ventanas import ventana_principal
 from PIL import Image, ImageTk
+import tkinter as tk
+import unidecode
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):
@@ -41,7 +28,7 @@ def ventana_inicio():
     menu_inicio = tk.Menu(barra_menu, tearoff="off")
     barra_menu.add_cascade(label="Inicio", menu=menu_inicio)
 
-    menu_inicio.add_command(label="Descripción", command= lambda:descripcion_programa(texto_saludo, saludo))
+    menu_inicio.add_command(label="Descripción",command= lambda:descripcion_programa(texto_saludo, saludo))
     menu_inicio.add_separator()
     menu_inicio.add_command(label="Salir", command= lambda: salir_programa(ventana))
 
@@ -67,6 +54,7 @@ def ventana_inicio():
     p4.pack_propagate(False)
 
     ingreso_sistema=tk.Button(p4,command=lambda:ventana_principal.ventana_principal(ventana))
+
     ingreso_sistema.pack(expand=True, fill='both')
 
     p5 = tk.Frame(p2, highlightbackground="black", highlightthickness=1, height=180)
