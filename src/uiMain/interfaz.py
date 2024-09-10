@@ -4,13 +4,15 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from baseDatos import Serializador, Deserializador
 from gestorAplicación.gestion.habitacion import Habitacion
 from gestorAplicación.transporte.asiento import Asiento
-import funcionalidad1
-import funcionalidad2
-import funcionalidad3
-import funcionalidad4
+import uiMain.funcionalidades.funcionalidad1 as funcionalidad1
+import uiMain.funcionalidades.funcionalidad2 as funcionalidad2
+import uiMain.funcionalidades.funcionalidad3 as funcionalidad3
+import uiMain.funcionalidades.funcionalidad4 as funcionalidad4
+from Ventanas import ventana_inicio
 #import funcionalidad5
 import auxiliar
 from auxiliar import sc_input
+
 
 class Interfaz:
     @staticmethod
@@ -30,7 +32,7 @@ class Interfaz:
         auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
 
-        auxiliar.ventana_inicio()
+        ventana_inicio.ventana_inicio()
         #auxiliar.ventana_principal()
         """
         opcion = ""
