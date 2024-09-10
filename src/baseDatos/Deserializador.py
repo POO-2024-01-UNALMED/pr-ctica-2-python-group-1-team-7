@@ -1,55 +1,56 @@
-import os
-import pickle
 from gestorAplicación.gestion.empresa import Empresa
+from gestorAplicación.personas.pasajero import Pasajero
 from gestorAplicación.gestion.terminal import Terminal
 from gestorAplicación.gestion.tiquete import Tiquete
-from gestorAplicación.personas.pasajero import Pasajero
+
+import pickle
+import os
 
 # Definir la ruta a la carpeta temporal
-ruta_temp = os.path.join(os.getcwd(), "src", "baseDatos", "temp")
+ruta_temp = os.path.abspath("src\\baseDatos\\temp")
 
+# Deserializa los objetos de diferentes clases 
+# desde los archivos correspondientes en la carpeta temporal.
 def deserializar():
-    """
-    Deserializa los objetos de diferentes clases desde los archivos correspondientes en la carpeta temporal.
-    """
     try:
-        docs = os.listdir(ruta_temp)
-        for doc in docs:
-            file_path = os.path.join(ruta_temp, doc)
+        archivos = os.listdir(ruta_temp)
+        for archivo in archivos:
+            file_path = ruta_temp + "\\" + archivo
             if "empresas" in file_path:
                 try:
-                    with open(file_path, 'rb') as file:
-                        # Deserializa y asigna las empresas
-                        empresas = pickle.load(file)
-                        Empresa.set_empresas(empresas)
+                    # Deserializa y asigna las empresas
+                    picklefile = open(file_path, "rb")
+                    Empresa.set_empresas(pickle.load(picklefile))
+                    picklefile.close()
                 except Exception as e:
                     print(f"Error al deserializar empresas: {e}")
 
             elif "pasajeros" in file_path:
                 try:
-                    with open(file_path, 'rb') as file:
-                        # Deserializa y asigna los pasajeros
-                        pasajeros = pickle.load(file)
-                        Pasajero.set_pasajeros(pasajeros)
+                    # Deserializa y asigna los pasajeros
+                    picklefile = open(file_path, "rb")
+                    Pasajero.set_pasajeros(pickle.load(picklefile))
+                    picklefile.close()
                 except Exception as e:
                     print(f"Error al deserializar pasajeros: {e}")
 
             elif "terminales" in file_path:
                 try:
-                    with open(file_path, 'rb') as file:
-                        # Deserializa y asigna las terminales
-                        terminales = pickle.load(file)
-                        Terminal.set_terminales(terminales)
+                    # Deserializa y asigna las terminales
+                    picklefile = open(file_path, "rb")
+                    Terminal.set_terminales(pickle.load(picklefile))
+                    picklefile.close()
                 except Exception as e:
                     print(f"Error al deserializar terminales: {e}")
 
             elif "tiquetes" in file_path:
                 try:
-                    with open(file_path, 'rb') as file:
-                        # Deserializa un objeto de Tiquete
-                        tiquete = pickle.load(file)
-                        # Se asume que Tiquete tiene un método para asignar el número de reserva
-                        Tiquete.set_numeros_reserva(int(tiquete.get_numero_reserva()))
+                    # Se asigna el atributo de clase "numeros_reserva" a la clase Tiquete
+                    picklefile = open(file_path, "rb")
+                    Tiquete.set_numeros_reserva(
+                        pickle.load(picklefile).get_numero_reserva()
+                    )
+                    picklefile.close()
                 except Exception as e:
                     print(f"Error al deserializar tiquetes: {e}")
 

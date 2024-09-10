@@ -49,6 +49,7 @@ def serializar():
                     pickle.dump(Terminal.get_terminales(), picklefile)
                 except Exception as e:
                     print(f"Error al serializar terminales: {e}")
+
             elif "tiquetes" in file_path:
                 try:
                     # Serializa el último tiquete creado para llevar 
@@ -57,5 +58,6 @@ def serializar():
                     pickle.dump(Tiquete(), picklefile)
                 except Exception as e:
                     print(f"Error al serializar tiquetes: {e}")
+                    
     except Exception as e:
         print(f"Error al serializar archivos: {e}")
