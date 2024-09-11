@@ -10,7 +10,7 @@ import uiMain.funcionalidades.funcionalidad3 as funcionalidad3
 import uiMain.funcionalidades.funcionalidad4 as funcionalidad4
 #from uiMain.Ventanas import ventana_inicio
 #import uiMain.Ventanas.ventana_principal
-import uiMain.Ventanas.ventana_inicio
+import uiMain.ventanas.ventana_inicio
 #import funcionalidad5
 import auxiliar
 from auxiliar import sc_input
