@@ -44,10 +44,12 @@ def ventana_inicio():
     p3.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
     p3.pack_propagate(False)
 
-    texto_saludo = ("Proin suscipit enim.")
+    with open("src//uiMain//assets//saludo.txt", "r") as file:
+        texto_saludo = file.read()
 
-    saludo = tk.Label(p3, text=texto_saludo)
-    saludo.pack(anchor="w", expand=True)
+    etiqueta_p3 = tk.Label(p3, text=texto_saludo, anchor="nw", justify="left")
+    etiqueta_p3.pack(expand=True, fill="both")
+    etiqueta_p3.bind('<Configure>', lambda evento: etiqueta_p3.config(wraplength=evento.width))
 
     p4 = tk.Frame(p1, highlightbackground="black", highlightthickness=1, height=160)
     p4.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
@@ -61,7 +63,8 @@ def ventana_inicio():
     p5.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
     p5.pack_propagate(False)
 
-    texto_hoja_vida = "samuel"
+    with open("src//uiMain//assets//saludo.txt", "r") as file:
+        texto_hoja_vida = file.read()
 
     boton_p5 = tk.Button(p5, text=texto_hoja_vida)
     boton_p5.pack(expand=True, fill="both")
@@ -74,22 +77,22 @@ def ventana_inicio():
     p6.grid_columnconfigure(0, weight=1)
 
     foto1 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//Assets//download.png").resize((125, 150)))
+        "src//uiMain//assets//download.png").resize((125, 150)))
     label_foto1 = tk.Label(p6, image=foto1)
     label_foto1.grid(row=0, column=0, padx=(10, 5), pady=(10, 5), sticky="news")
 
     foto2 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//Assets//download.png").resize((125, 150)))
+        "src//uiMain//assets//download.png").resize((125, 150)))
     label_foto2 = tk.Label(p6, image=foto2)
     label_foto2.grid(row=0, column=1, padx=(5, 10), pady=(10, 5), sticky="news")
 
     foto3 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//Assets//download.png").resize((125, 150)))
+        "src//uiMain//assets//download.png").resize((125, 150)))
     label_foto3 = tk.Label(p6, image=foto3)
     label_foto3.grid(row=1, column=0, padx=(10, 5), pady=(5, 10), sticky="news")
 
     foto4 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//Assets//download.png").resize((125, 150)))
+        "src//uiMain//assets//download.png").resize((125, 150)))
     label_foto4 = tk.Label(p6, image=foto4)
     label_foto4.grid(row=1, column=1, padx=(5, 10), pady=(5, 10), sticky="news")
 

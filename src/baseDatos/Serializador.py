@@ -7,14 +7,14 @@ import pickle
 import os
 
 # Definir la ruta a la carpeta temporal
-ruta_temp = os.path.abspath("src\\baseDatos\\temp")
+ruta_temp = os.path.abspath("src//baseDatos//temp")
 
 #Limpia el contenido de todos los archivos en la carpeta temporal
 def limpiar_archivos():
     try:
         archivos = os.listdir(ruta_temp)
         for archivo in archivos:
-            file_path = ruta_temp + "\\" + archivo
+            file_path = ruta_temp + "//" + archivo
             open(file_path, "w").close()
     except Exception as e:
         print(f"Error al limpiar archivos: {e}")
@@ -25,7 +25,7 @@ def serializar():
     try:
         archivos = os.listdir(ruta_temp)
         for archivo in archivos:
-            file_path = ruta_temp + "\\" + archivo
+            file_path = ruta_temp + "//" + archivo
             if "empresas" in file_path:
                 try:
                     # Serializa las empresas

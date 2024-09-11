@@ -7,7 +7,7 @@ import pickle
 import os
 
 # Definir la ruta a la carpeta temporal
-ruta_temp = os.path.abspath("src\\baseDatos\\temp")
+ruta_temp = os.path.abspath("src//baseDatos//temp")
 
 # Deserializa los objetos de diferentes clases 
 # desde los archivos correspondientes en la carpeta temporal.
@@ -15,7 +15,7 @@ def deserializar():
     try:
         archivos = os.listdir(ruta_temp)
         for archivo in archivos:
-            file_path = ruta_temp + "\\" + archivo
+            file_path = ruta_temp + "//" + archivo
             if "empresas" in file_path:
                 try:
                     # Deserializa y asigna las empresas
