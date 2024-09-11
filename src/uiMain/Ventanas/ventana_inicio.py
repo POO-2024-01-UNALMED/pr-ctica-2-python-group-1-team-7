@@ -1,4 +1,4 @@
-from ventanas import ventana_principal
+from Ventanas import ventana_principal
 from PIL import Image, ImageTk
 import tkinter as tk
 import unidecode

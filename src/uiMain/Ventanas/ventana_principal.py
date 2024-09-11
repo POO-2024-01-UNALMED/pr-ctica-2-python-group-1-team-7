@@ -15,7 +15,7 @@ from uiMain.funcionalidades.funcionalidad3 import gestionar_tiquetes
 from uiMain.funcionalidades.funcionalidad4 import hospedaje
 #from funcionalidad5 import administrador
 from PIL import Image, ImageTk
-from ventanas import ventana_inicio
+from Ventanas import ventana_inicio
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):
@@ -74,5 +74,14 @@ def ventana_principal(ventana1):
     frame_ventana = tk.Frame(ventana, highlightbackground="black", 
                                     highlightthickness=2)
     frame_ventana.pack(padx=(20, 20), pady=(20, 20), fill="both", expand=True)
+
+    frame_interno1=tk.Frame(frame_ventana,highlightbackground="black", 
+                                    highlightthickness=1)
+    frame_interno1.pack( pady=(50, 0), fill="both", expand=True)
+
+    nombre_proceso_consulta="Bienvenido a la ventana principal"
+
+    label_nombre=tk.Label(frame_ventana,text=nombre_proceso_consulta)
+    label_nombre.pack(side="top", anchor="n",pady=5)
 
     ventana.mainloop()

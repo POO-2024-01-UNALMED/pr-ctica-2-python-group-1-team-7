@@ -8,7 +8,9 @@ import uiMain.funcionalidades.funcionalidad1 as funcionalidad1
 import uiMain.funcionalidades.funcionalidad2 as funcionalidad2
 import uiMain.funcionalidades.funcionalidad3 as funcionalidad3
 import uiMain.funcionalidades.funcionalidad4 as funcionalidad4
-from ventanas import ventana_inicio
+#from uiMain.Ventanas import ventana_inicio
+#import uiMain.Ventanas.ventana_principal
+import uiMain.Ventanas.ventana_inicio
 #import funcionalidad5
 import auxiliar
 from auxiliar import sc_input
@@ -32,7 +34,7 @@ class Interfaz:
         auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
 
-        ventana_inicio.ventana_inicio()
+        uiMain.Ventanas.ventana_inicio.ventana_inicio()
         #auxiliar.ventana_principal()
         """
         opcion = ""
