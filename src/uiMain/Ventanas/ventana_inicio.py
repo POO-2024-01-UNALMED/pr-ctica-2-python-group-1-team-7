@@ -39,6 +39,9 @@ def ventana_inicio():
     ventana.title("LussajuBus")
     ventana.geometry("700x600")
 
+    icono = tk.PhotoImage(file="src//uiMain//assets//cubito.png")
+    ventana.iconphoto(True, icono)
+
     barra_menu = tk.Menu(ventana)
     ventana.config(menu=barra_menu) 
 
