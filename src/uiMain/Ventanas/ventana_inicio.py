@@ -1,21 +1,38 @@
-from Ventanas import ventana_principal
+from ventanas import ventana_principal
 from PIL import Image, ImageTk
 import tkinter as tk
 import unidecode
+import os
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):
     input_value = input(mensaje)
     return unidecode.unidecode(input_value).strip()
 
+def descripcion_programa(etiqueta):
+    with open("src//uiMain//assets//saludo.txt", "r") as file:
+        texto_saludo = file.read()
+
+    if (etiqueta.cget("text") == texto_saludo):
+        etiqueta.config(
+            text="Hola jejejeje \n (Darle click nuevamente a descripción para quitarla)"
+        )
+    else:
+        etiqueta.config(text=texto_saludo)
+
+def cambiar_hoja_vida(evento):
+    if "santiago" in evento.widget.cget("text"):
+        with open("src//uiMain//assets//hojasVida//hoja_vida_samuel.txt", "r") as file:
+            texto_hoja_vida = file.read()
+            evento.widget.config(text=texto_hoja_vida)
+
+    elif "samuel" in evento.widget.cget("text"):
+        with open("src//uiMain//assets//hojasVida//hoja_vida_santiago.txt", "r") as file:
+            texto_hoja_vida = file.read()
+            evento.widget.config(text=texto_hoja_vida)
+
 def salir_programa(ventana):
     ventana.destroy()
-
-def descripcion_programa(texto_saludo, saludo):
-    if (saludo.cget("text")==texto_saludo):
-        saludo.config(text="Hola jejejeje \n (Darle click nuevamente a descripción para quitarla)")
-    else:
-        saludo.config(text=texto_saludo)
 
 def ventana_inicio():
     ventana = tk.Tk()
@@ -28,9 +45,12 @@ def ventana_inicio():
     menu_inicio = tk.Menu(barra_menu, tearoff="off")
     barra_menu.add_cascade(label="Inicio", menu=menu_inicio)
 
-    menu_inicio.add_command(label="Descripción",command= lambda:descripcion_programa(texto_saludo, saludo))
+    menu_inicio.add_command(
+        label="Descripción", 
+        command=lambda:descripcion_programa(etiqueta_p3)
+    )
     menu_inicio.add_separator()
-    menu_inicio.add_command(label="Salir", command= lambda: salir_programa(ventana))
+    menu_inicio.add_command(label="Salir", command=lambda: salir_programa(ventana))
 
     p1 = tk.Frame(ventana, highlightbackground="black", highlightthickness=2)
     p1.pack(side="left", expand=True, fill="both", pady=10, padx=(10, 5))
@@ -49,25 +69,35 @@ def ventana_inicio():
 
     etiqueta_p3 = tk.Label(p3, text=texto_saludo, anchor="nw", justify="left")
     etiqueta_p3.pack(expand=True, fill="both")
-    etiqueta_p3.bind('<Configure>', lambda evento: etiqueta_p3.config(wraplength=evento.width))
+    etiqueta_p3.bind(
+        '<Configure>', 
+        lambda evento: etiqueta_p3.config(wraplength=evento.width)
+    )
 
     p4 = tk.Frame(p1, highlightbackground="black", highlightthickness=1, height=160)
     p4.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
     p4.pack_propagate(False)
 
-    ingreso_sistema=tk.Button(p4,command=lambda:ventana_principal.ventana_principal(ventana))
+    ingreso_sistema=tk.Button(
+        p4, 
+        text="Ventana principal",
+        command=lambda:ventana_principal.ventana_principal(ventana)
+    )
 
     ingreso_sistema.pack(expand=True, fill='both')
 
     p5 = tk.Frame(p2, highlightbackground="black", highlightthickness=1, height=180)
     p5.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
     p5.pack_propagate(False)
-
-    with open("src//uiMain//assets//saludo.txt", "r") as file:
+    
+    with open("src//uiMain//assets//hojasVida//hoja_vida_santiago.txt", "r") as file:
         texto_hoja_vida = file.read()
 
-    boton_p5 = tk.Button(p5, text=texto_hoja_vida)
+    boton_p5 = tk.Button(p5, text=texto_hoja_vida, anchor="nw", justify="left", 
+                            relief="flat")
     boton_p5.pack(expand=True, fill="both")
+    boton_p5.bind('<Configure>', lambda evento: boton_p5.config(wraplength=evento.width))
+    boton_p5.bind('<Button-1>', cambiar_hoja_vida)
 
     p6 = tk.Frame(p2, highlightbackground="black", highlightthickness=1, height=160)
     p6.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
