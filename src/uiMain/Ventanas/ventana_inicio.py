@@ -10,7 +10,7 @@ def sc_input(mensaje: str):
     return unidecode.unidecode(input_value).strip()
 
 class ventana_inicio(tk.Tk):
-    def __init__(self, titulo, dimensiones, icono):
+    def __init__(self):
         self.nombre_imagenes_sistema = os.listdir("src//uiMain//assets//imagenesSistema")
         self.indice_imagen_sistema = 0
         self.nombre = "santiago"
@@ -18,9 +18,9 @@ class ventana_inicio(tk.Tk):
                                         + self.nombre + "//imagenes")
 
         super().__init__()
-        self.title(titulo)
-        self.geometry(dimensiones)
-        self.iconphoto(True, tk.PhotoImage(file=icono))
+        self.title("LussajuBus")
+        self.geometry("700x600")
+        self.iconphoto(True, tk.PhotoImage(file="src//uiMain//assets//cubito.png"))
 
         self.barra_menu = tk.Menu(self)
         self.config(menu=self.barra_menu) 
