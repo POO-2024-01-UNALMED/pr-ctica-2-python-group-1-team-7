@@ -28,9 +28,41 @@ def redimensionar_frames(evento):
     frame1.config(height=int(evento.height/3))
     frame2 = evento.widget.winfo_children()[1]
     frame2.config(height=int(evento.height*(2/3)))
- 
-def redimensionar_widgets_p4(evento):
-    imagen = Image.open("src//uiMain//assets//download.png")
+
+def cambiar_imagen_sistema(evento, frame):
+    imagenes = os.listdir("src//uiMain//assets//imagenesSistema")
+    archivo = open("src//uiMain//assets//switch.txt", "r")
+    switch = archivo.read()
+
+    if switch == "4":
+        archivo = open("src//uiMain//assets//switch.txt", "w")
+        archivo.write("0")
+        indice = int(switch)
+    else:
+        archivo = open("src//uiMain//assets//switch.txt", "w")
+        indice = int(switch) + 1
+        archivo.write(str(indice))
+        
+    frame.update()
+
+    imagen = Image.open("src//uiMain//assets//imagenesSistema" + "//" + imagenes[indice])
+    imagen_modificada = imagen.resize((
+        int((frame.winfo_width()-20)), 
+        int((frame.winfo_height()-70))
+    ))
+    img = ImageTk.PhotoImage(imagen_modificada)
+
+    label = frame.winfo_children()[0]
+    label.config(image=img)
+    label.image=img
+
+def redimensionar_imagen_sistema(evento):
+    path_imagenes = os.listdir("src//uiMain//assets//imagenesSistema")
+    archivo = open("src//uiMain//assets//switch.txt", "r")
+    switch = archivo.read()
+    indice = int(switch)
+
+    imagen = Image.open("src//uiMain//assets//imagenesSistema" + "//" + path_imagenes[indice])
     imagen_modificada = imagen.resize((
         int((evento.width-20)), 
         int((evento.height-70))
@@ -165,15 +197,20 @@ def ventana_inicio():
     p4 = tk.Frame(p1, highlightbackground="black", highlightthickness=1)
     p4.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
     p4.pack_propagate(False)
-    p4.bind('<Configure>', redimensionar_widgets_p4)
+    p4.bind('<Configure>', redimensionar_imagen_sistema)
 
-    imagen_sistema = Image.open("src//uiMain//assets//download.png")
+    imagen_sistema = Image.open("src//uiMain//assets//imagenesSistema//cubo1.png")
     imagen_sistema = ImageTk.PhotoImage(imagen_sistema)
 
     label_imagen_sistema = tk.Label(p4, image=imagen_sistema)
     label_imagen_sistema.pack(
         side="top", expand=True, fill="both", padx=10, pady=(10, 5)
     )
+    label_imagen_sistema.bind(
+        "<Enter>", 
+        lambda evento: cambiar_imagen_sistema(evento, p4)
+    )
+   
 
     button_sistema = tk.Button(
         p4, 

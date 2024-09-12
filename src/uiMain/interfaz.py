@@ -33,7 +33,6 @@ class Interfaz:
         #Deserializador.deserializar()
         auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
-
         uiMain.ventanas.ventana_inicio.ventana_inicio()
         #auxiliar.ventana_principal()
         """
