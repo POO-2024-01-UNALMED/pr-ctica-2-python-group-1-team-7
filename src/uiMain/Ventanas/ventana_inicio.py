@@ -51,7 +51,11 @@ class ventana_inicio(tk.Tk):
 
         self.texto_saludo = open("src//uiMain//assets//saludo.txt", "r").read()
 
-        self.label_p3 = tk.Label(self.p3, text=self.texto_saludo, anchor="nw", justify="left")
+        self.label_p3 = tk.Label(self.p3, 
+            text=self.texto_saludo, 
+            anchor="nw", 
+            justify="left"
+        )
         self.label_p3.pack(expand=True, fill="both")
         self.label_p3.bind(
             '<Configure>', 
@@ -90,7 +94,8 @@ class ventana_inicio(tk.Tk):
         self.p5.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
         self.p5.pack_propagate(False)
 
-        self.path_texto_hoja_vida = "src//uiMain//assets//hojasVida//santiago//hoja_vida_santiago.txt"
+        self.path_texto_hoja_vida = ("src//uiMain//assets//hojasVida" 
+                                        + "//santiago//hoja_vida_santiago.txt")
         self.texto_hoja_vida = open(self.path_texto_hoja_vida).read()
 
         self.button_p5 = tk.Button(
@@ -175,17 +180,21 @@ class ventana_inicio(tk.Tk):
     
     def cambiar_hoja_vida_e_imagenes(self, evento):
         if "santiago" in self.path_texto_hoja_vida:
-            self.path_texto_hoja_vida = "src//uiMain//assets//hojasVida//samuel//hoja_vida_samuel.txt"
+            self.path_texto_hoja_vida = ("src//uiMain//assets//hojasVida" 
+                                            + "//samuel//hoja_vida_samuel.txt")
             self.texto_hoja_vida = open(self.path_texto_hoja_vida).read()
             self.button_p5.config(text=self.texto_hoja_vida)
             self.nombre = "samuel"
-            self.path_imagenes_hoja_vida = "src//uiMain//assets//hojasVida//" + self.nombre + "//imagenes"
+            self.path_imagenes_hoja_vida = ("src//uiMain//assets//hojasVida//" 
+                                                + self.nombre + "//imagenes")
         else:
-            self.path_texto_hoja_vida = "src//uiMain//assets//hojasVida//santiago//hoja_vida_santiago.txt"
+            self.path_texto_hoja_vida = ("src//uiMain//assets//hojasVida" 
+                                            + "//santiago//hoja_vida_santiago.txt")
             self.texto_hoja_vida = open(self.path_texto_hoja_vida).read()
             self.button_p5.config(text=self.texto_hoja_vida)
             self.nombre = "santiago"
-            self.path_imagenes_hoja_vida = "src//uiMain//assets//hojasVida//" + self.nombre + "//imagenes"
+            self.path_imagenes_hoja_vida = ("src//uiMain//assets//hojasVida//" 
+                                                + self.nombre + "//imagenes")
 
         self.redimensionar_imagenes_hojas_vida(None)
 
