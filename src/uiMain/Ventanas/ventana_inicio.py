@@ -20,19 +20,102 @@ def descripcion_programa(etiqueta):
     else:
         etiqueta.config(text=texto_saludo)
 
-def cambiar_hoja_vida(evento):
-    if "santiago" in evento.widget.cget("text"):
-        with open("src//uiMain//assets//hojasVida//hoja_vida_samuel.txt", "r") as file:
-            texto_hoja_vida = file.read()
-            evento.widget.config(text=texto_hoja_vida)
-
-    elif "samuel" in evento.widget.cget("text"):
-        with open("src//uiMain//assets//hojasVida//hoja_vida_santiago.txt", "r") as file:
-            texto_hoja_vida = file.read()
-            evento.widget.config(text=texto_hoja_vida)
-
 def salir_programa(ventana):
     ventana.destroy()
+
+def redimensionar_frames(evento):
+    frame1 = evento.widget.winfo_children()[0]
+    frame1.config(height=int(evento.height/3))
+    frame2 = evento.widget.winfo_children()[1]
+    frame2.config(height=int(evento.height*(2/3)))
+ 
+def redimensionar_widgets_p4(evento):
+    imagen = Image.open("src//uiMain//assets//download.png")
+    imagen_modificada = imagen.resize((
+        int((evento.width-20)), 
+        int((evento.height-70))
+    ))
+    img = ImageTk.PhotoImage(imagen_modificada)
+
+    label = evento.widget.winfo_children()[0]
+    label.config(image=img)
+    label.image=img
+
+def cambiar_hoja_vida_e_imagenes(evento, frame):
+    archivo = open("src//uiMain//assets//hojasVida//switch.txt", "r")
+    switch = archivo.read()
+    if switch == "0":
+        nombre = "samuel"
+        archivo = open("src//uiMain//assets//hojasVida//switch.txt", "w")
+        archivo.write("1")
+        with open(
+            "src//uiMain//assets//hojasVida//samuel//hoja_vida_samuel.txt", "r"
+        ) as file:
+            texto_hoja_vida = file.read()
+            evento.widget.config(text=texto_hoja_vida)
+
+    elif switch == "1":
+        nombre = "santiago"
+        archivo = open("src//uiMain//assets//hojasVida//switch.txt", "w")
+        archivo.write("0")
+        with open(
+            "src//uiMain//assets//hojasVida//santiago//hoja_vida_santiago.txt", "r"
+        ) as file:
+            texto_hoja_vida = file.read()
+            evento.widget.config(text=texto_hoja_vida)
+
+    imagenes = []
+
+    path = "src//uiMain//assets//hojasVida//" + nombre + "//imagenes"
+
+    frame.update()
+
+    for archivo in os.listdir(path):
+        imagen = Image.open(path + "//" + archivo)
+
+        imagen_modificada = imagen.resize((
+            int((frame.winfo_reqwidth()-40)/2), 
+            int((frame.winfo_reqheight()-40)/2)
+        ))
+
+        img = ImageTk.PhotoImage(imagen_modificada)
+        imagenes.append(img)
+
+    indice = 0
+    for label in frame.winfo_children():
+        label.config(image=imagenes[indice])
+        label.image=imagenes[indice]
+        indice += 1
+
+def redimensionar_imagenes(evento):
+    imagenes = []
+
+    archivo = open("src//uiMain//assets//hojasVida//switch.txt", "r")
+    switch = archivo.read()
+
+    if switch == "0":
+        nombre = "santiago"
+    elif switch == "1":
+        nombre = "samuel"
+
+    path = "src//uiMain//assets//hojasVida//" + nombre + "//imagenes"
+
+    for archivo in os.listdir(path):
+        imagen = Image.open(path + "//" + archivo)
+
+        imagen_modificada = imagen.resize((
+            int((evento.width-40)/2), 
+            int((evento.height-40)/2)
+        ))
+
+        img = ImageTk.PhotoImage(imagen_modificada)
+        imagenes.append(img)
+
+    indice = 0
+    for label in evento.widget.winfo_children():
+        label.config(image=imagenes[indice])
+        label.image=imagenes[indice]
+        indice += 1
 
 def ventana_inicio():
     ventana = tk.Tk()
@@ -50,7 +133,7 @@ def ventana_inicio():
 
     menu_inicio.add_command(
         label="Descripción", 
-        command=lambda:descripcion_programa(etiqueta_p3)
+        command=lambda:descripcion_programa(label_p3)
     )
     menu_inicio.add_separator()
     menu_inicio.add_command(label="Salir", command=lambda: salir_programa(ventana))
@@ -58,10 +141,12 @@ def ventana_inicio():
     p1 = tk.Frame(ventana, highlightbackground="black", highlightthickness=2)
     p1.pack(side="left", expand=True, fill="both", pady=10, padx=(10, 5))
     p1.pack_propagate(False)
+    p1.bind('<Configure>', redimensionar_frames)
 
     p2 = tk.Frame(ventana, highlightbackground="black", highlightthickness=2)
     p2.pack(side="right", expand=True, fill="both", pady=10, padx=(5, 10))
     p2.pack_propagate(False)
+    p2.bind('<Configure>', redimensionar_frames)
 
     p3 = tk.Frame(p1, highlightbackground="black", highlightthickness=1)
     p3.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
@@ -70,63 +155,78 @@ def ventana_inicio():
     with open("src//uiMain//assets//saludo.txt", "r") as file:
         texto_saludo = file.read()
 
-    etiqueta_p3 = tk.Label(p3, text=texto_saludo, anchor="nw", justify="left")
-    etiqueta_p3.pack(expand=True, fill="both")
-    etiqueta_p3.bind(
+    label_p3 = tk.Label(p3, text=texto_saludo, anchor="nw", justify="left")
+    label_p3.pack(expand=True, fill="both")
+    label_p3.bind(
         '<Configure>', 
-        lambda evento: etiqueta_p3.config(wraplength=evento.width)
+        lambda evento: label_p3.config(wraplength=evento.width)
     )
 
-    p4 = tk.Frame(p1, highlightbackground="black", highlightthickness=1, height=160)
+    p4 = tk.Frame(p1, highlightbackground="black", highlightthickness=1)
     p4.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
     p4.pack_propagate(False)
+    p4.bind('<Configure>', redimensionar_widgets_p4)
 
-    ingreso_sistema=tk.Button(
+    imagen_sistema = Image.open("src//uiMain//assets//download.png")
+    imagen_sistema = ImageTk.PhotoImage(imagen_sistema)
+
+    label_imagen_sistema = tk.Label(p4, image=imagen_sistema)
+    label_imagen_sistema.pack(
+        side="top", expand=True, fill="both", padx=10, pady=(10, 5)
+    )
+
+    button_sistema = tk.Button(
         p4, 
+        width=15,
+        height=5,
         text="Ventana principal",
         command=lambda:ventana_principal.ventana_principal(ventana)
     )
 
-    ingreso_sistema.pack(expand=True, fill='both')
+    button_sistema.pack(side="bottom", pady=(5, 10))
 
-    p5 = tk.Frame(p2, highlightbackground="black", highlightthickness=1, height=180)
+    p5 = tk.Frame(p2, highlightbackground="black", highlightthickness=1)
     p5.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
     p5.pack_propagate(False)
     
-    with open("src//uiMain//assets//hojasVida//hoja_vida_santiago.txt", "r") as file:
+    with open(
+        "src//uiMain//assets//hojasVida//santiago//hoja_vida_santiago.txt", "r"
+    ) as file:
         texto_hoja_vida = file.read()
 
-    boton_p5 = tk.Button(p5, text=texto_hoja_vida, anchor="nw", justify="left", 
+    button_p5 = tk.Button(p5, text=texto_hoja_vida, anchor="nw", justify="left", 
                             relief="flat")
-    boton_p5.pack(expand=True, fill="both")
-    boton_p5.bind('<Configure>', lambda evento: boton_p5.config(wraplength=evento.width))
-    boton_p5.bind('<Button-1>', cambiar_hoja_vida)
-
-    p6 = tk.Frame(p2, highlightbackground="black", highlightthickness=1, height=160)
+    button_p5.pack(expand=True, fill="both")
+    button_p5.bind(
+        '<Configure>', lambda evento: button_p5.config(wraplength=evento.width)
+    )
+   
+    p6 = tk.Frame(p2, highlightbackground="black", highlightthickness=1)
     p6.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
     p6.pack_propagate(False)
+    p6.bind('<Configure>', redimensionar_imagenes)
 
-    p6.grid_rowconfigure(0, weight=1)
-    p6.grid_columnconfigure(0, weight=1)
+    button_p5.bind('<Button-1>', lambda evento: cambiar_hoja_vida_e_imagenes(evento, p6))
 
-    foto1 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//assets//download.png").resize((125, 150)))
-    label_foto1 = tk.Label(p6, image=foto1)
-    label_foto1.grid(row=0, column=0, padx=(10, 5), pady=(10, 5), sticky="news")
+    imagenes = []
 
-    foto2 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//assets//download.png").resize((125, 150)))
-    label_foto2 = tk.Label(p6, image=foto2)
-    label_foto2.grid(row=0, column=1, padx=(5, 10), pady=(10, 5), sticky="news")
+    for archivo in os.listdir("src//uiMain//assets//hojasVida//santiago//imagenes"):
+        imagen = Image.open(
+            "src//uiMain//assets//hojasVida//santiago//imagenes//" + archivo
+        )
+        img = ImageTk.PhotoImage(imagen)
+        imagenes.append(img)
+   
+    label_imagen1 = tk.Label(p6, image=imagenes[0])
+    label_imagen1.grid(row=0, column=0, padx=(10, 5), pady=(10, 5))
+    
+    label_imagen2 = tk.Label(p6, image=imagenes[1])
+    label_imagen2.grid(row=0, column=1, padx=(5, 10), pady=(10, 5))
 
-    foto3 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//assets//download.png").resize((125, 150)))
-    label_foto3 = tk.Label(p6, image=foto3)
-    label_foto3.grid(row=1, column=0, padx=(10, 5), pady=(5, 10), sticky="news")
+    label_imagen3 = tk.Label(p6, image=imagenes[2])
+    label_imagen3.grid(row=1, column=0, padx=(10, 5), pady=(5, 10))
 
-    foto4 = ImageTk.PhotoImage(Image.open(
-        "src//uiMain//assets//download.png").resize((125, 150)))
-    label_foto4 = tk.Label(p6, image=foto4)
-    label_foto4.grid(row=1, column=1, padx=(5, 10), pady=(5, 10), sticky="news")
+    label_imagen4 = tk.Label(p6, image=imagenes[3])
+    label_imagen4.grid(row=1, column=1, padx=(5, 10), pady=(5, 10))
 
     ventana.mainloop()
