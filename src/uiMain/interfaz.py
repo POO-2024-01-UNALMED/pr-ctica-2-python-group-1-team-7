@@ -33,7 +33,11 @@ class Interfaz:
         #Deserializador.deserializar()
         auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
-        uiMain.ventanas.ventana_inicio.ventana_inicio()
+        uiMain.ventanas.ventana_inicio.ventana_inicio(
+            "LussajuBus", 
+            "700x600", 
+            "src//uiMain//assets//cubito.png"
+        )
         #auxiliar.ventana_principal()
         """
         opcion = ""
