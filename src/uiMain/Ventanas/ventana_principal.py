@@ -108,7 +108,7 @@ def ventana_principal(ventana1):
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
-from .aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
+from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 
 class ventana_principal(tk.Tk):
     def __init__(self, ventana):

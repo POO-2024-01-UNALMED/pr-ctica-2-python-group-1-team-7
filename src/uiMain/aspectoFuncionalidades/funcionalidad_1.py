@@ -12,7 +12,7 @@ class funcionalidad_1(tk.Frame):
         frame_center = tk.Frame(self.frame_interno, highlightbackground="black", highlightthickness=1)
         frame_center.pack(fill="both", expand=True) """
 
-from .field_frame import field_frame
+from uiMain.field_frame import field_frame
 import tkinter as tk
 
 class funcionalidad_1(tk.Frame):
