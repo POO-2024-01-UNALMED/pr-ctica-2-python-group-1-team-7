@@ -1,4 +1,3 @@
-from datetime import datetime, time
 from gestorAplicación.gestion.empresa import Empresa
 from gestorAplicación.gestion.hospedaje import Hospedaje
 from gestorAplicación.gestion.terminal import Terminal
@@ -6,14 +5,10 @@ from gestorAplicación.gestion.tiquete import Tiquete
 from gestorAplicación.gestion.viaje import Viaje
 from gestorAplicación.personas.pasajero import Pasajero
 from gestorAplicación.transporte.bus import Bus
+
+from datetime import datetime, time
 import unidecode
 import tkinter as tk
-#from funcionalidad1 import ver_viajes
-#from funcionalidad_2 import reservar_tiquete
-from uiMain.funcionalidades.funcionalidad3 import gestionar_tiquetes
-from uiMain.funcionalidades.funcionalidad4 import hospedaje
-#from funcionalidad5 import administrador
-from PIL import Image, ImageTk
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):

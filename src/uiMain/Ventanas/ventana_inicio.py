@@ -4,11 +4,6 @@ import tkinter as tk
 import unidecode
 import os
 
-# Normaliza la entrada eliminando acentos y caracteres especiales
-def sc_input(mensaje: str):
-    input_value = input(mensaje)
-    return unidecode.unidecode(input_value).strip()
-
 class ventana_inicio(tk.Tk):
     def __init__(self):
         self.nombre_imagenes_sistema = os.listdir("src//uiMain//assets//imagenesSistema")
