@@ -113,6 +113,7 @@ from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 class ventana_principal(tk.Tk):
     def __init__(self, ventana):
         super().__init__()
+        ventana.withdraw()
         self.title("LussajuBus")
         self.geometry("800x500")
 
@@ -203,10 +204,10 @@ class ventana_principal(tk.Tk):
 
     def info_aplicacion(self):
         messagebox.showinfo("Acerca de la Aplicación" 
-                                + "Esta aplicación permite al usuario ....")
+                                , "Esta aplicación permite al usuario ....")
 
     def acerca_de(self):
-        messagebox.showinfo("Autores" + "Autores de la aplicación:\n\n-" 
+        messagebox.showinfo("Autores" , "Autores de la aplicación:\n\n-" 
                                 + "Santiago Cardona Franco \n- Samuel Hernández Duque")
 
 

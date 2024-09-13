@@ -20,6 +20,21 @@ def sc_input(mensaje: str):
     input_value = input(mensaje)
     return unidecode.unidecode(input_value).strip()
 
+def generar_botones(frame_contenedor):
+    frame_down = tk.Frame(frame_contenedor,bg='lightblue')
+    frame_down.pack(side="bottom", fill="x")
+
+    botones_frame = tk.Frame(frame_down,bg='lightblue')
+    botones_frame.pack(side="bottom",anchor='s',pady=5)
+
+    boton_aceptar = tk.Button(botones_frame, text="Aceptar", font=("Arial", 10), width=8, height=1)
+    boton_aceptar.pack(side='left',anchor='s', padx=7)
+
+    boton_borrar = tk.Button(botones_frame, text="Borrar", font=("Arial", 10), width=8, height=1)
+    boton_borrar.pack(side='left',anchor='s', padx=7)
+
+    return (boton_aceptar,boton_borrar)
+
 def instanciar_objetos():
     # Crear instancias de Terminal
     medellin = Terminal("MEDELLIN")

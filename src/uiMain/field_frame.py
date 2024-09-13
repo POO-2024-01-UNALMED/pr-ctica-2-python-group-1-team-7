@@ -70,20 +70,10 @@ class FieldFrame(tk.Frame):
         if criterio in self.criterios:
             return self.valores[self.criterios.index(criterio)] """
 
-import tkinter as tk
 
-class field_frame(tk.Frame):
-    def __init__(self,parent,tituloCriterios,criterios,tituloValores,valores,habilitado=None):
-        super().__init__(parent)
-        self.pack(expand=True, fill="both")
-        self.tituloCriterios=tituloCriterios
-        self.criterios=criterios
-        self.tituloValores=tituloValores
-        self.valores=valores
-        self.habilitado=habilitado
 
-        self.frame_izquierda = tk.Frame(self)
-        self.frame_izquierda.pack(side="left", expand=True, fill="both")
+'''self.frame_izquierda = tk.Frame(self)
+        self.frame_izquierda.grid(side="left", expand=True, fill="both")
         self.frame_derecha = tk.Frame(self)
         self.frame_derecha.pack(side="right", expand=True, fill="both")
 
@@ -105,3 +95,80 @@ class field_frame(tk.Frame):
         #Lanzar un exception error si no encuentra el criterior
         if criterio in self.criterios:
             return self.valores[self.criterios.index(criterio)]
+
+        self.label_titulo_criterios = tk.Label(self.frame_izquierda, text=tituloCriterios)
+        self.label_titulo_criterios.grid(row=0,column=0, pady=10)
+
+        for text_label in self.criterios:
+            label = tk.Label(self.frame_izquierda, text=text_label)
+            label.pack(expand=True, fill="x")
+
+        self.label_titulo_valores = tk.Label(self.frame_derecha, text=tituloValores)
+        self.label_titulo_valores.pack(expand=True, fill="x", pady=10)
+
+        for i in range(4):
+            entry = tk.Entry(self.frame_derecha)
+            entry.pack(expand=True, fill="x", padx=40)'''
+import tkinter as tk
+
+class field_frame(tk.Frame):
+    def __init__(self,parent,tituloCriterios,criterios,tituloValores,valores,habilitado=None):
+        super().__init__(parent,bg='lightblue')
+        self.pack(expand=True, fill="both")
+        self.tituloCriterios=tituloCriterios
+        self.criterios=criterios
+        self.tituloValores=tituloValores
+        self.valores=valores
+        self.habilitado=habilitado
+
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
+
+        if self.tituloCriterios!=None:
+            frame_tituloCriterios=tk.Frame(self,highlightbackground="blue", highlightthickness=2)
+            frame_tituloCriterios.grid(row=0,column=0,sticky='news',padx=10,pady=10)
+            label=tk.Label(frame_tituloCriterios,text=self.tituloCriterios)
+            label.pack()
+        if self.tituloValores!=None:
+            frame_tituloValores=tk.Frame(self,highlightbackground="blue", highlightthickness=2)
+            frame_tituloValores.grid(row=0,column=1,sticky='news',padx=10,pady=10)
+            label=tk.Label(frame_tituloValores,text=self.tituloValores)
+            label.pack()
+        if self.criterios!=None:
+            for criterio in self.criterios:
+                label=tk.Label(self,text=str(criterio))
+                label.grid(row=self.criterios.index(criterio)+1,column=0,sticky='news',padx=10,pady=10)
+            if self.valores!=None:
+                for valor in self.valores:
+                    if habilitado!=None:
+                        if self.criterios[self.valores.index(valor)] in self.habilitado:
+                            editado="disabled"
+                        else:
+                            editado="normal"
+                    else:
+                        editado="normal"
+                    if valor==None:
+                        entry=tk.Entry(self,state=editado)
+                        entry.grid(row=self.valores.index(valor)+1,column=1,sticky='news',padx=10,pady=10)
+                    else:
+                        entry=tk.Entry(self,state=editado,textvariable=tk.StringVar(self,value=valor))
+                        entry.grid(row=self.valores.index(valor)+1,column=1,sticky='news',padx=10,pady=10)
+            else:
+                for criterio in self.criterios:
+                    if habilitado!=None:
+                        if criterio in self.habilitado:
+                            editado="disabled"
+                        else:
+                            editado="normal"
+                    else: 
+                        editado="normal"
+                    entry=tk.Entry(self,state=editado)
+                    entry.grid(row=self.criterios.index(criterio)+1,column=1,sticky='news',padx=10,pady=10)
+
+    def getValue(self,criterio):
+        #Lanzar un exception error si no encuentra el criterior
+        if criterio in self.criterios:
+            return self.valores[self.criterios.index(criterio)]
+        
+    
