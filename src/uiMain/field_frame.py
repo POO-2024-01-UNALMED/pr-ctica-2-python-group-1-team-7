@@ -1,4 +1,4 @@
-import tkinter as tk
+""" import tkinter as tk
 
 def generar_botones(frame_contenedor):
     frame_down = tk.Frame(frame_contenedor, highlightbackground="black", highlightthickness=1)
@@ -65,6 +65,42 @@ class FieldFrame(tk.Frame):
                     entry=tk.Entry(frame,state=editado)
                     entry.grid(row=self.criterios.index(criterio)+1,column=1)
     
+    def getValue(self,criterio):
+        #Lanzar un exception error si no encuentra el criterior
+        if criterio in self.criterios:
+            return self.valores[self.criterios.index(criterio)] """
+
+import tkinter as tk
+
+class field_frame(tk.Frame):
+    def __init__(self,parent,tituloCriterios,criterios,tituloValores,valores,habilitado=None):
+        super().__init__(parent)
+        self.pack(expand=True, fill="both")
+        self.tituloCriterios=tituloCriterios
+        self.criterios=criterios
+        self.tituloValores=tituloValores
+        self.valores=valores
+        self.habilitado=habilitado
+
+        self.frame_izquierda = tk.Frame(self)
+        self.frame_izquierda.pack(side="left", expand=True, fill="both")
+        self.frame_derecha = tk.Frame(self)
+        self.frame_derecha.pack(side="right", expand=True, fill="both")
+
+        self.label_titulo_criterios = tk.Label(self.frame_izquierda, text=tituloCriterios)
+        self.label_titulo_criterios.pack(expand=True, fill="x", pady=10)
+
+        for text_label in self.criterios:
+            label = tk.Label(self.frame_izquierda, text=text_label)
+            label.pack(expand=True, fill="x")
+
+        self.label_titulo_valores = tk.Label(self.frame_derecha, text=tituloValores)
+        self.label_titulo_valores.pack(expand=True, fill="x", pady=10)
+
+        for i in range(4):
+            entry = tk.Entry(self.frame_derecha)
+            entry.pack(expand=True, fill="x", padx=40)
+
     def getValue(self,criterio):
         #Lanzar un exception error si no encuentra el criterior
         if criterio in self.criterios:
