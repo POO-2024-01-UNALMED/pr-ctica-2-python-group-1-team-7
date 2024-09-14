@@ -72,8 +72,8 @@ class funcionalidad_1(tk.Frame):
 
             f1.pack(fill="x", expand=True)
             f1.ocultar_campos(["a","b"])
-
-            #field_frame(self.frame_centro,None,["¿Por cuál categoría desea filtrar?"],None,None).pack(side='bottom',fill='x',expand=True)
+            #f1.activar_campo(["a"])
+            
         else:
             super().__init__()
 
