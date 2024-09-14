@@ -112,14 +112,17 @@ class FieldFrame(tk.Frame):
 import tkinter as tk
 
 class field_frame(tk.Frame):
-    def __init__(self,parent,tituloCriterios,criterios,tituloValores,valores,habilitado=None):
-        super().__init__(parent,bg='lightblue')
+    def __init__(self, parent, tituloCriterios, criterios, tituloValores, valores, habilitado=None):
+        super().__init__(parent, bg='lightblue')
         self.pack(expand=True, fill="both")
-        self.tituloCriterios=tituloCriterios
-        self.criterios=criterios
-        self.tituloValores=tituloValores
-        self.valores=valores
-        self.habilitado=habilitado
+        self.tituloCriterios = tituloCriterios
+        self.criterios = criterios
+        self.tituloValores = tituloValores
+        self.valores = valores
+        self.habilitado = habilitado
+
+        self.labels = {}
+        self.entries = {}
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
@@ -135,10 +138,38 @@ class field_frame(tk.Frame):
             frame_tituloValores.grid(row=0,column=1,sticky='news',padx=10,pady=10)
             label=tk.Label(frame_tituloValores,text=self.tituloValores)
             label.pack()
+
+        if self.criterios!=None:
+            for criterio in self.criterios:
+                label = tk.Label(self, text=str(criterio))
+                label.grid(row=self.criterios.index(criterio)+1, column=0, sticky='news', padx=10, pady=10)
+                self.labels[criterio] = label
+
+                entry = tk.Entry(self)
+                entry.grid(row=self.criterios.index(criterio)+1, column=1, sticky='news', padx=10, pady=10)
+                self.entries[criterio] = entry
+
+
+    def activar_campo(self, lista_criterios):
+        for criterio in lista_criterios:
+            if criterio in self.labels and criterio in self.entries:
+                self.labels[criterio].grid(row=self.criterios.index(criterio)+1, column=0, sticky='news', padx=10, pady=10)
+                self.entries[criterio].grid(row=self.criterios.index(criterio)+1, column=1, sticky='news', padx=10, pady=10)
+
+    def ocultar_campos(self, lista_criterios):
+        for criterio in lista_criterios:
+            if criterio in self.labels and criterio in self.entries:
+                self.labels[criterio].grid_forget()
+                self.entries[criterio].grid_forget()
+
+    
+
+        '''
         if self.criterios!=None:
             for criterio in self.criterios:
                 label=tk.Label(self,text=str(criterio))
                 label.grid(row=self.criterios.index(criterio)+1,column=0,sticky='news',padx=10,pady=10)
+                self.label.append()
             if self.valores!=None:
                 for valor in self.valores:
                     if habilitado!=None:
@@ -188,6 +219,6 @@ class field_frame(tk.Frame):
                 label[0].grid_forget()
                 entry=self.grid_slaves(row=indice,column=1)
                 entry[0].grid_forget()
-
+'''
         
     
