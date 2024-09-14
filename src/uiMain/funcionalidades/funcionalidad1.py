@@ -1,4 +1,29 @@
-from datetime import datetime, timedelta
+from gestorAplicación.gestion.empresa import Empresa
+
+class ver_viajes():
+    @classmethod
+    def mostrar_viajes(cls, parent):
+        for empresa in Empresa.get_empresas():
+            parent.insert(
+                "end", 
+                f"Viajes disponibles de la empresa {empresa.get_nombre()}\n"
+            )
+            parent.insert("end", "-" * 92 + "\n")
+            parent.insert(
+                "end", 
+                "    FECHA          ORIGEN          DESTINO" 
+                + "         HORA DE SALIDA     ID      PLACA BUS" + "\n"
+            )
+            parent.insert("end", "-" * 92 + "\n")
+
+            for viaje in empresa.get_viajes():
+                parent.insert("end", str(viaje) + "\n")
+            
+            parent.insert("end", "\n")
+
+        parent.config(state="disabled")
+
+""" from datetime import datetime, timedelta
 import sys
 from gestorAplicación.gestion.empresa import Empresa
 from gestorAplicación.transporte.tipoAsiento import TipoAsiento
@@ -368,3 +393,4 @@ def ver_viajes():
                                 # Aquí se debería implementar la lógica para liberar el asiento después del tiempo determinado
                                 # Para ello, puedes utilizar threading.Timer o una tarea programada con alguna librería adecuada
                                 # En esta traducción, he omitido la implementación específica
+ """
