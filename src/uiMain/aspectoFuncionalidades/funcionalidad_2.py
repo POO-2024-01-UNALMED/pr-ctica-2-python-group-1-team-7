@@ -1,6 +1,7 @@
 from uiMain.field_frame import field_frame
 from uiMain import auxiliar
 import tkinter as tk
+from tkinter import ttk
 
 
 class funcionalidad_2(tk.Frame):
@@ -14,6 +15,17 @@ class funcionalidad_2(tk.Frame):
             self.frame_superior = tk.Frame(self)
             self.frame_superior.pack(side="top", expand=True, fill="both")
             self.frame_superior.pack_propagate(False)
+
+            self.frame_right=tk.Frame(self.frame_superior,bg='spring green')
+            self.frame_right.pack(side='right', fill="both", anchor='e')
+
+            combobox_origen=ttk.Combobox(self.frame_right,values=('Bogota','Medellin','Barranquilla'),)
+            combobox_origen.set("Seleccione el origen")          
+            combobox_origen.pack(side='top',padx=10,pady=(20,40),anchor='ne')
+
+            combobox_destino=ttk.Combobox(self.frame_right,values=('Bogota','Medellin','Barranquilla'))
+            combobox_destino.set("Seleccione el destino")   
+            combobox_destino.pack(padx=10,pady=(40,40),anchor='ce')
 
             botones=auxiliar.generar_botones(self)
 

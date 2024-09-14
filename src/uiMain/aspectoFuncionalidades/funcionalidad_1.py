@@ -62,13 +62,15 @@ class funcionalidad_1(tk.Frame):
 
             canvas.bind("<Configure>", on_canvas_resize)
 
-            field_frame(
+            f1=field_frame(
                 scrollable_frame, 
                 "CRITERIO", 
                 ["¿Desea filtrar por alguna categoría?"], 
                 "VALOR", 
                 None
             ).pack(fill="x", expand=True)
+
+            field_frame(self.frame_centro,None,["¿Por cuál categoría desea filtrar?"],None,None).pack(side='bottom',fill='x',expand=True)
         else:
             super().__init__()
 

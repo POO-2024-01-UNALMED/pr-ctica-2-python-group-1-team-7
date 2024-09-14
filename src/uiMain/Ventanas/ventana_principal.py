@@ -113,15 +113,20 @@ class ventana_principal(tk.Tk):
         self.reiniciar_contador_frames()
         match funcionalidad:
             case 1:
+                self.configurar_nombre_descripcion("FUNCIONALIDAD 1","descripción funcionalidad 1\n...\n...")
                 self.frame_activo=funcionalidad_1(frame_interno3)
             case 2:
+                self.configurar_nombre_descripcion("FUNCIONALIDAD 2","descripción funcionalidad 2\n...\n...")
                 self.frame_activo=funcionalidad_2(frame_interno3)
             # case 3:
-              #  funcionalidad_3(frame_interno3)
+              #  self.configurar_nombre_descripcion("FUNCIONALIDAD 3","descripción funcionalidad 3\n...\n...")
+               # self.frame_activo=funcionalidad_3(frame_interno3)
             #case 4:
-               # funcionalidad_4(frame_interno3)
+               # self.configurar_nombre_descripcion("FUNCIONALIDAD 4","descripción funcionalidad 4\n...\n...")
+                #self.frame_activo=funcionalidad_4(frame_interno3)
             #case 5:
-             #   funcionalidad_5(frame_interno3)
+             #   self.configurar_nombre_descripcion("FUNCIONALIDAD 5","descripción funcionalidad 5\n...\n...")
+                #self.frame_activo=funcionalidad_5(frame_interno3)
             
 
     def info_aplicacion(self):
@@ -131,3 +136,9 @@ class ventana_principal(tk.Tk):
     def acerca_de(self):
         messagebox.showinfo("Autores" , "Autores de la aplicación:\n\n-" 
                                 + "Santiago Cardona Franco \n- Samuel Hernández Duque")
+        
+    def configurar_nombre_descripcion(self,nombre,descripcion):
+        self.nombre_proceso_consulta=nombre
+        self.texto_descripcion=descripcion
+        self.label_nombre.config(text=self.nombre_proceso_consulta)
+        self.label_descripcion.config(text=self.texto_descripcion)
