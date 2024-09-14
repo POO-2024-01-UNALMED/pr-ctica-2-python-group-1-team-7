@@ -171,4 +171,17 @@ class field_frame(tk.Frame):
         if criterio in self.criterios:
             return self.valores[self.criterios.index(criterio)]
         
+    def activar_campo(self):
+        pass
+    
+    def ocultar_campos(self,lista_criterios):
+        for criterio in lista_criterios:
+            if criterio in self.criterios:
+                indice=self.criterios.index(criterio)+1
+                label=self.grid_slaves(row=indice,column=0)
+                label[0].grid_forget()
+                entry=self.grid_slaves(row=indice,column=1)
+                entry[0].grid_forget()
+
+        
     

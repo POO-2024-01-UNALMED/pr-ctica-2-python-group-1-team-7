@@ -65,12 +65,15 @@ class funcionalidad_1(tk.Frame):
             f1=field_frame(
                 scrollable_frame, 
                 "CRITERIO", 
-                ["¿Desea filtrar por alguna categoría?"], 
+                ["¿Desea filtrar por alguna categoría?","a","b"], 
                 "VALOR", 
                 None
-            ).pack(fill="x", expand=True)
+            )
 
-            field_frame(self.frame_centro,None,["¿Por cuál categoría desea filtrar?"],None,None).pack(side='bottom',fill='x',expand=True)
+            f1.pack(fill="x", expand=True)
+            f1.ocultar_campos(["a","b"])
+
+            #field_frame(self.frame_centro,None,["¿Por cuál categoría desea filtrar?"],None,None).pack(side='bottom',fill='x',expand=True)
         else:
             super().__init__()
 
