@@ -1,4 +1,6 @@
 from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
+from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
+
 
 import tkinter as tk
 from tkinter import messagebox
@@ -37,10 +39,9 @@ class ventana_principal(tk.Tk):
 
         self.menu_procesos.add_command(
             label="Ver viajes",
-            command=lambda: funcionalidad_1(self.frame_interno3)
-        )
+            command=lambda:self.generador_funcionalidades(1,self.frame_interno3))
         self.menu_procesos.add_separator()
-        self.menu_procesos.add_command(label="Reservar tiquete")
+        self.menu_procesos.add_command(label="Reservar tiquete",command=lambda:self.generador_funcionalidades(2,self.frame_interno3))
         self.menu_procesos.add_separator()
         self.menu_procesos.add_command(label="Gestionar tiquetes")
         self.menu_procesos.add_separator()
@@ -86,6 +87,8 @@ class ventana_principal(tk.Tk):
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
+        self.frame_activo=None
+
         self.mainloop()
 
     def cerrar_ambas_ventanas(self, ventana):
@@ -93,8 +96,33 @@ class ventana_principal(tk.Tk):
         ventana.destroy()
 
     def cerrar_ventana(self, ventana):
+        self.reiniciar_contador_frames()
         self.destroy()
         ventana.deiconify()
+
+    def reiniciar_contador_frames(self):
+        funcionalidad_1.numero_frames=1
+        funcionalidad_2.numero_frames=1
+        #funcionalidad_3.numero_frames=1
+        #funcionalidad_4.numero_frames=1
+        #funcionalidad_5.numero_frames=1
+
+    def generador_funcionalidades(self,funcionalidad,frame_interno3):
+        if self.frame_activo:
+            self.frame_activo.pack_forget()
+        self.reiniciar_contador_frames()
+        match funcionalidad:
+            case 1:
+                self.frame_activo=funcionalidad_1(frame_interno3)
+            case 2:
+                self.frame_activo=funcionalidad_2(frame_interno3)
+            # case 3:
+              #  funcionalidad_3(frame_interno3)
+            #case 4:
+               # funcionalidad_4(frame_interno3)
+            #case 5:
+             #   funcionalidad_5(frame_interno3)
+            
 
     def info_aplicacion(self):
         messagebox.showinfo("Acerca de la Aplicación" 
