@@ -7,7 +7,7 @@ from tkinter import ttk
 
 class funcionalidad_2(tk.Frame):
     numero_frames = 1
-    def __init__(self, frame):
+    def __init__(self,ventana_principal, frame):
         if funcionalidad_2.numero_frames == 1:
             super().__init__(frame)
             self.pack(expand=True, fill="both")

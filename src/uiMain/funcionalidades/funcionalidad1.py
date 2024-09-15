@@ -8,13 +8,13 @@ class ver_viajes():
                 "end", 
                 f"Viajes disponibles de la empresa {empresa.get_nombre()}\n"
             )
-            text.insert("end", "-" * 92 + "\n")
+            text.insert("end", "-" * 112 + "\n")
             text.insert(
                 "end", 
                 "    FECHA          ORIGEN          DESTINO" 
                 + "         HORA DE SALIDA     ID      PLACA BUS\n"
             )
-            text.insert("end", "-" * 92 + "\n")
+            text.insert("end", "-" * 112 + "\n")
 
             for viaje in empresa.get_viajes():
                 text.insert("end", str(viaje) + "\n")

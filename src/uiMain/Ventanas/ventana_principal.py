@@ -1,6 +1,6 @@
 from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
-from uiMain.auxiliar import posicionar
+#from uiMain.auxiliar import posicionar
 
 import tkinter as tk
 from tkinter import messagebox
@@ -11,7 +11,8 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        posicionar(self, "1000", "700")
+        self.geometry("900x700")
+        #posicionar(self, "1000", "700")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)
@@ -38,9 +39,9 @@ class ventana_principal(tk.Tk):
 
         self.menu_procesos.add_command(
             label="Ver viajes",
-            command=lambda:self.generador_funcionalidades(1,self.frame_interno3))
+            command=lambda:self.generador_funcionalidades(1))
         self.menu_procesos.add_separator()
-        self.menu_procesos.add_command(label="Reservar tiquete",command=lambda:self.generador_funcionalidades(2,self.frame_interno3))
+        self.menu_procesos.add_command(label="Reservar tiquete",command=lambda:self.generador_funcionalidades(2))
         self.menu_procesos.add_separator()
         self.menu_procesos.add_command(label="Gestionar tiquetes")
         self.menu_procesos.add_separator()
@@ -106,27 +107,25 @@ class ventana_principal(tk.Tk):
         #funcionalidad_4.numero_frames=1
         #funcionalidad_5.numero_frames=1
 
-    def generador_funcionalidades(self,funcionalidad,frame_interno3):
+    def generador_funcionalidades(self, funcionalidad):
         if self.frame_activo:
             self.frame_activo.pack_forget()
-        self.reiniciar_contador_frames()
         match funcionalidad:
             case 1:
-                self.configurar_nombre_descripcion("FUNCIONALIDAD 1","descripción funcionalidad 1\n...\n...")
-                self.frame_activo=funcionalidad_1(frame_interno3)
+                self.configurar_nombre_descripcion("FUNCIONALIDAD 1", "descripción funcionalidad 1\n...\n...")
+                self.frame_activo = funcionalidad_1(self,self.frame_interno3)
             case 2:
-                self.configurar_nombre_descripcion("FUNCIONALIDAD 2","descripción funcionalidad 2\n...\n...")
-                self.frame_activo=funcionalidad_2(frame_interno3)
-            # case 3:
-              #  self.configurar_nombre_descripcion("FUNCIONALIDAD 3","descripción funcionalidad 3\n...\n...")
-               # self.frame_activo=funcionalidad_3(frame_interno3)
-            #case 4:
-               # self.configurar_nombre_descripcion("FUNCIONALIDAD 4","descripción funcionalidad 4\n...\n...")
-                #self.frame_activo=funcionalidad_4(frame_interno3)
-            #case 5:
-             #   self.configurar_nombre_descripcion("FUNCIONALIDAD 5","descripción funcionalidad 5\n...\n...")
-                #self.frame_activo=funcionalidad_5(frame_interno3)
-            
+                self.configurar_nombre_descripcion("FUNCIONALIDAD 2", "descripción funcionalidad 2\n...\n...")
+                self.frame_activo = funcionalidad_2(self,self.frame_interno3)
+            case 3:
+                self.configurar_nombre_descripcion("FUNCIONALIDAD 3", "descripción funcionalidad 3\n...\n...")
+                #self.frame_activo = funcionalidad_3(self,self.frame_interno3)
+            case 4:
+                self.configurar_nombre_descripcion("FUNCIONALIDAD 4", "descripción funcionalidad 4\n...\n...")
+                #self.frame_activo = funcionalidad_4(self,self.frame_interno3)
+            case 5:
+                self.configurar_nombre_descripcion("FUNCIONALIDAD 5", "descripción funcionalidad 5\n...\n...")
+                #self.frame_activo = funcionalidad_5(self,self.frame_interno3)
 
     def info_aplicacion(self):
         messagebox.showinfo("Acerca de la Aplicación" 
@@ -141,3 +140,10 @@ class ventana_principal(tk.Tk):
         self.texto_descripcion=descripcion
         self.label_nombre.config(text=self.nombre_proceso_consulta)
         self.label_descripcion.config(text=self.texto_descripcion)
+
+    def volver_principal(self):
+        decision=messagebox.askyesno("Diálogo de confirmación","¿Desea volver al menú principal?")
+        if decision:
+            ventana_principal(self)
+
+    

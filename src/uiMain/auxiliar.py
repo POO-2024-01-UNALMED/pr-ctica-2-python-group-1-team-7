@@ -10,6 +10,9 @@ from uiMain.field_frame import field_frame
 from datetime import datetime, time
 import unidecode
 import tkinter as tk
+from tkinter import messagebox
+#from ventanas.ventana_principal import ventana_principal
+#from ventanas.ventana_inicio import ventana_inicio
 
 # Normaliza la entrada eliminando acentos y caracteres especiales
 def sc_input(mensaje: str):
@@ -54,7 +57,7 @@ def generar_botones(frame_contenedor):
 
 def generar_scrollbar(frame):
     canvas = tk.Canvas(frame, bg='lightblue')
-    canvas.pack(fill="both", expand=True)
+    canvas.pack(side="left", fill="both", expand=True)
 
     scrollbar = tk.Scrollbar(frame, orient="vertical", command=canvas.yview)
     scrollbar.pack(side="right", fill="y")
@@ -62,6 +65,7 @@ def generar_scrollbar(frame):
     canvas.configure(yscrollcommand=scrollbar.set)
 
     scrollable_frame = tk.Frame(canvas)
+
     scrollable_frame.bind(
         "<Configure>",
         lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
@@ -73,14 +77,8 @@ def generar_scrollbar(frame):
         canvas.itemconfig(window, width=event.width)
 
     canvas.bind("<Configure>", on_canvas_resize)
-    
-    print(f"Scrollable frame creado: {scrollable_frame}")
-    return scrollable_frame
 
-def borrar_datos(event,fieldframe:field_frame):
-    for valor in fieldframe.valores:
-        if valor in fieldframe.entries:
-            fieldframe.entries[valor].config(text="")
+    return scrollable_frame
 
 def instanciar_objetos():
     # Crear instancias de Terminal

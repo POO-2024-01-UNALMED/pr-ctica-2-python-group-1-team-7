@@ -1,4 +1,4 @@
-from uiMain.auxiliar import posicionar
+#from uiMain.auxiliar import posicionar
 from ventanas import ventana_principal
 from PIL import Image, ImageTk
 import tkinter as tk
@@ -15,7 +15,8 @@ class ventana_inicio(tk.Tk):
 
         super().__init__()
         self.title("LussajuBus")
-        posicionar(self, "1000", "700")
+        self.geometry("700x600")
+        #posicionar(self, "1000", "700")
         self.iconphoto(True, tk.PhotoImage(file="src//uiMain//assets//cubito.png"))
 
         self.barra_menu = tk.Menu(self)

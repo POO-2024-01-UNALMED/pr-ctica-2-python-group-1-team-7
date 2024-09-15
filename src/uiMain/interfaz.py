@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from baseDatos import Serializador, Deserializador
 from gestorAplicación.gestion.habitacion import Habitacion
 from gestorAplicación.transporte.asiento import Asiento
-import uiMain.ventanas.ventana_inicio
+from ventanas.ventana_inicio import ventana_inicio
 import auxiliar
 
 class Interfaz:
@@ -25,7 +25,7 @@ class Interfaz:
         #Deserializador.deserializar()
         auxiliar.instanciar_objetos()
         Interfaz.chequear_asientos_y_habitaciones()
-        uiMain.ventanas.ventana_inicio.ventana_inicio()
+        ventana_inicio()
        
 if __name__ == "__main__":
         Interfaz.main()
