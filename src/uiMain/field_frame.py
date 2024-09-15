@@ -106,7 +106,7 @@ class field_frame(tk.Frame):
         valores = None, 
         habilitado = None
     ):
-        super().__init__(parent, width=200, height=200, bg='lightblue')
+        super().__init__(parent, bg='lightblue')
         self.pack(fill="both")
 
         self.tituloCriterios = tituloCriterios
@@ -186,6 +186,30 @@ class field_frame(tk.Frame):
             if criterio in self.labels and criterio in self.entries:
                 self.labels[criterio].grid_forget()
                 self.entries[criterio].grid_forget() 
+    
+    def agregar_campo(self, criterio):
+        label = tk.Label(self, text=criterio)
+        label.grid(
+            row=len(self.criterios)+2, 
+            column=0, 
+            sticky='news', 
+            padx=10, 
+            pady=10
+        )
+        self.labels[criterio] = label
+
+        entry = tk.Entry(self)
+        entry.grid(
+            row=len(self.criterios)+2, 
+            column=1, 
+            sticky='news', 
+            padx=10, 
+            pady=10
+        )
+        self.entries[criterio] = entry
+    
+    def getValue(self, criterio):
+        return self.entries[criterio].get()
 
 '''
 if self.criterios!=None:

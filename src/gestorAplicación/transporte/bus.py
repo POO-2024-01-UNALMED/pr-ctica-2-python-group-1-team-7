@@ -12,6 +12,7 @@ class Bus(Vehiculo):
         self.crear_asientos(filas)
         # Genera una placa única para el bus
         self.placa = Vehiculo.generar_placa()
+        self.filas = filas
     
     # Método para crear los asientos al llamar al constructor
     def crear_asientos(self, filas: int):
@@ -48,3 +49,6 @@ class Bus(Vehiculo):
     def set_asientos(self, asientos):
         # Establece la lista de asientos del bus
         self.asientos = asientos
+
+    def get_filas(self):
+        return self.filas

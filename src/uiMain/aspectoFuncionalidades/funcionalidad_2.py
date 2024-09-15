@@ -4,7 +4,6 @@ from uiMain import auxiliar
 import tkinter as tk
 from tkinter import ttk
 
-
 class funcionalidad_2(tk.Frame):
     numero_frames = 1
     def __init__(self,ventana_principal, frame):
@@ -73,10 +72,15 @@ class funcionalidad_2(tk.Frame):
             self.botones[0].config(command=lambda: self.segundo_paso(viajes))
     
     def segundo_paso(self, viajes):
-        reservar_tiquete.mostrar_asientos(
+        viaje = reservar_tiquete.mostrar_asientos(
             self.frame_superior, 
             self.text_viajes, 
             self.field, 
             viajes
         )
         self.frame_right.pack_forget()
+        if viaje != None:
+            self.botones[0].config(command=lambda: self.tercer_paso(viaje))
+
+    def tercer_paso(self, viaje):
+        reservar_tiquete.reservar_asiento(self.field, viaje)

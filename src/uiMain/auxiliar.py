@@ -27,6 +27,94 @@ def posicionar(window, width, height):
         y_cordinate = int((screen_height/2) - (int(height)/2))
 
         window.geometry(f"{width}x{height}+{x_cordinate}+{y_cordinate-100}")
+
+def asientos(frame_superior, viaje):
+    frame_principal = tk.Frame(frame_superior)
+    frame_principal.place(relx=0.5, rely=0.5, relwidth=0.75, anchor="center")
+
+    frame_asientos = tk.Frame(frame_principal)
+    frame_asientos.pack(side="left", padx=(50, 10), pady=20)
+
+    frame_tipos_asiento = tk.Frame(frame_principal)
+    frame_tipos_asiento.pack(side="right", padx=(10, 50), pady=20)
+
+    label_preferencial = tk.Label(
+        frame_tipos_asiento, 
+        bg="lightblue", 
+        text="Preferencial",
+        font="Consolas"
+    )
+    label_preferencial.grid(row=0, column=0)
+
+    label_premium = tk.Label(
+        frame_tipos_asiento, 
+        bg="lightgreen", 
+        text="Premium",
+        font="Consolas"
+    )
+    label_premium.grid(row=1, column=0)
+
+    label_estandar = tk.Label(
+        frame_tipos_asiento, 
+        bg="lightyellow", 
+        text="Estándar",
+        font="Consolas"
+    )
+    label_estandar.grid(row=2, column=0)
+
+    label_reservado = tk.Label(
+        frame_tipos_asiento, 
+        bg="red", 
+        text="Reservado",
+        font="Consolas"
+    )
+    label_reservado.grid(row=3, column=0)
+
+    asientos = viaje.lista_asientos()
+    letras = "ABCD"
+    for asiento in asientos:
+        if len(asiento.get_numero()) == 2:
+            if asiento.is_reservado():
+                tk.Label(
+                    frame_asientos, 
+                    bg="red", 
+                    text=asiento.get_numero() + " ", 
+                    font="Consolas"
+                ).grid(
+                    row=letras.index(asiento.get_numero()[1]), 
+                    column=int(asiento.get_numero()[0]) - 1
+                )
+            else:
+                tk.Label(
+                    frame_asientos, 
+                    bg=asiento.get_tipo_asiento().value, 
+                    text=asiento.get_numero() + " ", 
+                    font="Consolas"
+                ).grid(
+                    row=letras.index(asiento.get_numero()[1]), 
+                    column=int(asiento.get_numero()[0]) - 1
+                )
+        else:
+            if asiento.is_reservado():
+                tk.Label(
+                    frame_asientos, 
+                    bg="red", 
+                    text=asiento.get_numero(), 
+                    font="Consolas"
+                ).grid(
+                    row=letras.index(asiento.get_numero()[2]), 
+                    column=int(asiento.get_numero()[0:2]) - 1
+                )
+            else:
+                tk.Label(
+                    frame_asientos, 
+                    bg=asiento.get_tipo_asiento().value, 
+                    text=asiento.get_numero(), 
+                    font="Consolas"
+                ).grid(
+                    row=letras.index(asiento.get_numero()[2]), 
+                    column=int(asiento.get_numero()[0:2]) - 1
+                )
         
 def generar_botones(frame_contenedor):
     frame_inferior = tk.Frame(frame_contenedor, bg='lightblue')
