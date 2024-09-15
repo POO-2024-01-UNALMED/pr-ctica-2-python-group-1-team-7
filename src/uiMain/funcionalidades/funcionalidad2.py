@@ -1,4 +1,6 @@
 from gestorAplicación.gestion.empresa import Empresa
+from gestorAplicación.gestion.viaje import Viaje
+import tkinter as tk
 
 class reservar_tiquete():
     @classmethod
@@ -14,6 +16,8 @@ class reservar_tiquete():
 
     @classmethod
     def mostrar_viajes(cls, text, combobox_origen, combobox_destino):
+        text.config(state="normal")
+        text.delete("1.0", "end")
         origen = combobox_origen.get()
         destino = combobox_destino.get()
         viajes = Empresa.buscar_viajes_por_origen_destino(origen, destino)
@@ -40,10 +44,85 @@ class reservar_tiquete():
                 text.insert("end", "-" * 91 + "\n")
                 text.insert("end", str(viaje) + "\n")
                 text.insert("end", "\n")
-
         text.config(state="disabled")
+        return viajes
 
-""" from gestorAplicación.gestion.empresa import Empresa
+    @classmethod
+    def mostrar_asientos(cls, frame_superior, text, field_frame, viajes):
+        text.config(state="normal")
+        text.delete("1.0", "end")
+        viaje = Viaje.buscar_viaje(
+            viajes, 
+            field_frame.entries["Ingrese el id del viaje"].get()
+        )
+
+        if not viaje:
+            text.insert(
+                "end", 
+                f"No se encontró ningún viaje con número de id {id}" 
+                + " disponible para reservar\n"
+            )
+        else:
+            text.pack_forget()
+            field_frame.entries["Ingrese el id del viaje"].config(state="disabled")
+            
+            frame_principal = tk.Frame(frame_superior)
+            frame_principal.place(relx=0.5, rely=0.5, anchor="center")
+
+            frame_asientos = tk.Frame(frame_principal)
+            frame_asientos.pack(side="left", padx=(50, 10), pady=20)
+
+            frame_tipos_asiento = tk.Frame(frame_principal)
+            frame_tipos_asiento.pack(side="right", padx=(10, 50), pady=50)
+
+            label_preferencial = tk.Label(
+                frame_tipos_asiento, 
+                bg="lightblue", 
+                text="Preferencial"
+            )
+            label_preferencial.grid(row=0, column=0)
+
+            label_premium = tk.Label(
+                frame_tipos_asiento, 
+                bg="lightgreen", 
+                text="Premium"
+            )
+            label_premium.grid(row=1, column=0)
+
+            label_estandar = tk.Label(
+                frame_tipos_asiento, 
+                bg="lightyellow", 
+                text="Estándar"
+            )
+            label_estandar.grid(row=2, column=0)
+
+            letras = "DCBA"
+            for i in range(15):
+                for j in range(4):
+                    if i + 1 <= 5:
+                        tk.Label(
+                            frame_asientos, 
+                            bg="lightblue", 
+                            text=str(i+1) + letras[j] + " ", 
+                            font="Consolas"
+                        ).grid(row=j, column=i)
+                    elif i + 1 < 10:
+                        tk.Label(
+                            frame_asientos, 
+                            bg="lightgreen", 
+                            text=str(i+1) + letras[j] + " ", 
+                            font="Consolas"
+                        ).grid(row=j, column=i)
+                    else:
+                        tk.Label(
+                            frame_asientos, 
+                            bg="lightyellow", 
+                            text=str(i+1) + letras[j], 
+                            font="Consolas"
+                        ).grid(row=j, column=i)
+
+""" 
+from gestorAplicación.gestion.empresa import Empresa
 from auxiliar import sc_input
 import re
 
@@ -213,4 +292,5 @@ def reservar_tiquete():
             print(f"Origen: {viaje.get_terminal_origen().get_ubicacion()}")
             print(f"Destino: {viaje.get_terminal_destino().get_ubicacion()}")
             print("-" * 34)
-            print() """
+            print() 
+"""

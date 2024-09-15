@@ -1,20 +1,4 @@
-""" import tkinter as tk
-
-def generar_botones(frame_contenedor):
-    frame_down = tk.Frame(frame_contenedor, highlightbackground="black", highlightthickness=1)
-    frame_down.pack(side="bottom", fill="x")
-
-    botones_frame = tk.Frame(frame_down, highlightbackground="black", highlightthickness=1)
-    botones_frame.pack(side="bottom",anchor='s',pady=5)
-
-    boton_aceptar = tk.Button(botones_frame, text="Aceptar", font=("Arial", 10), width=8, height=1)
-    boton_aceptar.pack(side='left',anchor='s', padx=7)
-
-    boton_borrar = tk.Button(botones_frame, text="Borrar", font=("Arial", 10), width=8, height=1)
-    boton_borrar.pack(side='left',anchor='s', padx=7)
-
-    return (boton_aceptar,boton_borrar)
-
+"""
 class FieldFrame(tk.Frame):
     def __init__(self,tituloCriterios,criterios,tituloValores,valores,habilitado=None):
         super().__init__()
@@ -109,12 +93,22 @@ class FieldFrame(tk.Frame):
         for i in range(4):
             entry = tk.Entry(self.frame_derecha)
             entry.pack(expand=True, fill="x", padx=40)'''
+
 import tkinter as tk
 
 class field_frame(tk.Frame):
-    def __init__(self, parent, tituloCriterios, criterios, tituloValores, valores, habilitado=None):
+    def __init__(
+        self, 
+        parent, 
+        tituloCriterios, 
+        criterios, 
+        tituloValores, 
+        valores = None, 
+        habilitado = None
+    ):
         super().__init__(parent, width=200, height=200, bg='lightblue')
-        self.pack(expand=True, fill="both")
+        self.pack(fill="both")
+
         self.tituloCriterios = tituloCriterios
         self.criterios = criterios
         self.tituloValores = tituloValores
@@ -129,73 +123,102 @@ class field_frame(tk.Frame):
         self.grid_columnconfigure(1, weight=1)
 
         if self.tituloCriterios!=None:
-            frame_tituloCriterios=tk.Frame(self,highlightbackground="blue", highlightthickness=2)
+            frame_tituloCriterios=tk.Frame(
+                self,
+                highlightbackground="blue", 
+                highlightthickness=2
+            )
             frame_tituloCriterios.grid(row=0,column=0,sticky='news',padx=10,pady=10)
             label=tk.Label(frame_tituloCriterios,text=self.tituloCriterios)
             label.pack()
         if self.tituloValores!=None:
-            frame_tituloValores=tk.Frame(self,highlightbackground="blue", highlightthickness=2)
+            frame_tituloValores=tk.Frame(
+                self,
+                highlightbackground="blue", 
+                highlightthickness=2
+            )
             frame_tituloValores.grid(row=0,column=1,sticky='news',padx=10,pady=10)
             label=tk.Label(frame_tituloValores,text=self.tituloValores)
             label.pack()
 
-        if self.criterios!=None:
+        if self.criterios != None:
             for criterio in self.criterios:
                 label = tk.Label(self, text=str(criterio))
-                label.grid(row=self.criterios.index(criterio)+1, column=0, sticky='news', padx=10, pady=10)
+                label.grid(
+                    row=self.criterios.index(criterio)+1, 
+                    column=0, 
+                    sticky='news', 
+                    padx=10, 
+                    pady=10
+                )
                 self.labels[criterio] = label
 
                 entry = tk.Entry(self)
-                entry.grid(row=self.criterios.index(criterio)+1, column=1, sticky='news', padx=10, pady=10)
+                entry.grid(
+                    row=self.criterios.index(criterio)+1, 
+                    column=1, 
+                    sticky='news', 
+                    padx=10, 
+                    pady=10
+                )
                 self.entries[criterio] = entry
-
-
+ 
     def activar_campo(self, lista_criterios):
         for criterio in lista_criterios:
             if criterio in self.labels and criterio in self.entries:
-                self.labels[criterio].grid(row=self.criterios.index(criterio)+1, column=0, sticky='news', padx=10, pady=10)
-                self.entries[criterio].grid(row=self.criterios.index(criterio)+1, column=1, sticky='news', padx=10, pady=10)
+                self.labels[criterio].grid(
+                    row=self.criterios.index(criterio)+1, 
+                    column=0, 
+                    sticky='news', 
+                    padx=10, 
+                    pady=10
+                )
+                self.entries[criterio].grid(
+                    row=self.criterios.index(criterio)+1, 
+                    column=1, 
+                    sticky='news', 
+                    padx=10, 
+                    pady=10
+                )
 
     def ocultar_campos(self, lista_criterios):
         for criterio in lista_criterios:
             if criterio in self.labels and criterio in self.entries:
                 self.labels[criterio].grid_forget()
-                self.entries[criterio].grid_forget()
+                self.entries[criterio].grid_forget() 
 
-    
-
-        '''
-        if self.criterios!=None:
-            for criterio in self.criterios:
-                label=tk.Label(self,text=str(criterio))
-                label.grid(row=self.criterios.index(criterio)+1,column=0,sticky='news',padx=10,pady=10)
-                self.label.append()
-            if self.valores!=None:
-                for valor in self.valores:
-                    if habilitado!=None:
-                        if self.criterios[self.valores.index(valor)] in self.habilitado:
-                            editado="disabled"
-                        else:
-                            editado="normal"
-                    else:
-                        editado="normal"
-                    if valor==None:
-                        entry=tk.Entry(self,state=editado)
-                        entry.grid(row=self.valores.index(valor)+1,column=1,sticky='news',padx=10,pady=10)
-                    else:
-                        entry=tk.Entry(self,state=editado,textvariable=tk.StringVar(self,value=valor))
-                        entry.grid(row=self.valores.index(valor)+1,column=1,sticky='news',padx=10,pady=10)
+'''
+if self.criterios!=None:
+    for criterio in self.criterios:
+        label=tk.Label(self,text=str(criterio))
+        label.grid(row=self.criterios.index(criterio)+1,column=0,sticky='news',padx=10,pady=10)
+        self.label.append()
+    if self.valores!=None:
+        for valor in self.valores:
+            if habilitado!=None:
+                if self.criterios[self.valores.index(valor)] in self.habilitado:
+                    editado="disabled"
+                else:
+                    editado="normal"
             else:
-                for criterio in self.criterios:
-                    if habilitado!=None:
-                        if criterio in self.habilitado:
-                            editado="disabled"
-                        else:
-                            editado="normal"
-                    else: 
-                        editado="normal"
-                    entry=tk.Entry(self,state=editado)
-                    entry.grid(row=self.criterios.index(criterio)+1,column=1,sticky='news',padx=10,pady=10)
+                editado="normal"
+            if valor==None:
+                entry=tk.Entry(self,state=editado)
+                entry.grid(row=self.valores.index(valor)+1,column=1,sticky='news',padx=10,pady=10)
+            else:
+                entry=tk.Entry(self,state=editado,textvariable=tk.StringVar(self,value=valor))
+                entry.grid(row=self.valores.index(valor)+1,column=1,sticky='news',padx=10,pady=10)
+    else:
+        for criterio in self.criterios:
+            if habilitado!=None:
+                if criterio in self.habilitado:
+                    editado="disabled"
+                else:
+                    editado="normal"
+            else: 
+                editado="normal"
+            entry=tk.Entry(self,state=editado)
+            entry.grid(row=self.criterios.index(criterio)+1,column=1,sticky='news',padx=10,pady=10)
 
     def getValue(self,criterio):
         #Lanzar un exception error si no encuentra el criterior

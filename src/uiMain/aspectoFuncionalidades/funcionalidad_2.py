@@ -20,48 +20,63 @@ class funcionalidad_2(tk.Frame):
             self.frame_right=tk.Frame(self.frame_superior, bg='spring green')
             self.frame_right.pack(side='right', fill="y")
 
-            combobox_origen=ttk.Combobox(
+            self.combobox_origen=ttk.Combobox(
                 self.frame_right,
                 values=reservar_tiquete.obtener_ubicaciones("origenes"),
                 state="readonly"
             )
-            combobox_origen.pack(side="top", padx=10, pady=(60, 0))
-            combobox_origen.set("Seleccione el origen")          
+            self.combobox_origen.pack(side="top", padx=10, pady=(60, 0))
+            self.combobox_origen.set("Seleccione el origen")          
 
-            combobox_destino=ttk.Combobox(
+            self.combobox_destino=ttk.Combobox(
                 self.frame_right,
                 values=reservar_tiquete.obtener_ubicaciones("destinos"),
                 state="readonly"
             )
-            combobox_destino.pack(side="bottom", padx=10, pady=(0, 60))
-            combobox_destino.set("Seleccione el destino")   
+            self.combobox_destino.pack(side="bottom", padx=10, pady=(0, 60))
+            self.combobox_destino.set("Seleccione el destino")   
 
             self.frame_centro = tk.Frame(self)
             self.frame_centro.pack(expand=True, fill="both")
             self.frame_centro.pack_propagate(False)
 
             scrollable_frame = auxiliar.generar_scrollbar(self.frame_centro)
-            botones = auxiliar.generar_botones(self)
+            self.botones = auxiliar.generar_botones(self)
 
-            self.text_viajes = tk.Text(self.frame_superior, font=(("Consolas", 11)))
-            self.text_viajes.pack(expand=True, fill="both")
-
-            botones[0].config(
-                command=lambda: reservar_tiquete.mostrar_viajes(
-                    self.text_viajes, 
-                    combobox_origen, 
-                    combobox_destino
-                )
-            )
-
-            field_frame(
+            self.field = field_frame(
                 scrollable_frame, 
                 "CRITERIO", 
                 ["Ingrese el id del viaje"], 
                 "VALOR", 
                 None
-            ).pack(fill="x", expand=True)
+            )
+            self.field.pack_forget()
+
+            self.text_viajes = tk.Text(self.frame_superior, font=(("Consolas", 11)))
+            self.text_viajes.pack(expand=True, fill="both")
+
+            self.botones[0].config(command=self.primer_paso)
+
         else:
             super().__init__()
 
         funcionalidad_2.numero_frames += 1
+    
+    def primer_paso(self):
+        viajes = reservar_tiquete.mostrar_viajes(
+            self.text_viajes, 
+            self.combobox_origen, 
+            self.combobox_destino
+        )
+        if len(viajes) != 0:
+            self.field.pack(fill="both")
+            self.botones[0].config(command=lambda: self.segundo_paso(viajes))
+    
+    def segundo_paso(self, viajes):
+        reservar_tiquete.mostrar_asientos(
+            self.frame_superior, 
+            self.text_viajes, 
+            self.field, 
+            viajes
+        )
+        self.frame_right.pack_forget()
