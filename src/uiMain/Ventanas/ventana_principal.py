@@ -1,6 +1,6 @@
 from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
-
+from uiMain.auxiliar import posicionar
 
 import tkinter as tk
 from tkinter import messagebox
@@ -11,8 +11,7 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        self.geometry("900x700")
-
+        posicionar(self, "1000", "700")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)

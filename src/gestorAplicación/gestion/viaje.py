@@ -138,10 +138,10 @@ class Viaje:
         self.id = id_
 
     def get_origen(self):
-        return self.get_terminal_origen.get_ubicacion
+        return self.get_terminal_origen().get_ubicacion()
 
     def get_destino(self):
-        return self.get_terminal_destino.get_ubicacion
+        return self.get_terminal_destino().get_ubicacion()
 
     def get_str_fecha(self):
         return self.fecha.strftime("%d-%m-%Y")

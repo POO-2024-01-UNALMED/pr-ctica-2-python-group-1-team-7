@@ -1,4 +1,49 @@
 from gestorAplicación.gestion.empresa import Empresa
+
+class reservar_tiquete():
+    @classmethod
+    def obtener_ubicaciones(cls, tipo):
+        ubicaciones = []
+        for empresa in Empresa.get_empresas():
+            for viaje in empresa.get_viajes():
+                if tipo == "origenes":
+                    ubicaciones.append(viaje.get_terminal_origen().get_ubicacion())
+                elif tipo == "destinos":
+                    ubicaciones.append(viaje.get_terminal_destino().get_ubicacion())
+        return list(set(ubicaciones))
+
+    @classmethod
+    def mostrar_viajes(cls, text, combobox_origen, combobox_destino):
+        origen = combobox_origen.get()
+        destino = combobox_destino.get()
+        viajes = Empresa.buscar_viajes_por_origen_destino(origen, destino)
+
+        if not viajes:
+            text.insert(
+                "end", 
+                "No se encontraron viajes disponibles para reservar\n"
+            )
+        else:
+            text.insert(
+                "end", 
+                "Estos son los viajes disponibles para la ruta " 
+                + f"{origen.upper()} --> {destino.upper()}:\n"
+            )
+
+            for viaje in viajes:
+                text.insert("end", "-" * 106 + "\n")
+                text.insert(
+                    "end", 
+                    "    FECHA          ORIGEN          DESTINO" 
+                    + "         HORA DE SALIDA     ID      PLACA BUS\n"
+                )
+                text.insert("end", "-" * 106 + "\n")
+                text.insert("end", str(viaje) + "\n")
+                text.insert("end", "\n")
+
+        text.config(state="disabled")
+
+""" from gestorAplicación.gestion.empresa import Empresa
 from auxiliar import sc_input
 import re
 
@@ -168,4 +213,4 @@ def reservar_tiquete():
             print(f"Origen: {viaje.get_terminal_origen().get_ubicacion()}")
             print(f"Destino: {viaje.get_terminal_destino().get_ubicacion()}")
             print("-" * 34)
-            print()
+            print() """

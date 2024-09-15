@@ -25,22 +25,25 @@ class Empresa:
         if (destino == ""):
             for empresa in cls.empresas:
                 for viaje in empresa.get_viajes():
-                    if viaje.get_origen == origen:
+                    if viaje.get_origen() == origen:
                         viajes.append(viaje)
         elif (origen == ""):
             for empresa in cls.empresas:
                 for viaje in empresa.get_viajes():
-                    if viaje.get_destino == destino:
+                    if viaje.get_destino() == destino:
                         viajes.append(viaje)
         else:
             for empresa in cls.empresas:
                 for viaje in empresa.get_viajes():
                     if viaje.tiene_sillas():
-                        if (viaje.get_origen == origen 
-                                and viaje.get_destino == destino 
-                                and datetime.now() 
-                                    < datetime.combine(viaje.get_fecha(), 
-                                                        viaje.get_hora())):
+                        if (
+                            viaje.get_origen() == origen 
+                            and viaje.get_destino() == destino 
+                            and datetime.now() < datetime.combine(
+                                viaje.get_fecha(), 
+                                viaje.get_hora()
+                            )
+                        ):
                             viajes.append(viaje)
         return viajes
 

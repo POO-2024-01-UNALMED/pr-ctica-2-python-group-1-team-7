@@ -2,26 +2,26 @@ from gestorAplicación.gestion.empresa import Empresa
 
 class ver_viajes():
     @classmethod
-    def mostrar_viajes(cls, parent):
+    def mostrar_viajes(cls, text):
         for empresa in Empresa.get_empresas():
-            parent.insert(
+            text.insert(
                 "end", 
                 f"Viajes disponibles de la empresa {empresa.get_nombre()}\n"
             )
-            parent.insert("end", "-" * 92 + "\n")
-            parent.insert(
+            text.insert("end", "-" * 92 + "\n")
+            text.insert(
                 "end", 
                 "    FECHA          ORIGEN          DESTINO" 
-                + "         HORA DE SALIDA     ID      PLACA BUS" + "\n"
+                + "         HORA DE SALIDA     ID      PLACA BUS\n"
             )
-            parent.insert("end", "-" * 92 + "\n")
+            text.insert("end", "-" * 92 + "\n")
 
             for viaje in empresa.get_viajes():
-                parent.insert("end", str(viaje) + "\n")
+                text.insert("end", str(viaje) + "\n")
             
-            parent.insert("end", "\n")
+            text.insert("end", "\n")
 
-        parent.config(state="disabled")
+        text.config(state="disabled")
 
 ''' from datetime import datetime, timedelta
 import sys

@@ -16,20 +16,41 @@ def sc_input(mensaje: str):
     input_value = input(mensaje)
     return unidecode.unidecode(input_value).strip()
 
+def posicionar(window, width, height):
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
+
+        x_cordinate = int((screen_width/2) - (int(width)/2))
+        y_cordinate = int((screen_height/2) - (int(height)/2))
+
+        window.geometry(f"{width}x{height}+{x_cordinate}+{y_cordinate-100}")
+        
 def generar_botones(frame_contenedor):
-    frame_down = tk.Frame(frame_contenedor,bg='lightblue')
-    frame_down.pack(side="bottom", fill="x")
+    frame_inferior = tk.Frame(frame_contenedor, bg='lightblue')
+    frame_inferior.pack(side="bottom", fill="x")
 
-    botones_frame = tk.Frame(frame_down,bg='lightblue')
-    botones_frame.pack(side="bottom",anchor='s',pady=5)
+    frame_botones = tk.Frame(frame_inferior, bg='lightblue')
+    frame_botones.pack(pady=5)
 
-    boton_aceptar = tk.Button(botones_frame, text="Aceptar", font=("Arial", 10), width=8, height=1)
-    boton_aceptar.pack(side='left',anchor='s', padx=7)
+    boton_aceptar = tk.Button(
+        frame_botones, 
+        text="Aceptar", 
+        font=("Calibri", 10), 
+        width=8, 
+        height=1
+    )
+    boton_aceptar.pack(side='left', padx=7)
 
-    boton_borrar = tk.Button(botones_frame, text="Borrar", font=("Arial", 10), width=8, height=1)
-    boton_borrar.pack(side='left',anchor='s', padx=7)
+    boton_borrar = tk.Button(
+        frame_botones, 
+        text="Borrar", 
+        font=("Arial", 10), 
+        width=8, 
+        height=1
+    )
+    boton_borrar.pack(side='right', padx=7)
 
-    return (boton_aceptar,boton_borrar)
+    return (boton_aceptar, boton_borrar)
 
 def generar_scrollbar(frame):
     canvas = tk.Canvas(frame, bg='lightblue')
