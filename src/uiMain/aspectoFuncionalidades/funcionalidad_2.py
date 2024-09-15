@@ -18,7 +18,7 @@ class funcionalidad_2(tk.Frame):
             self.frame_superior.pack_propagate(False)
 
             self.frame_right=tk.Frame(self.frame_superior, bg='spring green')
-            self.frame_right.pack(side='right', expand=True, fill="both")
+            self.frame_right.pack(side='right', fill="y")
 
             combobox_origen=ttk.Combobox(
                 self.frame_right,
@@ -40,10 +40,11 @@ class funcionalidad_2(tk.Frame):
             self.frame_centro.pack(expand=True, fill="both")
             self.frame_centro.pack_propagate(False)
 
-            self.text_viajes = tk.Text(self.frame_superior, font=(("Calibri", 12)))
-            self.text_viajes.pack(expand=True, fill="both")
-
+            scrollable_frame = auxiliar.generar_scrollbar(self.frame_centro)
             botones = auxiliar.generar_botones(self)
+
+            self.text_viajes = tk.Text(self.frame_superior, font=(("Consolas", 11)))
+            self.text_viajes.pack(expand=True, fill="both")
 
             botones[0].config(
                 command=lambda: reservar_tiquete.mostrar_viajes(
@@ -53,38 +54,10 @@ class funcionalidad_2(tk.Frame):
                 )
             )
 
-            canvas = tk.Canvas(self.frame_centro, bg='lightblue')
-            canvas.pack(side="left", expand=True, fill="both")
-            canvas.pack_propagate(False)
-
-            scrollbar = tk.Scrollbar(
-                self.frame_centro, 
-                orient="vertical", 
-                command=canvas.yview
-            )
-            scrollbar.pack(side="right", fill="y")
-
-            canvas.configure(yscrollcommand=scrollbar.set)
-
-            scrollable_frame = tk.Frame(canvas)
-            scrollable_frame.bind(
-                "<Configure>",
-                lambda e: canvas.configure(
-                    scrollregion=canvas.bbox("all")
-                )
-            )
-
-            window = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-
-            def on_canvas_resize(event):
-                canvas.itemconfig(window, width=event.width)
-
-            canvas.bind("<Configure>", on_canvas_resize)
-
             field_frame(
                 scrollable_frame, 
                 "CRITERIO", 
-                ["Código", "Nombre", "Descripción", "Ubicación"], 
+                ["Ingrese el id del viaje"], 
                 "VALOR", 
                 None
             ).pack(fill="x", expand=True)

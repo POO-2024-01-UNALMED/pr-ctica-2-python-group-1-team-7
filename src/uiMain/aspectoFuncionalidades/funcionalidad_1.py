@@ -17,7 +17,7 @@ class funcionalidad_1(tk.Frame):
             self.frame_superior.pack(side="top", expand=True, fill="both")
             self.frame_superior.pack_propagate(False)
 
-            self.text_viajes = tk.Text(self.frame_superior, font=(("Calibri", 12)))
+            self.text_viajes = tk.Text(self.frame_superior, font=(("Consolas", 11)))
             self.text_viajes.pack(expand=True, fill="both")
 
             ver_viajes.mostrar_viajes(self.text_viajes)

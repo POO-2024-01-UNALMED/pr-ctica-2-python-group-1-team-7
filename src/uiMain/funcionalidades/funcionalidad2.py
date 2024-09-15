@@ -31,13 +31,13 @@ class reservar_tiquete():
             )
 
             for viaje in viajes:
-                text.insert("end", "-" * 106 + "\n")
+                text.insert("end", "-" * 91 + "\n")
                 text.insert(
                     "end", 
                     "    FECHA          ORIGEN          DESTINO" 
                     + "         HORA DE SALIDA     ID      PLACA BUS\n"
                 )
-                text.insert("end", "-" * 106 + "\n")
+                text.insert("end", "-" * 91 + "\n")
                 text.insert("end", str(viaje) + "\n")
                 text.insert("end", "\n")
 

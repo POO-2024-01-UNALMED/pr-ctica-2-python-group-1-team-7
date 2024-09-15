@@ -89,10 +89,13 @@ class Viaje:
         destino_spaces = ' ' * max(0, 11 - len(self.terminal_destino.get_ubicacion()))
         id_spaces = ' ' * max(0, 3 - len(self.id))
 
-        return (f"    {self.get_str_fecha()}     {self.terminal_origen.get_ubicacion()}"
-                f"{origen_spaces}     {self.terminal_destino.get_ubicacion()}"
-                f"{destino_spaces}     {self.hora}              {self.id}"
-                f"{id_spaces}     {self.bus.get_placa()}       ")
+        return (
+            f"    {self.get_str_fecha()}     {self.terminal_origen.get_ubicacion()}"
+            f"{origen_spaces}     {self.terminal_destino.get_ubicacion()}"
+            f"{destino_spaces}     {self.hora.strftime("%H:%M")}" 
+            f"              {self.id}"
+            f"{id_spaces}     {self.bus.get_placa()}"
+        )
 
     # Getters y setters         
     def get_terminal_origen(self):

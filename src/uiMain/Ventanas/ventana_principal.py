@@ -11,7 +11,7 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        self.geometry("900x700")
+        self.geometry("1200x700")
         #posicionar(self, "1000", "700")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 

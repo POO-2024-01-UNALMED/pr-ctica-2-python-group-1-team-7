@@ -113,7 +113,7 @@ import tkinter as tk
 
 class field_frame(tk.Frame):
     def __init__(self, parent, tituloCriterios, criterios, tituloValores, valores, habilitado=None):
-        super().__init__(parent, bg='lightblue')
+        super().__init__(parent, width=200, height=200, bg='lightblue')
         self.pack(expand=True, fill="both")
         self.tituloCriterios = tituloCriterios
         self.criterios = criterios
