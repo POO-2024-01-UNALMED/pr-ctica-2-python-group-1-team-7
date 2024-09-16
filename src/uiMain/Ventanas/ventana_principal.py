@@ -11,12 +11,12 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        #self.geometry("1200x700")
-        posicionar(self, "1200", "700")
+        self.geometry("1000x600")
+        #posicionar(self, "1200", "700")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)
-        self.config(menu=self.barra_menu) 
+        self.config(menu=self.barra_menu,bg='black') 
 
         self.menu_archivo = tk.Menu(self.barra_menu, tearoff="off")
         self.barra_menu.add_cascade(label="Archivo", menu=self.menu_archivo)
@@ -53,20 +53,18 @@ class ventana_principal(tk.Tk):
         self.barra_menu.add_cascade(label="Ayuda", menu=self.menu_ayuda)
         self.menu_ayuda.add_command(label="Acerca de", command=lambda: self.acerca_de())
         
-        self.frame_ventana = tk.Frame(self, highlightbackground="black", 
-                                        highlightthickness=2)
+        self.frame_ventana = tk.Frame(self,bg='light blue')
         self.frame_ventana.pack(padx=(20, 20), pady=(20, 20), fill="both", expand=True)
 
         self.nombre_proceso_consulta="Bienvenido a la ventana principal"
 
         self.label_nombre=tk.Label(
             self.frame_ventana,
-            text=self.nombre_proceso_consulta,font=("Arial",15)
+            text=self.nombre_proceso_consulta,font=("Arial",15),bg='light blue'
         )
         self.label_nombre.pack(side="top", anchor="n", pady=10)
 
-        self.frame_interno1=tk.Frame(self.frame_ventana,highlightbackground="black", 
-                                        highlightthickness=1)
+        self.frame_interno1=tk.Frame(self.frame_ventana,bg='LightCyan2')
         self.frame_interno1.pack(fill="both", expand=True)
 
         self.texto_descripcion="Aquí va la descripción de la funcionalidad\n...\n..."
@@ -74,20 +72,24 @@ class ventana_principal(tk.Tk):
         self.label_descripcion=tk.Label(
             self.frame_interno1,
             text=self.texto_descripcion,
-            font=("Arial",10)
+            font=("Arial",10),
+            bg='LightCyan2'
         )
         self.label_descripcion.pack(side="top", anchor="n", pady=10)
 
-        self.frame_interno2=tk.Frame(self.frame_interno1,highlightbackground="black", 
-                                        highlightthickness=1)
+        self.frame_interno2=tk.Frame(self.frame_interno1,bg='gray38')
         self.frame_interno2.pack(fill="both", expand=True)
 
-        self.frame_interno3=tk.Frame(self.frame_interno2,highlightbackground="black", 
-                                        highlightthickness=1)
+        self.frame_interno3=tk.Frame(self.frame_interno2,bg='white')
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
-        self.frame_activo=None
+        '''self.imagen_label = tk.Label(self.frame_interno3,
+                                      image=tk.PhotoImage(file="src//uiMain//assets//logo.png"))
+        
+        self.imagen_label.pack()'''
+
+        self.frame_activo = None
 
         self.mainloop()
 

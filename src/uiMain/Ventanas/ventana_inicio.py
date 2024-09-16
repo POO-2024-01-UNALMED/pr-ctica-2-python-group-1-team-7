@@ -15,12 +15,12 @@ class ventana_inicio(tk.Tk):
 
         super().__init__()
         self.title("LussajuBus")
-        #self.geometry("700x600")
-        posicionar(self, "800", "700")
-        self.iconphoto(True, tk.PhotoImage(file="src//uiMain//assets//cubito.png"))
+        self.geometry("700x600")
+        #posicionar(self, "800", "700")
+        self.iconphoto(True, tk.PhotoImage(file="src//uiMain//assets//logo.png"))
 
         self.barra_menu = tk.Menu(self)
-        self.config(menu=self.barra_menu) 
+        self.config(menu=self.barra_menu,bg="black") 
 
         self.menu_inicio = tk.Menu(self.barra_menu, tearoff="off")
         self.barra_menu.add_cascade(label="Inicio", menu=self.menu_inicio)
@@ -32,17 +32,17 @@ class ventana_inicio(tk.Tk):
         self.menu_inicio.add_separator()
         self.menu_inicio.add_command(label="Salir",  command=self.destroy)
 
-        self.p1 = tk.Frame(self, highlightbackground="black", highlightthickness=2)
+        self.p1 = tk.Frame(self, bg="gray38")
         self.p1.pack(side="left", expand=True, fill="both", pady=10, padx=(10, 5))
         self.p1.pack_propagate(False)
         self.p1.bind('<Configure>', self.redimensionar_frames)
 
-        self.p2 = tk.Frame(self, highlightbackground="black", highlightthickness=2)
+        self.p2 = tk.Frame(self, bg="gray38")
         self.p2.pack(side="right", expand=True, fill="both", pady=10, padx=(5, 10))
         self.p2.pack_propagate(False)
         self.p2.bind('<Configure>', self.redimensionar_frames)
 
-        self.p3 = tk.Frame(self.p1, highlightbackground="black", highlightthickness=1)
+        self.p3 = tk.Frame(self.p1, bg='light blue')
         self.p3.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
         self.p3.pack_propagate(False)
 
@@ -51,7 +51,9 @@ class ventana_inicio(tk.Tk):
         self.label_p3 = tk.Label(self.p3, 
             text=self.texto_saludo, 
             anchor="nw", 
-            justify="left"
+            #justify="left", 
+            bg='light blue',
+            font=('Arial',15)
         )
         self.label_p3.pack(expand=True, fill="both")
         self.label_p3.bind(
@@ -59,7 +61,7 @@ class ventana_inicio(tk.Tk):
             lambda evento: self.label_p3.config(wraplength=evento.width)
         )
 
-        self.p4 = tk.Frame(self.p1, highlightbackground="black", highlightthickness=1)
+        self.p4 = tk.Frame(self.p1, bg='LightCyan2')
         self.p4.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
         self.p4.pack_propagate(False)
         self.p4.bind('<Configure>', self.redimensionar_imagen_sistema)
@@ -71,7 +73,7 @@ class ventana_inicio(tk.Tk):
         self.imagen_sistema = Image.open(self.path_imagen_sistema)
         self.imagen_sistema = ImageTk.PhotoImage(self.imagen_sistema)
 
-        self.label_imagen_sistema = tk.Label(self.p4, image=self.imagen_sistema)
+        self.label_imagen_sistema = tk.Label(self.p4, image=self.imagen_sistema,bd=0)
         self.label_imagen_sistema.pack(
             side="top", expand=True, fill="both", padx=10, pady=(10, 5)
         )
@@ -85,9 +87,9 @@ class ventana_inicio(tk.Tk):
             command=lambda: ventana_principal.ventana_principal(self)
         )
 
-        self.button_sistema.pack(side="bottom", pady=(5, 10))
+        self.button_sistema.pack(side="bottom", expand=True, pady=(5, 10))
 
-        self.p5 = tk.Frame(self.p2, highlightbackground="black", highlightthickness=1)
+        self.p5 = tk.Frame(self.p2)
         self.p5.pack(side="top", expand=True, fill="both", padx=10, pady=(10, 5))
         self.p5.pack_propagate(False)
 
@@ -100,15 +102,17 @@ class ventana_inicio(tk.Tk):
             text=self.texto_hoja_vida, 
             anchor="nw", 
             justify="left", 
-            relief="flat"
+            relief="flat",
+            bg='LightCyan2',
+            font=('Arial',10)
         )
-        self.button_p5.pack(expand=True, fill="both")
+        self.button_p5.pack(expand=True, fill="both",padx=1,pady=1)
         self.button_p5.bind(
             '<Configure>', lambda evento: self.button_p5.config(wraplength=evento.width)
         )
         self.button_p5.bind('<Button-1>', self.cambiar_hoja_vida_e_imagenes)
     
-        self.p6 = tk.Frame(self.p2, highlightbackground="black", highlightthickness=1)
+        self.p6 = tk.Frame(self.p2, bg='light blue')
         self.p6.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
         self.p6.pack_propagate(False)
         self.p6.bind('<Configure>', self.redimensionar_imagenes_hojas_vida)
@@ -120,16 +124,16 @@ class ventana_inicio(tk.Tk):
             img = ImageTk.PhotoImage(imagen)
             imagenes.append(img)
 
-        self.label_imagen1 = tk.Label(self.p6, image=imagenes[0])
-        self.label_imagen1.grid(row=0, column=0, padx=(10, 5), pady=(10, 5))
+        self.label_imagen1 = tk.Label(self.p6, image=imagenes[0],bd=0)
+        self.label_imagen1.grid(row=0, column=0, padx=(20, 5), pady=(20, 5))
         
-        self.label_imagen2 = tk.Label(self.p6, image=imagenes[1])
-        self.label_imagen2.grid(row=0, column=1, padx=(5, 10), pady=(10, 5))
+        self.label_imagen2 = tk.Label(self.p6, image=imagenes[1],bd=0)
+        self.label_imagen2.grid(row=0, column=1, padx=(5, 10), pady=(20, 5))
 
-        self.label_imagen3 = tk.Label(self.p6, image=imagenes[2])
-        self.label_imagen3.grid(row=1, column=0, padx=(10, 5), pady=(5, 10))
+        self.label_imagen3 = tk.Label(self.p6, image=imagenes[2],bd=0)
+        self.label_imagen3.grid(row=1, column=0, padx=(20, 5), pady=(5, 10))
 
-        self.label_imagen4 = tk.Label(self.p6, image=imagenes[3])
+        self.label_imagen4 = tk.Label(self.p6, image=imagenes[3],bd=0)
         self.label_imagen4.grid(row=1, column=1, padx=(5, 10), pady=(5, 10))
 
         self.mainloop()
