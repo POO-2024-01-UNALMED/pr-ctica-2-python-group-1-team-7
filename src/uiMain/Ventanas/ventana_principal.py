@@ -12,7 +12,7 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        posicionar(self, "1150", "800")
+        posicionar(self)
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)
@@ -104,7 +104,7 @@ class ventana_principal(tk.Tk):
         self.reiniciar_contador_frames()
         self.destroy()
         ventana.deiconify()
-        posicionar(ventana, "700", "600")
+        posicionar(ventana)
 
     def reiniciar_contador_frames(self):
         funcionalidad_1.numero_frames=1

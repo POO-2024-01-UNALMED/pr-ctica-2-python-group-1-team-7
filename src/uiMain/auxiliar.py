@@ -19,10 +19,13 @@ def sc_input(mensaje: str):
     input_value = input(mensaje)
     return unidecode.unidecode(input_value).strip()
 
-def posicionar(window, width, height):
+def posicionar(window):
     # Obtener las dimensiones de la pantalla
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
+
+    width = screen_width-int(screen_width*1/4)
+    height = screen_height-int(screen_height*1/3)
 
     x_cordinate = int((screen_width / 2) - (int(width) / 2))
     y_cordinate = int((screen_height / 2) - (int(height) / 2))
