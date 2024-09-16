@@ -20,14 +20,14 @@ def sc_input(mensaje: str):
     return unidecode.unidecode(input_value).strip()
 
 def posicionar(window, width, height):
-        screen_width = window.winfo_screenwidth()
-        screen_height = window.winfo_screenheight()
+    # Obtener las dimensiones de la pantalla
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
 
-        x_cordinate = int((screen_width/2) - (int(width)/2))
-        y_cordinate = int((screen_height/2) - (int(height)/2))
+    x_cordinate = int((screen_width / 2) - (int(width) / 2))
+    y_cordinate = int((screen_height / 2) - (int(height) / 2))
 
-        window.geometry(f"{width}x{height}+{x_cordinate}+{y_cordinate-100}")
-
+    window.geometry(f"{width}x{height}+{x_cordinate}+{y_cordinate}")
 def asientos(frame_superior, viaje):
     frame_principal = tk.Frame(frame_superior)
     frame_principal.place(relx=0.5, rely=0.5, relwidth=0.75, anchor="center")
