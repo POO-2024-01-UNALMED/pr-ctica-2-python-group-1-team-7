@@ -84,9 +84,9 @@ class ventana_principal(tk.Tk):
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
-        """ self.img = tk.PhotoImage(file="src//uiMain//assets//logo.png")
+        '''self.img = tk.PhotoImage(file="src//uiMain//assets//logo.png")
         self.imagen_label = tk.Label(self.frame_interno3, image=self.img)
-        self.imagen_label.pack(expand=True,fill='both') """
+        self.imagen_label.pack(expand=True,fill='both') '''
 
 
         self.frame_activo = None
