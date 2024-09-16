@@ -1,0 +1,3 @@
+El programa permite al usuario hacer uso de un sistema de transporte terrestre a nivel Nacional, en el cual podra gestionar los tiquetes de los usuarios, los viajes, hospedajes y el funcionamiento general de este tipo de redes viales.
+
+(Darle click nuevamente a descripcion para quitarla)

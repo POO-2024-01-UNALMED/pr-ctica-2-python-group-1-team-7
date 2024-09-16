@@ -1,6 +1,7 @@
 from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
 from uiMain.auxiliar import posicionar
+import os
 
 import tkinter as tk
 from tkinter import messagebox
@@ -84,10 +85,10 @@ class ventana_principal(tk.Tk):
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
-        '''self.imagen_label = tk.Label(self.frame_interno3,
-                                      image=tk.PhotoImage(file="src//uiMain//assets//logo.png"))
-        
-        self.imagen_label.pack()'''
+        self.img = tk.PhotoImage(file="src//uiMain//assets//logo.png")
+        self.imagen_label = tk.Label(self.frame_interno3, image=self.img)
+        self.imagen_label.pack(expand=True,fill='both')
+
 
         self.frame_activo = None
 
@@ -101,6 +102,7 @@ class ventana_principal(tk.Tk):
         self.reiniciar_contador_frames()
         self.destroy()
         ventana.deiconify()
+        ventana.geometry("700x600")
 
     def reiniciar_contador_frames(self):
         funcionalidad_1.numero_frames=1
@@ -131,7 +133,7 @@ class ventana_principal(tk.Tk):
 
     def info_aplicacion(self):
         messagebox.showinfo("Acerca de la Aplicación" 
-                                , "Esta aplicación permite al usuario ....")
+                                , "Esta aplicación permite al usuario tener el control de un sistema de transporte terrestre en Colombia, en el cuál podrá gestionar y consultar información relacionada con los viajes, tiquetes, buses, hospedajes y otros datos relevantes que ayudan a fortalecer la industria del transporte Nacional")
 
     def acerca_de(self):
         messagebox.showinfo("Autores" , "Autores de la aplicación:\n\n-" 

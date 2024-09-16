@@ -16,7 +16,7 @@ class ventana_inicio(tk.Tk):
         super().__init__()
         self.title("LussajuBus")
         self.geometry("700x600")
-        #posicionar(self, "800", "700")
+        #posicionar(self, "700", "600")
         self.iconphoto(True, tk.PhotoImage(file="src//uiMain//assets//logo.png"))
 
         self.barra_menu = tk.Menu(self)
@@ -48,18 +48,33 @@ class ventana_inicio(tk.Tk):
 
         self.texto_saludo = open("src//uiMain//assets//saludo.txt", "r").read()
 
-        self.label_p3 = tk.Label(self.p3, 
+        self.texto_descripcion = open("src//uiMain//assets//descripcion.txt", "r").read()
+
+        '''self.label_p3 = tk.Text(self.p3, 
             text=self.texto_saludo, 
             anchor="nw", 
             #justify="left", 
             bg='light blue',
             font=('Arial',15)
-        )
+        )'''
+        self.label_p3 = tk.Text(self.p3, 
+                    bg='light blue',
+                    font=('Arial', 15),
+                    wrap='word',
+                    padx=12,
+                    pady=10,
+                    bd=0
+                )
+        self.label_p3.insert('1.0', self.texto_saludo)
+        self.label_p3.tag_configure('center', justify='center')
+        self.label_p3.tag_add('center', '1.0', 'end')
+        self.label_p3.config(state=tk.DISABLED)
+
         self.label_p3.pack(expand=True, fill="both")
-        self.label_p3.bind(
+        '''self.label_p3.bind(
             '<Configure>', 
             lambda evento: self.label_p3.config(wraplength=evento.width)
-        )
+        )'''
 
         self.p4 = tk.Frame(self.p1, bg='LightCyan2')
         self.p4.pack(side="bottom", expand=True, fill="both", padx=10, pady=(5, 10))
@@ -84,6 +99,9 @@ class ventana_inicio(tk.Tk):
             width=15,
             height=5,
             text="Ventana principal",
+            bg='gray12',
+            fg='white',
+            font=('Calibri',12),
             command=lambda: ventana_principal.ventana_principal(self)
         )
 
@@ -101,7 +119,8 @@ class ventana_inicio(tk.Tk):
             self.p5, 
             text=self.texto_hoja_vida, 
             anchor="nw", 
-            justify="left", 
+            justify="left",
+            wraplength=2,
             relief="flat",
             bg='LightCyan2',
             font=('Arial',10)
@@ -125,27 +144,36 @@ class ventana_inicio(tk.Tk):
             imagenes.append(img)
 
         self.label_imagen1 = tk.Label(self.p6, image=imagenes[0],bd=0)
-        self.label_imagen1.grid(row=0, column=0, padx=(20, 5), pady=(20, 5))
+        self.label_imagen1.grid(row=0, column=0, padx=(15, 5), pady=(15, 5))
         
         self.label_imagen2 = tk.Label(self.p6, image=imagenes[1],bd=0)
-        self.label_imagen2.grid(row=0, column=1, padx=(5, 10), pady=(20, 5))
+        self.label_imagen2.grid(row=0, column=1, padx=(5, 15), pady=(15, 5))
 
         self.label_imagen3 = tk.Label(self.p6, image=imagenes[2],bd=0)
-        self.label_imagen3.grid(row=1, column=0, padx=(20, 5), pady=(5, 10))
+        self.label_imagen3.grid(row=1, column=0, padx=(15, 5), pady=(5, 15))
 
         self.label_imagen4 = tk.Label(self.p6, image=imagenes[3],bd=0)
-        self.label_imagen4.grid(row=1, column=1, padx=(5, 10), pady=(5, 10))
+        self.label_imagen4.grid(row=1, column=1, padx=(5, 15), pady=(5, 15))
 
         self.mainloop()
 
     def descripcion_programa(self):
-        if (self.label_p3.cget("text") == self.texto_saludo):
-            self.label_p3.config(
-                text="Hola jejejeje" + "\n" 
-                    + "(Darle click nuevamente a descripción para quitarla)"
-            )
+        if (self.label_p3.get('1.0','end').strip() == self.texto_saludo):
+            self.label_p3.config(state=tk.NORMAL)
+            self.label_p3.delete('1.0', 'end')
+            self.label_p3.insert('1.0', self.texto_descripcion) 
+            self.label_p3.tag_configure('center', justify='center')
+            self.label_p3.tag_add('center', '1.0', 'end')
+            self.label_p3.config(font=('Arial', 12))
+            self.label_p3.config(state=tk.DISABLED)
         else:
-            self.label_p3.config(text=self.texto_saludo)
+            self.label_p3.config(state=tk.NORMAL) 
+            self.label_p3.delete('1.0', 'end') 
+            self.label_p3.insert('1.0', self.texto_saludo)
+            self.label_p3.tag_configure('center', justify='center')
+            self.label_p3.tag_add('center', '1.0', 'end')
+            self.label_p3.config(font=('Arial', 15))
+            self.label_p3.config(state=tk.DISABLED)
     
     def redimensionar_frames(self, evento):
         frame1 = evento.widget.winfo_children()[0]
@@ -184,7 +212,7 @@ class ventana_inicio(tk.Tk):
             self.path_texto_hoja_vida = ("src//uiMain//assets//hojasVida" 
                                             + "//samuel//hoja_vida_samuel.txt")
             self.texto_hoja_vida = open(self.path_texto_hoja_vida).read()
-            self.button_p5.config(text=self.texto_hoja_vida)
+            self.button_p5.config(text=self.texto_hoja_vida,font=('Arial',11))
             self.nombre = "samuel"
             self.path_imagenes_hoja_vida = ("src//uiMain//assets//hojasVida//" 
                                                 + self.nombre + "//imagenes")
@@ -192,7 +220,7 @@ class ventana_inicio(tk.Tk):
             self.path_texto_hoja_vida = ("src//uiMain//assets//hojasVida" 
                                             + "//santiago//hoja_vida_santiago.txt")
             self.texto_hoja_vida = open(self.path_texto_hoja_vida).read()
-            self.button_p5.config(text=self.texto_hoja_vida)
+            self.button_p5.config(text=self.texto_hoja_vida,font=('Arial',10))
             self.nombre = "santiago"
             self.path_imagenes_hoja_vida = ("src//uiMain//assets//hojasVida//" 
                                                 + self.nombre + "//imagenes")
