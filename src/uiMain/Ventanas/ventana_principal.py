@@ -12,7 +12,7 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        posicionar(self, "1200", "800")
+        posicionar(self, "1150", "800")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)
@@ -87,17 +87,10 @@ class ventana_principal(tk.Tk):
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
-<<<<<<< Updated upstream
-        '''self.img = tk.PhotoImage(file="src//uiMain//assets//logo.png")
-        self.imagen_label = tk.Label(self.frame_interno3, image=self.img)
-        self.imagen_label.pack(expand=True,fill='both') '''
-
-=======
         """ imagen = tk.PhotoImage(file="src//uiMain//assets//logo.png")
         self.imagen_label = tk.Label(self.frame_interno3, image=imagen)
         self.imagen_label.image = imagen
         self.imagen_label.pack(expand=True, fill='both')  """
->>>>>>> Stashed changes
 
         self.frame_activo = None
 

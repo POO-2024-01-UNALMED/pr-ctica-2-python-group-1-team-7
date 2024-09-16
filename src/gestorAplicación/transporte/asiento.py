@@ -56,7 +56,7 @@ class Asiento:
     @override
     def __str__(self):
         # Muestra el número y el tipo de asiento.
-        return f"{self.numero} {self.tipo_asiento}"
+        return f"{self.numero} {self.tipo_asiento.name}"
 
     # Getters y setters
     def get_numero(self):
