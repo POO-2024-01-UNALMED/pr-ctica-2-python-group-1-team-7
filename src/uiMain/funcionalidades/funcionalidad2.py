@@ -65,19 +65,21 @@ class reservar_tiquete():
             )
         else:
             text.pack_forget()
-
-            field_frame.entries["Ingrese el id del viaje"].config(state="disabled")
-            field_frame.agregar_campo("Ingrese el número del asiento")
-
+            field_frame.agregar_campo("Ingrese el número del asiento", True)
             auxiliar.asientos(frame_superior, viaje)
 
         return viaje
     
     @classmethod
     def reservar_asiento(cls, field_frame, viaje):
-        print("hola")
-    
-        viaje.buscar_asiento(field_frame.getValue("Ingrese el número del asiento"))
+        numero_asiento =  field_frame.getValue("Ingrese el número del asiento")
+        asiento = viaje.buscar_asiento(numero_asiento)
+        viaje.reservar_asiento(numero_asiento, None)
+        field_frame.agregar_campo("Nombre", True)
+        field_frame.agregar_campo("Id", False)
+        field_frame.agregar_campo("Correo", False)
+        field_frame.agregar_campo("Teléfono", False)
+        
 
 """  numero_asiento = sc_input("Ingrese el número del asiento: ").strip()
 

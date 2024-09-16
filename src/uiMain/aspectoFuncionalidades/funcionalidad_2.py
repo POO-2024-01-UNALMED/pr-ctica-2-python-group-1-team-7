@@ -40,6 +40,7 @@ class funcionalidad_2(tk.Frame):
             self.frame_centro.pack_propagate(False)
 
             scrollable_frame = auxiliar.generar_scrollbar(self.frame_centro)
+
             self.botones = auxiliar.generar_botones(self)
 
             self.field = field_frame(

@@ -143,11 +143,11 @@ def generar_botones(frame_contenedor):
 
     return (boton_aceptar, boton_borrar)
 
-def generar_scrollbar(frame):
-    canvas = tk.Canvas(frame, bg='lightblue')
+def generar_scrollbar(contenedor):
+    canvas = tk.Canvas(contenedor, bg='lightblue')
     canvas.pack(side="left", fill="both", expand=True)
 
-    scrollbar = tk.Scrollbar(frame, orient="vertical", command=canvas.yview)
+    scrollbar = tk.Scrollbar(contenedor, orient="vertical", command=canvas.yview)
     scrollbar.pack(side="right", fill="y")
 
     canvas.configure(yscrollcommand=scrollbar.set)
@@ -158,6 +158,8 @@ def generar_scrollbar(frame):
         "<Configure>",
         lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
     )
+
+    canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 
     window = canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 

@@ -187,26 +187,31 @@ class field_frame(tk.Frame):
                 self.labels[criterio].grid_forget()
                 self.entries[criterio].grid_forget() 
     
-    def agregar_campo(self, criterio):
+    def agregar_campo(self, criterio, desabilitar_anterior):
+        if desabilitar_anterior:
+            self.labels[list(self.labels.keys())[-1]].config(state="disabled")
         label = tk.Label(self, text=criterio)
         label.grid(
-            row=len(self.criterios)+2, 
+            row=len(self.labels)+1, 
             column=0, 
             sticky='news', 
             padx=10, 
             pady=10
         )
         self.labels[criterio] = label
-
+        
+        if desabilitar_anterior:
+            self.entries[list(self.entries.keys())[-1]].config(state="disabled")
         entry = tk.Entry(self)
         entry.grid(
-            row=len(self.criterios)+2, 
+            row=len(self.entries)+1, 
             column=1, 
             sticky='news', 
             padx=10, 
             pady=10
         )
         self.entries[criterio] = entry
+
     
     def getValue(self, criterio):
         return self.entries[criterio].get()
