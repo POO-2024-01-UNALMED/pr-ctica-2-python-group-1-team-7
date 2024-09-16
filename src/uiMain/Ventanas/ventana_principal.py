@@ -12,7 +12,7 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        posicionar(self)
+        posicionar(self, "1150", "700")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)

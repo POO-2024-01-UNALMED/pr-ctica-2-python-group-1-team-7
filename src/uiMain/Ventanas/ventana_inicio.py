@@ -15,7 +15,7 @@ class ventana_inicio(tk.Tk):
 
         super().__init__()
         self.title("LussajuBus")
-        posicionar(self)
+        posicionar(self, "700", "600")
         self.iconphoto(True, tk.PhotoImage(file="src//uiMain//assets//logo.png"))
 
         self.barra_menu = tk.Menu(self)
