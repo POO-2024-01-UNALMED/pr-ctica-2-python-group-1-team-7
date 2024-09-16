@@ -1,5 +1,8 @@
 from gestorAplicación.gestion.empresa import Empresa
 from gestorAplicación.gestion.viaje import Viaje
+from gestorAplicación.gestion.tiquete import Tiquete
+from gestorAplicación.personas.pasajero import Pasajero
+
 from uiMain import auxiliar
 import tkinter as tk
 
@@ -21,6 +24,7 @@ class reservar_tiquete():
         text.delete("1.0", "end")
         origen = combobox_origen.get()
         destino = combobox_destino.get()
+
         viajes = Empresa.buscar_viajes_por_origen_destino(origen, destino)
 
         if not viajes:
@@ -52,89 +56,89 @@ class reservar_tiquete():
     def mostrar_asientos(cls, frame_superior, text, field_frame, viajes):
         text.config(state="normal")
         text.delete("1.0", "end")
-        viaje = Viaje.buscar_viaje(
-            viajes, 
-            field_frame.getValue("Ingrese el id del viaje")
-        )
-
-        if not viaje:
-            text.insert(
-                "end", 
-                f"No se encontró ningún viaje con número de id {id}" 
-                + " disponible para reservar\n"
+        try:
+            viaje = Viaje.buscar_viaje(
+                viajes, 
+                field_frame.getValue("Ingrese el id del viaje")
             )
-        else:
-            text.pack_forget()
-            field_frame.agregar_campo("Ingrese el número del asiento", True)
-            auxiliar.asientos(frame_superior, viaje)
+
+            if not viaje:
+                text.insert(
+                    "end", 
+                    f"No se encontró ningún viaje con número de id {id}" 
+                    + " disponible para reservar\n"
+                )
+            else:
+                text.pack_forget()
+                field_frame.agregar_campo("Ingrese el número del asiento", True)
+                auxiliar.asientos(frame_superior, viaje)
+        except:
+            pass
 
         return viaje
     
     @classmethod
     def reservar_asiento(cls, field_frame, viaje):
-        numero_asiento =  field_frame.getValue("Ingrese el número del asiento")
-        asiento = viaje.buscar_asiento(numero_asiento)
-        viaje.reservar_asiento(numero_asiento, None)
-        field_frame.agregar_campo("Nombre", True)
-        field_frame.agregar_campo("Id", False)
-        field_frame.agregar_campo("Correo", False)
-        field_frame.agregar_campo("Teléfono", False)
-        
+        try:
+            numero_asiento = field_frame.getValue("Ingrese el número del asiento")
+            asiento = viaje.buscar_asiento(numero_asiento)
+            if asiento != None and not asiento.is_reservado():
+                viaje.reservar_asiento(numero_asiento, None)
+                field_frame.agregar_campo("Nombre", True)
+                field_frame.agregar_campo("Id", False)
+                field_frame.agregar_campo("Correo", False)
+                field_frame.agregar_campo("Teléfono", False)  
+                return asiento
+            else:
+                return None  
+        except:
+            pass
+       
+    @classmethod
+    def imprimir_tiquete(cls, frame_superior, field_frame, viaje, asiento):
+        try:
+            frame_superior.winfo_children()[1].destroy()
 
-"""  numero_asiento = sc_input("Ingrese el número del asiento: ").strip()
+            text = frame_superior.winfo_children()[0]
+            text.pack(expand=True, fill="both")
 
-while True:
-asiento = viaje.buscar_asiento(numero_asiento)
-if asiento is None or asiento.is_reservado():
-    print("\nEl asiento no está disponible\n")
-    numero_asiento = sc_input("Ingrese otro número de asiento: ").strip()
-else:
-    break
+            atributos = []
+            for criterio in list(field_frame.labels.keys())[-4:]:
+                field_frame.entries[criterio].config(state="disabled")
+                atributos.append(field_frame.getValue(criterio))
 
-viaje.reservar_asiento(numero_asiento, None)
-
-print("Ingrese sus datos:\n")
-
-nombre = sc_input("Nombre completo: ").strip()
-id_pasajero = sc_input("Número de identificación (6 dígitos): ").strip()
-
-while len(id_pasajero) != 6:
-id_pasajero = sc_input("Número de identificación (6 dígitos): ").strip()
-
-pasajero = Pasajero.buscar_pasajero(id_pasajero)
-
-if not pasajero:
-telefono = sc_input("Teléfono: ").strip()
-while not re.match(r'^\d{10}$', telefono):
-    print("Teléfono inválido\nEl teléfono debe contener 10 dígitos\n")
-    telefono = sc_input("Teléfono: ").strip()
-
-correo = sc_input("Correo electrónico: ").strip()
-while not re.match(r'^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$', correo):
-    print("Correo inválido\nEl correo debe tener la estructura (abcde@xyz.com)\n")
-    correo = sc_input("Correo electrónico: ").strip()
-
-pasajero = Pasajero(nombre, id_pasajero, telefono, correo)
-
-asiento = viaje.buscar_asiento(numero_asiento)
-tiquete = Tiquete(pasajero, viaje, asiento)
-pasajero.agregar_tiquete(tiquete)
-
-print("Tiquete reservado exitosamente\n")
-print("-" * 34)
-print(f"    Tiquete No. {tiquete.get_numero_reserva()}")
-print("-" * 34)
-print(f"Nombre del pasajero: {nombre}")
-print(f"Id del pasajero: {id_pasajero}")
-print(f"Teléfono: {pasajero.get_telefono()}")
-print(f"Correo: {pasajero.get_correo()}")
-print(f"Asiento: {asiento}")
-print(f"Empresa: {viaje.get_empresa().get_nombre()}")
-print(f"Placa del bus: {viaje.get_bus().get_placa()}")
-print(f"Id del viaje: {viaje.get_id()}")
-print(f"Fecha y hora: {viaje.get_fecha()} {viaje.get_hora()}")
-print(f"Origen: {viaje.get_terminal_origen().get_ubicacion()}")
-print(f"Destino: {viaje.get_terminal_destino().get_ubicacion()}")
-print("-" * 34)
-print()  """
-
+            
+            pasajero = Pasajero(atributos[0], atributos[1], atributos[2], atributos[3])
+            tiquete = Tiquete(pasajero, viaje, asiento)
+            pasajero.agregar_tiquete(tiquete)
+            
+            text.insert("end", "Tiquete reservado exitosamente\n")
+            text.insert("end", "-" * 34 + "\n")
+            text.insert("end", f"Tiquete No. {tiquete.get_numero_reserva()}" + "\n")
+            text.insert("end", "-" * 34 + "\n")
+            text.insert("end", f"Nombre del pasajero: {atributos[0]}" + "\n")
+            text.insert("end", f"Id del pasajero: {atributos[1]}" + "\n")
+            text.insert("end", f"Teléfono: {atributos[2]}" + "\n")
+            text.insert("end", f"Correo: {atributos[3]}" + "\n")
+            text.insert("end", f"Asiento: {asiento}" + "\n")
+            text.insert("end", f"Empresa: {viaje.get_empresa().get_nombre()}" + "\n")
+            text.insert("end", f"Placa del bus: {viaje.get_bus().get_placa()}" + "\n")
+            text.insert("end", f"Id del viaje: {viaje.get_id()}" + "\n")
+            text.insert(
+                "end", 
+                f"Fecha y hora: {viaje.get_fecha()} {viaje.get_hora().strftime("%H:%M")}" 
+                + "\n"
+            )
+            text.insert(
+                "end", 
+                f"Origen: {viaje.get_terminal_origen().get_ubicacion()}" 
+                + "\n"
+            )
+            text.insert(
+                "end", 
+                f"Destino: {viaje.get_terminal_destino().get_ubicacion()}" 
+                + "\n"
+            )
+            text.insert("end", "-" * 34 + "\n")
+        except:
+            pass

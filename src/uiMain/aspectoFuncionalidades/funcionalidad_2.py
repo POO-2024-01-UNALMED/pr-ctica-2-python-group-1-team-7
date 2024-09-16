@@ -18,7 +18,7 @@ class funcionalidad_2(tk.Frame):
             self.frame_superior.pack(side="top", expand=True, fill="both")
             self.frame_superior.pack_propagate(False)
 
-            self.frame_right=tk.Frame(self.frame_superior, bg='lightgreen')
+            self.frame_right=tk.Frame(self.frame_superior, bg='LightCyan2')
             self.frame_right.pack(side='right', fill="y")
 
             self.combobox_origen=ttk.Combobox(
@@ -81,9 +81,14 @@ class funcionalidad_2(tk.Frame):
             self.field, 
             viajes
         )
-        self.frame_right.pack_forget()
+        self.frame_right.destroy()
         if viaje != None:
             self.botones[0].config(command=lambda: self.tercer_paso(viaje))
 
     def tercer_paso(self, viaje):
-        reservar_tiquete.reservar_asiento(self.field, viaje)
+        asiento = reservar_tiquete.reservar_asiento(self.field, viaje)
+        if asiento != None:
+            self.botones[0].config(command=lambda: self.cuarto_paso(viaje, asiento))
+
+    def cuarto_paso(self, viaje, asiento):
+        reservar_tiquete.imprimir_tiquete(self.frame_superior, self.field, viaje, asiento)

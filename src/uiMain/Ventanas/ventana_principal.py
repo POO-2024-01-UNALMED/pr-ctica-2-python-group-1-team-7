@@ -12,7 +12,7 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        posicionar(self, "1200", "600")
+        posicionar(self, "1200", "800")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)
@@ -41,7 +41,10 @@ class ventana_principal(tk.Tk):
             label="Ver viajes",
             command=lambda:self.generador_funcionalidades(1))
         self.menu_procesos.add_separator()
-        self.menu_procesos.add_command(label="Reservar tiquete",command=lambda:self.generador_funcionalidades(2))
+        self.menu_procesos.add_command(
+            label="Reservar tiquete",
+            command=lambda:self.generador_funcionalidades(2)
+        )
         self.menu_procesos.add_separator()
         self.menu_procesos.add_command(label="Gestionar tiquetes")
         self.menu_procesos.add_separator()
@@ -84,10 +87,17 @@ class ventana_principal(tk.Tk):
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
+<<<<<<< Updated upstream
         '''self.img = tk.PhotoImage(file="src//uiMain//assets//logo.png")
         self.imagen_label = tk.Label(self.frame_interno3, image=self.img)
         self.imagen_label.pack(expand=True,fill='both') '''
 
+=======
+        """ imagen = tk.PhotoImage(file="src//uiMain//assets//logo.png")
+        self.imagen_label = tk.Label(self.frame_interno3, image=imagen)
+        self.imagen_label.image = imagen
+        self.imagen_label.pack(expand=True, fill='both')  """
+>>>>>>> Stashed changes
 
         self.frame_activo = None
 
@@ -101,7 +111,7 @@ class ventana_principal(tk.Tk):
         self.reiniciar_contador_frames()
         self.destroy()
         ventana.deiconify()
-        ventana.geometry("700x600")
+        posicionar(ventana, "700", "600")
 
     def reiniciar_contador_frames(self):
         funcionalidad_1.numero_frames=1
@@ -116,28 +126,52 @@ class ventana_principal(tk.Tk):
             self.frame_activo.pack_forget()
         match funcionalidad:
             case 1:
-                self.configurar_nombre_descripcion("FUNCIONALIDAD 1", "descripción funcionalidad 1\n...\n...")
+                self.configurar_nombre_descripcion(
+                    "FUNCIONALIDAD 1", 
+                    "descripción funcionalidad 1\n...\n..."
+                )
                 self.frame_activo = funcionalidad_1(self,self.frame_interno3)
             case 2:
-                self.configurar_nombre_descripcion("FUNCIONALIDAD 2", "descripción funcionalidad 2\n...\n...")
+                self.configurar_nombre_descripcion(
+                    "FUNCIONALIDAD 2", 
+                    "descripción funcionalidad 2\n...\n..."
+                )
                 self.frame_activo = funcionalidad_2(self,self.frame_interno3)
             case 3:
-                self.configurar_nombre_descripcion("FUNCIONALIDAD 3", "descripción funcionalidad 3\n...\n...")
+                self.configurar_nombre_descripcion(
+                    "FUNCIONALIDAD 3", 
+                    "descripción funcionalidad 3\n...\n..."
+                )
                 #self.frame_activo = funcionalidad_3(self,self.frame_interno3)
             case 4:
-                self.configurar_nombre_descripcion("FUNCIONALIDAD 4", "descripción funcionalidad 4\n...\n...")
+                self.configurar_nombre_descripcion(
+                    "FUNCIONALIDAD 4", 
+                    "descripción funcionalidad 4\n...\n..."
+                )
                 #self.frame_activo = funcionalidad_4(self,self.frame_interno3)
             case 5:
-                self.configurar_nombre_descripcion("FUNCIONALIDAD 5", "descripción funcionalidad 5\n...\n...")
+                self.configurar_nombre_descripcion(
+                    "FUNCIONALIDAD 5", 
+                    "descripción funcionalidad 5\n...\n..."
+                )
                 #self.frame_activo = funcionalidad_5(self,self.frame_interno3)
 
     def info_aplicacion(self):
-        messagebox.showinfo("Acerca de la Aplicación" 
-                                , "Esta aplicación permite al usuario tener el control de un sistema de transporte terrestre en Colombia, en el cuál podrá gestionar y consultar información relacionada con los viajes, tiquetes, buses, hospedajes y otros datos relevantes que ayudan a fortalecer la industria del transporte Nacional")
+        messagebox.showinfo(
+            "Acerca de la Aplicación" , 
+            "Esta aplicación permite al usuario tener el control de un sistema" 
+            + " de transporte terrestre en Colombia, en el cuál podrá gestionar" 
+            + " y consultar información relacionada con los viajes, tiquetes, buses," 
+            + " hospedajes y otros datos relevantes que ayudan a fortalecer" 
+            + " la industria del transporte Nacional"
+        )
 
     def acerca_de(self):
-        messagebox.showinfo("Autores" , "Autores de la aplicación:\n\n-" 
-                                + "Santiago Cardona Franco \n- Samuel Hernández Duque")
+        messagebox.showinfo(
+            "Autores" , 
+            "Autores de la aplicación:\n\n-" 
+            + "Santiago Cardona Franco \n- Samuel Hernández Duque"
+        )
         
     def configurar_nombre_descripcion(self,nombre,descripcion):
         self.nombre_proceso_consulta=nombre
@@ -146,7 +180,10 @@ class ventana_principal(tk.Tk):
         self.label_descripcion.config(text=self.texto_descripcion)
 
     def volver_principal(self):
-        decision=messagebox.askyesno("Diálogo de confirmación","¿Desea volver al menú principal?")
+        decision=messagebox.askyesno(
+            "Diálogo de confirmación",
+            "¿Desea volver al menú principal?"
+        )
         if decision:
             ventana_principal(self)
 
