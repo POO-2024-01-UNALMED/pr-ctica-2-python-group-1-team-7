@@ -12,8 +12,7 @@ class ventana_principal(tk.Tk):
         super().__init__()
         ventana.withdraw()
         self.title("LussajuBus")
-        #self.geometry("1000x600")
-        posicionar(self, "1000", "600")
+        posicionar(self, "1200", "600")
         self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
 
         self.barra_menu = tk.Menu(self)
@@ -85,9 +84,9 @@ class ventana_principal(tk.Tk):
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
-        self.img = tk.PhotoImage(file="src//uiMain//assets//logo.png")
+        """ self.img = tk.PhotoImage(file="src//uiMain//assets//logo.png")
         self.imagen_label = tk.Label(self.frame_interno3, image=self.img)
-        self.imagen_label.pack(expand=True,fill='both')
+        self.imagen_label.pack(expand=True,fill='both') """
 
 
         self.frame_activo = None
@@ -112,6 +111,7 @@ class ventana_principal(tk.Tk):
         #funcionalidad_5.numero_frames=1
 
     def generador_funcionalidades(self, funcionalidad):
+        self.reiniciar_contador_frames()
         if self.frame_activo:
             self.frame_activo.pack_forget()
         match funcionalidad:

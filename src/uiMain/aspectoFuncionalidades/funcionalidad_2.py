@@ -9,14 +9,16 @@ class funcionalidad_2(tk.Frame):
     def __init__(self,ventana_principal, frame):
         if funcionalidad_2.numero_frames == 1:
             super().__init__(frame)
+            ventana_principal.frame_activo = self
+
             self.pack(expand=True, fill="both")
             self.pack_propagate(False)
-
+        
             self.frame_superior = tk.Frame(self)
             self.frame_superior.pack(side="top", expand=True, fill="both")
             self.frame_superior.pack_propagate(False)
 
-            self.frame_right=tk.Frame(self.frame_superior, bg='spring green')
+            self.frame_right=tk.Frame(self.frame_superior, bg='lightgreen')
             self.frame_right.pack(side='right', fill="y")
 
             self.combobox_origen=ttk.Combobox(

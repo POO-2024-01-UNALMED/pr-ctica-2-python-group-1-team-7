@@ -19,8 +19,8 @@ class field_frame(tk.Frame):
         self.valores = valores
         self.habilitado = habilitado
 
-        '''self.labels = {}
-        self.entries = {}'''
+        self.labels = {}
+        self.entries = {}
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
@@ -67,7 +67,7 @@ class field_frame(tk.Frame):
                 )
                 self.entries[criterio] = entry
  
-    '''def activar_campo(self, lista_criterios):
+    def activar_campo(self, lista_criterios):
         for criterio in lista_criterios:
             if criterio in self.labels and criterio in self.entries:
                 self.labels[criterio].grid(
@@ -89,7 +89,7 @@ class field_frame(tk.Frame):
         for criterio in lista_criterios:
             if criterio in self.labels and criterio in self.entries:
                 self.labels[criterio].grid_forget()
-                self.entries[criterio].grid_forget() '''
+                self.entries[criterio].grid_forget()
     
     def agregar_campo(self, criterio, desabilitar_anterior):
         if desabilitar_anterior:

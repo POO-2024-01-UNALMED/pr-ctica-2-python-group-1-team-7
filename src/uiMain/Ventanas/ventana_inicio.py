@@ -15,7 +15,6 @@ class ventana_inicio(tk.Tk):
 
         super().__init__()
         self.title("LussajuBus")
-        #self.geometry("700x600")
         posicionar(self, "700", "600")
         self.iconphoto(True, tk.PhotoImage(file="src//uiMain//assets//logo.png"))
 

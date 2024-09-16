@@ -28,6 +28,7 @@ def posicionar(window, width, height):
     y_cordinate = int((screen_height / 2) - (int(height) / 2))
 
     window.geometry(f"{width}x{height}+{x_cordinate}+{y_cordinate}")
+    
 def asientos(frame_superior, viaje):
     frame_principal = tk.Frame(frame_superior)
     frame_principal.place(relx=0.5, rely=0.5, relwidth=0.75, anchor="center")

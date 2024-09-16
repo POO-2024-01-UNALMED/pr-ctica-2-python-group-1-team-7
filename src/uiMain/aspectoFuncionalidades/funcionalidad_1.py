@@ -8,7 +8,7 @@ class funcionalidad_1(tk.Frame):
     def __init__(self,ventana_principal, frame):
         if funcionalidad_1.numero_frames == 1:
             super().__init__(frame)
-            self.ventana_principal=ventana_principal
+            ventana_principal.frame_activo = self
 
             self.pack(expand=True, fill="both")
             self.pack_propagate(False)
