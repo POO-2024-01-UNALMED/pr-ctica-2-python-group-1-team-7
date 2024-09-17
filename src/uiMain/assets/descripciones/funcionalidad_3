@@ -1,1 +1,4 @@
-En la funcionalidad 3 usted como usuario podra ingresando el id del pasajero consultar que tiquetes validos e invalidos tiene, asi mismo podra elegir a uno de ellos para cambiar su asiento en ese viaje, para cambiar el viaje o para cancelarlo y se imprimira finalmente en caso de ser necesario el nuevo tiquete asociado a los nuevos datos que se modificaron
+En la funcionalidad 3 usted como usuario podra ingresando el id del pasajero consultar que tiquetes 
+validos e invalidos tiene, asi mismo podra elegir a uno de ellos para cambiar su asiento en ese viaje, 
+para cambiar el viaje o para cancelarlo y se imprimira finalmente en caso de ser necesario el nuevo 
+tiquete asociado a los nuevos datos que se modificaron

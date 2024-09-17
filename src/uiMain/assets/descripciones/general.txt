@@ -1,1 +1,4 @@
-Para navegar entre las funcionalidades que presenta la aplicacion, usted debera de ingresar al menu superior llamado procesos y consultas y alli elegir la funcionalidad de la cual desee hacer uso, una vez termine con el proceso de dicha funcionalidad, usted podra ir a otra o reiniciarla las veces que lo considere necesario para darle un manejo adecuado al programa
+Para navegar entre las funcionalidades que presenta la aplicacion, usted debera de ingresar al menu 
+superior llamado procesos y consultas y alli elegir la funcionalidad de la cual desee hacer uso, una 
+vez termine con el proceso de dicha funcionalidad, usted podrir a otra o reiniciarla las veces que lo 
+considere necesario para darle un manejo adecuado al programa

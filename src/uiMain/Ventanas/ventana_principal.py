@@ -71,16 +71,29 @@ class ventana_principal(tk.Tk):
         self.frame_interno1.pack(fill="both", expand=True)
         self.frame_interno1.pack_propagate(False)
 
-        """ self.texto_descripcion=open("src//uiMain//assets//descripciones//general.txt", "r").read()
+        self.texto_descripcion=open("src//uiMain//assets//descripciones//general.txt", "r").read()
+        '''self.texto_funcionalidad_1=open("src//uiMain//assets//descripciones//funcionalidad_1.txt", "r").read()
+        self.texto_funcionalidad_2=open("src//uiMain//assets//descripciones//funcionalidad_2.txt", "r").read()
+        self.texto_funcionalidad_3=open("src//uiMain//assets//descripciones//funcionalidad_3.txt", "r").read()'''
 
-        self.label_descripcion=tk.Text(
+        '''with open("src/uiMain/assets/descripciones/funcionalidad_1.txt", "r") as file:
+            self.texto_funcionalidad_1 = file.read()
+
+        with open("src/uiMain/assets/descripciones/funcionalidad_2.txt", "r") as file:
+            self.texto_funcionalidad_2 = file.read()
+
+        with open("src/uiMain/assets/descripciones/funcionalidad_3.txt", "r") as file:
+            self.texto_funcionalidad_3 = file.read()'''
+
+        self.label_descripcion=tk.Label(
             self.frame_interno1,
+            text=self.texto_descripcion,
             font=("Arial",10),
             bg='LightCyan2'
         )
-        self.label_descripcion.pack(fill="x")
-        self.label_descripcion.insert("end", self.texto_descripcion)
-        self.label_descripcion.config(state="disabled") """
+        self.label_descripcion.pack(side="top", anchor="n", pady=10)
+
+
 
         self.frame_interno2=tk.Frame(self.frame_interno1,bg='gray38')
         self.frame_interno2.pack(fill="both", expand=True)
@@ -123,6 +136,7 @@ class ventana_principal(tk.Tk):
         self.destroy()
 
     def reiniciar_contador_frames(self):
+
         self.frame_up.pack_forget()
         self.frame_down.pack_forget()
         funcionalidad_1.numero_frames=1
@@ -138,19 +152,28 @@ class ventana_principal(tk.Tk):
             case 1:
                 self.configurar_nombre_descripcion(
                     "VER VIAJES", 
-                    "descripción funcionalidad 1\n...\n..."
+                    "En esta funcionalidad usted podra ver los viajes disponible por cada empresa, ademas de poder elegir\n" 
+                    "una por su Id para poder observar los asientos que se encuentran disponibles y ocupados para dicho\n"
+                    "viaje, ademas del tipo de cada asiento, y por ultimo usted podra reservar uno de esos asientos por un\n" 
+                    "breve periodo de tiempo."
                 )
                 self.frame_activo = funcionalidad_1(self, self.frame_interno3)
             case 2:
                 self.configurar_nombre_descripcion(
                     "RESERVAR TIQUETE", 
-                    "descripción funcionalidad 2\n...\n..."
+                    "En la funcionalidad 2 usted podra elegir el origen y el destino del viaje que se desea realizar,\n" 
+                    "posteriormente, podra elegir alguno de los viajes para ver sus asientos, escoger uno y poder\n" 
+                    "reservarlo, esta vez de manera absoluta, se le pedira algo de informacion del pasajero y se imprimira\n"
+                    "el tiquete con toda la informacion sobre el viaje."
                 )
                 self.frame_activo = funcionalidad_2(self, self.frame_interno3)
             case 3:
                 self.configurar_nombre_descripcion(
                     "GESTIONAR TIQUETES", 
-                    "descripción funcionalidad 3\n...\n..."
+                    "En la funcionalidad 3 usted como usuario podra ingresando el id del pasajero consultar que tiquetes\n"
+                    "validos e invalidos tiene, asi mismo podra elegir a uno de ellos para cambiar su asiento en ese viaje,\n" 
+                    "para cambiar el viaje o para cancelarlo y se imprimira finalmente en caso de ser necesario el nuevo\n"
+                    "tiquete asociado a los nuevos datos que se modificaron"
                 )
                 self.frame_activo = funcionalidad_3(self, self.frame_interno3)
         
@@ -176,8 +199,8 @@ class ventana_principal(tk.Tk):
     def configurar_nombre_descripcion(self,nombre,descripcion):
         self.nombre_proceso_consulta=nombre
         self.texto_descripcion=descripcion
-        """ self.label_nombre.config(text=self.nombre_proceso_consulta)
-        self.label_descripcion.insert("end", self.texto_descripcion) """
+        self.label_nombre.config(text=self.nombre_proceso_consulta)
+        self.label_descripcion.config(text=self.texto_descripcion)
 
     def volver_principal(self,ventana):
         decision=messagebox.askyesno(
