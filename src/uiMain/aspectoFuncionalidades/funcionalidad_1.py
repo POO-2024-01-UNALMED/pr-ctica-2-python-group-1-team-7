@@ -48,16 +48,24 @@ class funcionalidad_1(tk.Frame):
         funcionalidad_1.numero_frames += 1
     
     def primer_paso(self):
-        boolean = ver_viajes.primera_pregunta(self)
-        if boolean:
+        caso = ver_viajes.primera_pregunta(self)
+
+        if caso == -1:
             self.boton_aceptar.config(command=self.segundo_paso)
-        else:
+        elif caso == 0:
             self.destroy()
+        else:
+            print("hola")
 
     def segundo_paso(self):
         ver_viajes.segunda_pregunta(self)
-        self.boton_aceptar.config(command=self.tercer_paso)
-
+        if caso == -1:
+            self.boton_aceptar.config(command=self.tercer_paso)
+        elif caso == 0:
+            self.destroy()
+        else:
+            print("hola")
+        
     def tercer_paso(self):
         boolean = ver_viajes.tercera_pregunta(self)
         if boolean:

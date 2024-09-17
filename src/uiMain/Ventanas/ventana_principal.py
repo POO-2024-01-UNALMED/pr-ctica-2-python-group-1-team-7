@@ -46,7 +46,10 @@ class ventana_principal(tk.Tk):
             command=lambda:self.generador_funcionalidades(2)
         )
         self.menu_procesos.add_separator()
-        self.menu_procesos.add_command(label="Gestionar tiquetes")
+        self.menu_procesos.add_command(
+            label="Gestionar tiquetes",
+            command=lambda:self.generador_funcionalidades(3)
+        )
         self.menu_procesos.add_separator()
         self.menu_procesos.add_command(label="Servicio de hospedaje")
         self.menu_procesos.add_separator()
@@ -135,7 +138,7 @@ class ventana_principal(tk.Tk):
                     "FUNCIONALIDAD 3", 
                     "descripción funcionalidad 3\n...\n..."
                 )
-                #self.frame_activo = funcionalidad_3(self,self.frame_interno3)
+                self.frame_activo = funcionalidad_3(self, self.frame_interno3)
             case 4:
                 self.configurar_nombre_descripcion(
                     "FUNCIONALIDAD 4", 
