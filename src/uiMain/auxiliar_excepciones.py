@@ -1,13 +1,13 @@
-from Excepciones import ExcepcionId
-from Excepciones import ExcepcionCorreo
-from Excepciones import ExcepcionTelefono
-from Excepciones import ExcepcionTiempo
-from Excepciones import ExcepcionIdUsuario
-from Excepciones import ExcepcionViaje
-from Excepciones import ExcepcionTiquete
-from Excepciones import ExcepcionHospedaje
-from Excepciones import ExcepcionAsiento
-from Excepciones import ExcepcionValoresVacios
+from excepciones import ExcepcionId
+from excepciones import ExcepcionCorreo
+from excepciones import ExcepcionTelefono
+from excepciones import ExcepcionTiempo
+from excepciones import ExcepcionIdUsuario
+from excepciones import ExcepcionViaje
+from excepciones import ExcepcionTiquete
+from excepciones import ExcepcionHospedaje
+from excepciones import ExcepcionAsiento
+from excepciones import ExcepcionValoresVacios
 
 from field_frame import field_frame
 

@@ -33,8 +33,7 @@ class reservar_tiquete():
                 print("ok")'''
 
         if not viajes:
-            ae.excepcion_viaje(99999)
-            reservar_tiquete.mostrar_viajes(text, combobox_origen, combobox_destino)
+            ae.excepcion_viaje('99999')
             text.insert(
                 "end", 
                 "No se encontraron viajes disponibles para reservar\n"
