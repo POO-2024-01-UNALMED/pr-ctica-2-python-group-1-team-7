@@ -44,12 +44,14 @@ class funcionalidad_2(tk.Frame):
             scrollable_frame = auxiliar.generar_scrollbar(self.frame_centro)
 
             self.botones = auxiliar.generar_botones(self)
+            self.boton_aceptar = self.botones[0]
+            self.boton_borrar = self.botones[1]
 
             self.field = field_frame(
                 scrollable_frame, 
-                "CONSULTAS", 
+                "Consultas", 
                 ["Ingrese el id del viaje"], 
-                "RESPUESTAS DEL CLIENTE", 
+                "Respuestas del usuario", 
                 None
             )
             self.field.pack_forget()
@@ -57,8 +59,8 @@ class funcionalidad_2(tk.Frame):
             self.text_viajes = tk.Text(self.frame_superior, font=(("Consolas", 11)))
             self.text_viajes.pack(expand=True, fill="both")
 
-            self.botones[0].config(command=self.primer_paso)
-
+            self.boton_aceptar.config(command=self.primer_paso)
+            self.boton_borrar.config(command=self.field.clear_entries)
         else:
             super().__init__()
 
@@ -72,7 +74,7 @@ class funcionalidad_2(tk.Frame):
         )
         if len(viajes) != 0:
             self.field.pack(fill="both")
-            self.botones[0].config(command=lambda: self.segundo_paso(viajes))
+            self.boton_aceptar.config(command=lambda: self.segundo_paso(viajes))
     
     def segundo_paso(self, viajes):
         viaje = reservar_tiquete.mostrar_asientos(
@@ -83,12 +85,19 @@ class funcionalidad_2(tk.Frame):
         )
         self.frame_right.destroy()
         if viaje != None:
-            self.botones[0].config(command=lambda: self.tercer_paso(viaje))
+            self.boton_aceptar.config(command=lambda: self.tercer_paso(viaje))
 
     def tercer_paso(self, viaje):
         asiento = reservar_tiquete.reservar_asiento(self.field, viaje)
         if asiento != None:
-            self.botones[0].config(command=lambda: self.cuarto_paso(viaje, asiento))
+            self.boton_aceptar.config(command=lambda: self.cuarto_paso(viaje, asiento))
 
     def cuarto_paso(self, viaje, asiento):
-        reservar_tiquete.imprimir_tiquete(self.frame_superior, self.field, viaje, asiento)
+        reservar_tiquete.imprimir_tiquete(
+            self.frame_superior, 
+            self.field, 
+            viaje, 
+            asiento
+        )
+        self.boton_aceptar.config(state="disabled")
+        self.boton_borrar.config(state="disabled")

@@ -7,8 +7,8 @@ from uiMain import auxiliar
 import tkinter as tk
 
 class reservar_tiquete():
-    @classmethod
-    def obtener_ubicaciones(cls, tipo):
+    @staticmethod
+    def obtener_ubicaciones(tipo):
         ubicaciones = []
         for empresa in Empresa.get_empresas():
             for viaje in empresa.get_viajes():
@@ -18,8 +18,8 @@ class reservar_tiquete():
                     ubicaciones.append(viaje.get_terminal_destino().get_ubicacion())
         return list(set(ubicaciones))
 
-    @classmethod
-    def mostrar_viajes(cls, text, combobox_origen, combobox_destino):
+    @staticmethod
+    def mostrar_viajes(text, combobox_origen, combobox_destino):
         text.config(state="normal")
         text.delete("1.0", "end")
         origen = combobox_origen.get()
@@ -52,8 +52,8 @@ class reservar_tiquete():
         text.config(state="disabled")
         return viajes
 
-    @classmethod
-    def mostrar_asientos(cls, frame_superior, text, field_frame, viajes):
+    @staticmethod
+    def mostrar_asientos(frame_superior, text, field_frame, viajes):
         text.config(state="normal")
         text.delete("1.0", "end")
         try:
@@ -77,8 +77,8 @@ class reservar_tiquete():
 
         return viaje
     
-    @classmethod
-    def reservar_asiento(cls, field_frame, viaje):
+    @staticmethod
+    def reservar_asiento(field_frame, viaje):
         try:
             numero_asiento = field_frame.getValue("Ingrese el número del asiento")
             asiento = viaje.buscar_asiento(numero_asiento)
@@ -94,12 +94,14 @@ class reservar_tiquete():
         except:
             pass
        
-    @classmethod
-    def imprimir_tiquete(cls, frame_superior, field_frame, viaje, asiento):
+    @staticmethod
+    def imprimir_tiquete(frame_superior, field_frame, viaje, asiento):
         try:
             frame_superior.winfo_children()[1].destroy()
 
             text = frame_superior.winfo_children()[0]
+            text.tag_configure("center", justify='center')
+            text.tag_add("center", 1.0, "end")
             text.pack(expand=True, fill="both")
 
             atributos = []
@@ -107,12 +109,11 @@ class reservar_tiquete():
                 field_frame.entries[criterio].config(state="disabled")
                 atributos.append(field_frame.getValue(criterio))
 
-            
             pasajero = Pasajero(atributos[0], atributos[1], atributos[2], atributos[3])
             tiquete = Tiquete(pasajero, viaje, asiento)
             pasajero.agregar_tiquete(tiquete)
             
-            text.insert("end", "Tiquete reservado exitosamente\n")
+            text.insert("end", "Tiquete reservado exitosamente\n", "center")
             text.insert("end", "-" * 34 + "\n")
             text.insert("end", f"Tiquete No. {tiquete.get_numero_reserva()}" + "\n")
             text.insert("end", "-" * 34 + "\n")
