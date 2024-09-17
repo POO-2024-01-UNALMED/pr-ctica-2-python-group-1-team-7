@@ -146,12 +146,12 @@ class reservar_tiquete():
             )
             text.insert(
                 "end", 
-                f"Origen: {viaje.get_terminal_origen().get_ubicacion()}" 
+                f"Origen: {viaje.get_origen()}" 
                 + "\n"
             )
             text.insert(
                 "end", 
-                f"Destino: {viaje.get_terminal_destino().get_ubicacion()}" 
+                f"Destino: {viaje.get_destino()}" 
                 + "\n"
             )
             text.insert("end", "-" * 34 + "\n")

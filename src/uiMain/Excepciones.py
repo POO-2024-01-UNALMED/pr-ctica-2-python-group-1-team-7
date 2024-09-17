@@ -40,7 +40,7 @@ class ExcepcionTiempo(ExcepcionDatosIncorrectos):
         super().__init__(f"{ExcepcionDatosIncorrectos().mensaje} : {mensaje2}")
 
 class ExcepcionTiquete(ExcepcionNoEncontrado):
-    def __init__(self,mensaje2='Ningun tiquete con ese id'):
+    def __init__(self, mensaje2='Ningun tiquete con ese id'):
         super().__init__(f"{ExcepcionNoEncontrado().mensaje} : {mensaje2}")
 
 class ExcepcionValoresVacios(ExcepcionDatosIncorrectos):

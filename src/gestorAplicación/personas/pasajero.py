@@ -32,7 +32,7 @@ class Pasajero(Persona):
 
         for tiquete in self.tiquetes:
             # Actualiza la información del viaje
-            tiquete.set_viaje(Empresa.buscar_viaje(tiquete.get_viaje().get_id())) 
+            tiquete.set_viaje(Empresa.buscar_viaje_por_id(tiquete.get_viaje().get_id())) 
             if tipo_tiquetes == "validos" and (tiquete.get_viaje().get_fecha() 
                                                 > date.today()):
                 tiquetes_validos.append(tiquete)

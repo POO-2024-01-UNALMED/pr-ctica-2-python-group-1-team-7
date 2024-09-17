@@ -31,13 +31,13 @@ def posicionar(window, width, height):
     
 def asientos(frame_superior, viaje):
     frame_principal = tk.Frame(frame_superior)
-    frame_principal.place(relx=0.5, rely=0.5, relwidth=0.75, anchor="center")
+    frame_principal.pack(expand=True, fill="both")
 
     frame_asientos = tk.Frame(frame_principal)
-    frame_asientos.pack(side="left", padx=(50, 10), pady=20)
+    frame_asientos.pack(side="left", padx=(100, 10), pady=20)
 
     frame_tipos_asiento = tk.Frame(frame_principal)
-    frame_tipos_asiento.pack(side="right", padx=(10, 50), pady=20)
+    frame_tipos_asiento.pack(side="right", padx=(10, 100), pady=20)
 
     label_preferencial = tk.Label(
         frame_tipos_asiento, 

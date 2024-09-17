@@ -1,7 +1,6 @@
 from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
 from uiMain.aspectoFuncionalidades.funcionalidad_3 import funcionalidad_3
-
 from uiMain.auxiliar import posicionar
 import os
 import tkinter as tk
@@ -148,13 +147,13 @@ class ventana_principal(tk.Tk):
                     "FUNCIONALIDAD 1", 
                     "descripción funcionalidad 1\n...\n..."
                 )
-                self.frame_activo = funcionalidad_1(self,self.frame_interno3)
+                self.frame_activo = funcionalidad_1(self, self.frame_interno3)
             case 2:
                 self.configurar_nombre_descripcion(
                     "FUNCIONALIDAD 2", 
                     "descripción funcionalidad 2\n...\n..."
                 )
-                self.frame_activo = funcionalidad_2(self,self.frame_interno3)
+                self.frame_activo = funcionalidad_2(self, self.frame_interno3)
             case 3:
                 self.configurar_nombre_descripcion(
                     "FUNCIONALIDAD 3", 

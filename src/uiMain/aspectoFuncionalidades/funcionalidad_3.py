@@ -8,7 +8,8 @@ class funcionalidad_3(tk.Frame):
     def __init__(self,ventana_principal, frame):
         if funcionalidad_3.numero_frames == 1:
             super().__init__(frame)
-            ventana_principal.frame_activo = self
+            self.ventana_principal = ventana_principal
+            self.ventana_principal.frame_activo = self
             
             self.pack(expand=True, fill="both")
             self.pack_propagate(False)
@@ -46,4 +47,48 @@ class funcionalidad_3(tk.Frame):
         funcionalidad_3.numero_frames += 1
     
     def primer_paso(self):
-        gestionar_tiquetes.mostrar_tiquetes(self)
+        try:
+            gestionar_tiquetes.mostrar_tiquetes(self)
+        except:
+            pass
+        else:
+            self.boton_aceptar.config(command=self.segundo_paso)
+
+    def segundo_paso(self):
+        try:
+            gestionar_tiquetes.primera_pregunta(self)
+        except:
+            pass
+        else:
+            self.boton_aceptar.config(command=self.tercer_paso)
+
+    def tercer_paso(self):
+        try:
+            gestionar_tiquetes.seleccionar_tiquete(self)
+        except:
+            pass
+        else:
+            self.boton_aceptar.config(command=self.cuarto_paso)
+
+    def cuarto_paso(self):
+        try:
+            gestionar_tiquetes.decision(self)
+        except:
+            pass
+        else:
+            self.boton_aceptar.config(command=self.quinto_paso)
+
+    def quinto_paso(self):
+        try:
+            gestionar_tiquetes.modificar(self, self.ventana_principal)
+        except:
+            pass
+        else:
+            self.boton_aceptar.config(command=self.sexto_paso)
+
+    def sexto_paso(self):
+        try:
+            gestionar_tiquetes.modificar_continuacion(self)
+        except:
+            pass
+

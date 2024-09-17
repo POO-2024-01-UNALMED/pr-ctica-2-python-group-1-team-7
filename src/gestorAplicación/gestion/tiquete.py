@@ -1,4 +1,5 @@
 from typing import override
+from gestorAplicación.gestion.empresa import Empresa
 
 class Tiquete:
     numeros_reserva = 1000000  # Contador para generar números de reserva únicos
@@ -34,28 +35,26 @@ class Tiquete:
     # Método para que un asiento se libere después de un cierto período de tiempol, 
     # usado en la funcionalidad 1
     def liberar_asiento(self):
-        self.viaje = Empresa.buscar_viaje(self.viaje.get_id)  # Actualiza el viaje 
-                                                                # del tiquete
-        self.viaje.liberar_asiento(self.asiento.get_numero)  # Libera el asiento 
+        viaje = Empresa.buscar_viaje_por_id(self.get_viaje().get_id())                                                 # del tiquete
+        viaje.liberar_asiento(self.get_asiento().get_numero())  # Libera el asiento 
                                                                 # en el viaje
 
     # Representa el tiquete como una cadena con formato específico
     @override
     def __str__(self): 
         # Calcula los espacios necesarios para el nombre
-        nombre_espacios = 9 - len(self.pasajero.nombre)  
-
+        nombre_spaces = ' ' * max(0, 9 - len(self.get_pasajero().get_nombre())) 
+        
         # Calcula los espacios para el asiento
-        asiento_espacios = 16 - len(f"{self.asiento.numero} {self.asiento.tipo_asiento}")  
-    
-        # Espacios para el nombre y el asiento
-        espacio_nombre = ' ' * nombre_espacios if nombre_espacios > 0 else ''
-        espacio_asiento = ' ' * asiento_espacios if asiento_espacios > 0 else ''
+        asiento_spaces = ' ' * max(0, 16 - len(str(self.get_asiento())))
 
         # Devuelve una cadena formateada con la información del tiquete
-        return (f"    {self.numero_reserva}               {self.pasajero.nombre}"
-                f"{espacio_nombre}     {self.asiento}{espacio_asiento}    "
-                f"{self.viaje.str_fecha} {self.viaje.hora}     {self.viaje.id}")
+        return (f"    {self.get_numero_reserva()}" 
+                f"               {self.get_pasajero().get_nombre()}"
+                f"{nombre_spaces}     {self.get_asiento()}{asiento_spaces}    "
+                f"{self.get_viaje().get_str_fecha()} " 
+                f"{self.get_viaje().get_hora().strftime("%H:%M")}" 
+                f"     {self.get_viaje().get_id()}")
 
     # Getters y setters
     @classmethod

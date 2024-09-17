@@ -6,7 +6,7 @@ class Persona:
         self.telefono = telefono
         self.correo = correo
 
-    def buscar_tiquete(self, numero_reserva: str):
+    def buscar_tiquete_por_reserva(self, numero_reserva: str):
         return None
 
     def buscar_tiquetes(self, tipo_tiquetes: str):
