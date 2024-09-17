@@ -2,7 +2,6 @@ from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
 from uiMain.auxiliar import posicionar
 import os
-
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
@@ -10,10 +9,11 @@ from PIL import Image, ImageTk
 class ventana_principal(tk.Tk):
     def __init__(self, ventana):
         super().__init__()
-        ventana.withdraw()
+        self.ventana=ventana
+        self.ventana.withdraw()
         self.title("LussajuBus")
         posicionar(self, "1150", "700")
-        self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(ventana))
+        self.protocol("WM_DELETE_WINDOW", lambda: self.cerrar_ambas_ventanas(self.ventana))
 
         self.barra_menu = tk.Menu(self)
         self.config(menu=self.barra_menu,bg='black') 
@@ -28,7 +28,7 @@ class ventana_principal(tk.Tk):
         self.menu_archivo.add_separator()
         self.menu_archivo.add_command(
             label="Salir", 
-            command=lambda: self.cerrar_ventana(ventana)
+            command=lambda: self.cerrar_ventana(self.ventana)
         )
 
         self.menu_procesos = tk.Menu(self.barra_menu, tearoff="off")
@@ -106,6 +106,10 @@ class ventana_principal(tk.Tk):
         ventana.deiconify()
         posicionar(ventana)
 
+    def cerrar_ventana2(self):
+        self.reiniciar_contador_frames()
+        self.destroy()
+
     def reiniciar_contador_frames(self):
         funcionalidad_1.numero_frames=1
         funcionalidad_2.numero_frames=1
@@ -172,12 +176,14 @@ class ventana_principal(tk.Tk):
         self.label_nombre.config(text=self.nombre_proceso_consulta)
         self.label_descripcion.config(text=self.texto_descripcion)
 
-    def volver_principal(self):
+    def volver_principal(self,ventana):
         decision=messagebox.askyesno(
             "Diálogo de confirmación",
             "¿Desea volver al menú principal?"
         )
         if decision:
-            ventana_principal(self)
+            ventana_principal(ventana)
+            self.destroy()
+        
 
     
