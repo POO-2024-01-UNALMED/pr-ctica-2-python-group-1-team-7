@@ -105,7 +105,8 @@ class reservar_tiquete():
                 ae.excepcion_asiento(numero_asiento,viaje.get_bus())
                 return None  
         except:
-            messagebox.showerror("Error inesperado","Se ha producido un error inesperado pero puede continuar navegando en el programa")
+            messagebox.showerror("Error inesperado",
+                                 "Se ha producido un error inesperado pero puede continuar navegando en el programa")
        
     @staticmethod
     def imprimir_tiquete(frame_superior, field_frame, viaje, asiento):

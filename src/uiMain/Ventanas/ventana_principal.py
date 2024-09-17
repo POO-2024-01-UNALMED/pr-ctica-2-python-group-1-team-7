@@ -1,6 +1,7 @@
 from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
 from uiMain.aspectoFuncionalidades.funcionalidad_3 import funcionalidad_3
+
 from uiMain.auxiliar import posicionar
 import os
 import tkinter as tk
@@ -74,7 +75,7 @@ class ventana_principal(tk.Tk):
         self.frame_interno1=tk.Frame(self.frame_ventana,bg='LightCyan2')
         self.frame_interno1.pack(fill="both", expand=True)
 
-        self.texto_descripcion="Aquí va la descripción de la funcionalidad\n...\n..."
+        self.texto_descripcion=open("src//uiMain//assets//descripciones//general.txt", "r").read()
 
         self.label_descripcion=tk.Label(
             self.frame_interno1,
@@ -91,12 +92,26 @@ class ventana_principal(tk.Tk):
         self.frame_interno3.pack(pady=10,padx=100,fill="both", expand=True)
         self.frame_interno3.pack_propagate(False)
 
-        """ imagen = tk.PhotoImage(file="src//uiMain//assets//logo.png")
-        self.imagen_label = tk.Label(self.frame_interno3, image=imagen)
-        self.imagen_label.image = imagen
-        self.imagen_label.pack(expand=True, fill='both')  """
+        self.frame_down = tk.Frame(self.frame_interno3, bg='LightCyan2')
+        self.frame_down.pack(side='bottom', fill='x', padx=20, pady=20)  # Aumentamos el padx y pady
+
+        # Frame superior, ocupando el resto del espacio disponible
+        self.frame_up = tk.Frame(self.frame_interno3, highlightthickness=1, highlightbackground='black')
+        self.frame_up.pack(expand=True, fill='both')
+
+        # Label ocupa todo el espacio del frame superior, con fuente cursiva llamativa
+        self.label_central = tk.Label(self.frame_up, text="Lussaju Bus", font=("Lucida Calligraphy", 80, "italic"), bg='DeepSkyBlue2', highlightthickness=1, highlightbackground='black')
+        self.label_central.pack(expand=True, fill='both')
+
+        # Botón centrado, con tamaño ajustado manualmente
+        boton_fuegos = tk.Label(self.frame_down,font=("Georgia",18), text='Viajando Unidos Conectamos Caminos', highlightthickness=1, highlightbackground='black', bg='black', fg='white', height=3, width=30)
+        boton_fuegos.pack(padx=20, pady=20)  # Aumentamos el padx y pady
+
+        
+ 
 
         self.frame_activo = None
+        
 
         self.mainloop()
 
@@ -115,9 +130,11 @@ class ventana_principal(tk.Tk):
         self.destroy()
 
     def reiniciar_contador_frames(self):
+        self.frame_up.unpack()
+        self.frame_down.unpack()
         funcionalidad_1.numero_frames=1
         funcionalidad_2.numero_frames=1
-        #funcionalidad_3.numero_frames=1
+        funcionalidad_3.numero_frames=1
         #funcionalidad_4.numero_frames=1
         #funcionalidad_5.numero_frames=1
 
