@@ -63,9 +63,9 @@ def excepcion_tiempo(tiempo):
         if not re.match(patron,tiempo):
             raise ExcepcionTiempo()
     except ExcepcionTiempo as e:
-        messagebox.showwarning("Tiempo ingresado incorrectamente",e)
+        messagebox.showerror("Tiempo ingresado incorrectamente",e)
     except:
-        messagebox.showwarning("Tiempo ingresado incorrectamente","El tiempo ingresado es incorrecto, ingréselo nuevamente")
+        messagebox.showerror("Tiempo ingresado incorrectamente","El tiempo ingresado es incorrecto, ingréselo nuevamente")
     else:
         return "ok"
     
@@ -81,11 +81,11 @@ def excepcion_id_usuario(id):
                 raise ExcepcionIdUsuario()
             
     except ExcepcionId as e:
-        messagebox.showwarning("Id de usuario incorrecto",e)
+        messagebox.showerror("Id de usuario incorrecto",e)
     except ExcepcionIdUsuario as e:
-        messagebox.showwarning("Id de usuario incorrecto",e)
+        messagebox.showerror("Id de usuario incorrecto",e)
     except:
-        messagebox.showwarning("Id de usuario incorrecto","El id de usuario debe ser un número")
+        messagebox.showerror("Id de usuario incorrecto","El id de usuario debe ser un número")
     else:
         return "ok"
     
@@ -99,9 +99,9 @@ def excepcion_viaje(id):
         if ok==False:
             raise ExcepcionViaje()
     except ExcepcionViaje as e:
-        messagebox.showwarning("Id de viaje incorrecto",e)
+        messagebox.showerror("Id de viaje incorrecto",e)
     except:
-        messagebox.showwarning("Id de viaje incorrecto","El id de empresa debe ser un número")
+        messagebox.showerror("Id de viaje incorrecto","El id de empresa debe ser un número")
     else:
         return "ok"
     
@@ -116,9 +116,9 @@ def excepcion_tiquete(numero_reserva):
         if ok==False:
             raise ExcepcionTiquete()
     except ExcepcionTiquete as e:
-        messagebox.showwarning("Número de reserva de tiquete incorrecto",e)
+        messagebox.showerror("Número de reserva de tiquete incorrecto",e)
     except:
-        messagebox.showwarning("Número de reserva de tiquete incorrecto","El número de reserva del tiquete debe ser un número")
+        messagebox.showerror("Número de reserva de tiquete incorrecto","El número de reserva del tiquete debe ser un número")
     else:
         return "ok"
     
@@ -132,9 +132,9 @@ def excepcion_hospedaje(nombre):
         if ok==False:
             raise ExcepcionHospedaje()
     except ExcepcionHospedaje as e:
-        messagebox.showwarning("Nombre de hospedaje incorrecto",e)
+        messagebox.showerror("Nombre de hospedaje incorrecto",e)
     except:
-        messagebox.showwarning("Nombre de hospedaje incorrecto","El nombre del hospedaje debe ser una cadena de caracteres")
+        messagebox.showerror("Nombre de hospedaje incorrecto","El nombre del hospedaje debe ser una cadena de caracteres")
     else:
         return "ok"
     
@@ -147,9 +147,9 @@ def excepcion_asiento(numero,bus:Bus):
         if ok==False:
             raise ExcepcionAsiento()
     except ExcepcionAsiento as e:
-        messagebox.showwarning("Número de asiento incorrecto o asiento ocupado",e)
+        messagebox.showerror("Número de asiento incorrecto o asiento ocupado",e)
     except:
-        messagebox.showwarning("Número de asiento incorrecto o asiento ocupado",
+        messagebox.showerror("Número de asiento incorrecto o asiento ocupado",
                                "El numero del asiento no se ha puesto correctamente, ingréselo nuevamente")
     else:
         return "ok"

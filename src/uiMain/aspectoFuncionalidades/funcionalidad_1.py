@@ -1,14 +1,17 @@
 from uiMain.funcionalidades.funcionalidad1 import ver_viajes
 from uiMain.field_frame import field_frame
+#from uiMain.ventanas.ventana_principal import ventana_principal
+
 from uiMain import auxiliar
 import tkinter as tk
 
 class funcionalidad_1(tk.Frame):
     numero_frames = 1
-    def __init__(self,ventana_principal, frame):
+    def __init__(self,ventana_principal:tk.Tk, frame):
         if funcionalidad_1.numero_frames == 1:
             super().__init__(frame)
-            ventana_principal.frame_activo = self
+            self.ventana_principal=ventana_principal
+            self.ventana_principal.frame_activo = self
 
             self.pack(expand=True, fill="both")
             self.pack_propagate(False)
@@ -71,7 +74,7 @@ class funcionalidad_1(tk.Frame):
         if boolean:
             self.boton_aceptar.config(command=self.cuarto_paso)
         else:
-            self.destroy()
+            self.ventana_principal.volver_principal(self.ventana_principal)
 
     def cuarto_paso(self):
         ver_viajes.cuarta_pregunta(self)

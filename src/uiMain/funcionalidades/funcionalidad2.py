@@ -2,6 +2,7 @@ from gestorAplicación.gestion.empresa import Empresa
 from gestorAplicación.gestion.viaje import Viaje
 from gestorAplicación.gestion.tiquete import Tiquete
 from gestorAplicación.personas.pasajero import Pasajero
+import auxiliar_excepciones as ae
 
 from uiMain import auxiliar
 import tkinter as tk
@@ -27,7 +28,10 @@ class reservar_tiquete():
 
         viajes = Empresa.buscar_viajes_por_origen_destino(origen, destino)
 
+        ae.excepcion_viaje(viajes.get_id())
+
         if not viajes:
+
             text.insert(
                 "end", 
                 "No se encontraron viajes disponibles para reservar\n"
