@@ -106,11 +106,7 @@ class ventana_principal(tk.Tk):
         boton_fuegos = tk.Label(self.frame_down,font=("Georgia",18), text='Viajando Unidos Conectamos Caminos', highlightthickness=1, highlightbackground='black', bg='black', fg='white', height=3, width=30)
         boton_fuegos.pack(padx=20, pady=20)  # Aumentamos el padx y pady
 
-        
- 
-
         self.frame_activo = None
-        
 
         self.mainloop()
 
@@ -129,13 +125,11 @@ class ventana_principal(tk.Tk):
         self.destroy()
 
     def reiniciar_contador_frames(self):
-        self.frame_up.unpack()
-        self.frame_down.unpack()
+        self.frame_up.pack_forget()
+        self.frame_down.pack_forget()
         funcionalidad_1.numero_frames=1
         funcionalidad_2.numero_frames=1
         funcionalidad_3.numero_frames=1
-        #funcionalidad_4.numero_frames=1
-        #funcionalidad_5.numero_frames=1
 
     def generador_funcionalidades(self, funcionalidad):
         self.reiniciar_contador_frames()
@@ -160,19 +154,7 @@ class ventana_principal(tk.Tk):
                     "descripción funcionalidad 3\n...\n..."
                 )
                 self.frame_activo = funcionalidad_3(self, self.frame_interno3)
-            case 4:
-                self.configurar_nombre_descripcion(
-                    "FUNCIONALIDAD 4", 
-                    "descripción funcionalidad 4\n...\n..."
-                )
-                #self.frame_activo = funcionalidad_4(self,self.frame_interno3)
-            case 5:
-                self.configurar_nombre_descripcion(
-                    "FUNCIONALIDAD 5", 
-                    "descripción funcionalidad 5\n...\n..."
-                )
-                #self.frame_activo = funcionalidad_5(self,self.frame_interno3)
-
+        
     def info_aplicacion(self):
         messagebox.showinfo(
             "Acerca de la Aplicación" , 
