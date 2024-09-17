@@ -176,7 +176,7 @@ class gestionar_tiquetes():
                     True
                 )
         elif respuesta == "viaje":
-            cls.TIQUETE.liberar_asiento()
+            cls.PASAJERO.cancelar_tiquete(cls.TIQUETE)
             frame_funcionalidad.destroy()
             ventana_principal.generador_funcionalidades(2)
             raise Exception

@@ -25,7 +25,6 @@ class Interfaz:
         Habitacion.chequear_habitaciones()
 
     def salir_del_sistema():
-        print("Ten un buen viaje")
         Serializador.limpiar_archivos()
         Serializador.serializar()
         sys.exit(0)

@@ -51,10 +51,6 @@ class ventana_principal(tk.Tk):
             label="Gestionar tiquetes",
             command=lambda:self.generador_funcionalidades(3)
         )
-        self.menu_procesos.add_separator()
-        self.menu_procesos.add_command(label="Servicio de hospedaje")
-        self.menu_procesos.add_separator()
-        self.menu_procesos.add_command(label="Administrador")
 
         self.menu_ayuda = tk.Menu(self.barra_menu, tearoff="off")
         self.barra_menu.add_cascade(label="Ayuda", menu=self.menu_ayuda)
@@ -73,16 +69,18 @@ class ventana_principal(tk.Tk):
 
         self.frame_interno1=tk.Frame(self.frame_ventana,bg='LightCyan2')
         self.frame_interno1.pack(fill="both", expand=True)
+        self.frame_interno1.pack_propagate(False)
 
-        self.texto_descripcion=open("src//uiMain//assets//descripciones//general.txt", "r").read()
+        """ self.texto_descripcion=open("src//uiMain//assets//descripciones//general.txt", "r").read()
 
-        self.label_descripcion=tk.Label(
+        self.label_descripcion=tk.Text(
             self.frame_interno1,
-            text=self.texto_descripcion,
             font=("Arial",10),
             bg='LightCyan2'
         )
-        self.label_descripcion.pack(side="top", anchor="n", pady=10)
+        self.label_descripcion.pack(fill="x")
+        self.label_descripcion.insert("end", self.texto_descripcion)
+        self.label_descripcion.config(state="disabled") """
 
         self.frame_interno2=tk.Frame(self.frame_interno1,bg='gray38')
         self.frame_interno2.pack(fill="both", expand=True)
@@ -118,7 +116,7 @@ class ventana_principal(tk.Tk):
         self.reiniciar_contador_frames()
         self.destroy()
         ventana.deiconify()
-        posicionar(ventana)
+        posicionar(ventana, "700", "600")
 
     def cerrar_ventana2(self):
         self.reiniciar_contador_frames()
@@ -178,8 +176,8 @@ class ventana_principal(tk.Tk):
     def configurar_nombre_descripcion(self,nombre,descripcion):
         self.nombre_proceso_consulta=nombre
         self.texto_descripcion=descripcion
-        self.label_nombre.config(text=self.nombre_proceso_consulta)
-        self.label_descripcion.config(text=self.texto_descripcion)
+        """ self.label_nombre.config(text=self.nombre_proceso_consulta)
+        self.label_descripcion.insert("end", self.texto_descripcion) """
 
     def volver_principal(self,ventana):
         decision=messagebox.askyesno(
