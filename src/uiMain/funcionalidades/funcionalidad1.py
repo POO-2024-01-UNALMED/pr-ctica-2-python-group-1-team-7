@@ -40,11 +40,12 @@ class ver_viajes():
                 "Ingrese el id del viaje", 
                 True
             )
-            return True
+            return -1
         elif respuesta == "no":
-            return False
+            return 0
         else:
-            pass
+            tk.messagebox.showwarning("Advertencia","Solo se admite (si/no)")
+            return 1
 
     @staticmethod
     def segunda_pregunta(frame_funcionalidad):
