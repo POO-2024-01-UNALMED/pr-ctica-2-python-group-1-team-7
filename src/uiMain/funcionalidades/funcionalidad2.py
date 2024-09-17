@@ -28,10 +28,13 @@ class reservar_tiquete():
 
         viajes = Empresa.buscar_viajes_por_origen_destino(origen, destino)
 
-        ae.excepcion_viaje(viajes.get_id())
+        '''        for viaje in viajes:
+            if (ae.excepcion_viaje(viaje.get_id()))=="ok":
+                print("ok")'''
 
         if not viajes:
-
+            ae.excepcion_viaje(99999)
+            reservar_tiquete.mostrar_viajes(text, combobox_origen, combobox_destino)
             text.insert(
                 "end", 
                 "No se encontraron viajes disponibles para reservar\n"
@@ -65,8 +68,10 @@ class reservar_tiquete():
                 viajes, 
                 field_frame.getValue("Ingrese el id del viaje")
             )
-
+            
             if not viaje:
+                ae.excepcion_viaje("9999999")
+
                 text.insert(
                     "end", 
                     f"No se encontró ningún viaje con número de id {id}" 
@@ -85,8 +90,10 @@ class reservar_tiquete():
     def reservar_asiento(field_frame, viaje):
         try:
             numero_asiento = field_frame.getValue("Ingrese el número del asiento")
+
             asiento = viaje.buscar_asiento(numero_asiento)
             if asiento != None and not asiento.is_reservado():
+                ae.excepcion_asiento(numero_asiento,viaje.get_bus())
                 viaje.reservar_asiento(numero_asiento, None)
                 field_frame.agregar_campo("Nombre", True)
                 field_frame.agregar_campo("Id", False)
@@ -94,6 +101,7 @@ class reservar_tiquete():
                 field_frame.agregar_campo("Teléfono", False)  
                 return asiento
             else:
+                ae.excepcion_asiento(numero_asiento,viaje.get_bus())
                 return None  
         except:
             pass

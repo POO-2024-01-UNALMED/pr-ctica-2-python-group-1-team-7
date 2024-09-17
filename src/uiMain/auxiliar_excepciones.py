@@ -1,13 +1,13 @@
-from Excepciones.ExcepcionId import ExcepcionId
-from Excepciones.ExcepcionCorreo import ExcepcionCorreo
-from Excepciones.ExcepcionTelefono import ExcepcionTelefono
-from Excepciones.ExcepcionTiempo import ExcepcionTiempo
-from Excepciones.ExcepcionIdUsuario import ExcepcionIdUsuario
-from Excepciones.ExcepcionViaje import ExcepcionViaje
-from Excepciones.ExcepcionTiquete import ExcepcionTiquete
-from Excepciones.ExcepcionHospedaje import ExcepcionHospedaje
-from Excepciones.ExcepcionAsiento import ExcepcionAsiento
-from Excepciones.ExcepcionValoresVacios import ExcepcionValoresVacios
+from Excepciones import ExcepcionId
+from Excepciones import ExcepcionCorreo
+from Excepciones import ExcepcionTelefono
+from Excepciones import ExcepcionTiempo
+from Excepciones import ExcepcionIdUsuario
+from Excepciones import ExcepcionViaje
+from Excepciones import ExcepcionTiquete
+from Excepciones import ExcepcionHospedaje
+from Excepciones import ExcepcionAsiento
+from Excepciones import ExcepcionValoresVacios
 
 from field_frame import field_frame
 
@@ -99,7 +99,7 @@ def excepcion_viaje(id):
         if ok==False:
             raise ExcepcionViaje()
     except ExcepcionViaje as e:
-        messagebox.showerror("Id de viaje incorrecto",e)
+        messagebox.showerror("Id de viaje incorrecto",str(e))
     except:
         messagebox.showerror("Id de viaje incorrecto","El id de empresa debe ser un número")
     else:

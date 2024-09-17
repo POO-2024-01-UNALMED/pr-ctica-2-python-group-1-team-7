@@ -3,6 +3,7 @@ from uiMain.field_frame import field_frame
 from uiMain import auxiliar
 import tkinter as tk
 from tkinter import ttk
+import auxiliar_excepciones as ae
 
 class funcionalidad_2(tk.Frame):
     numero_frames = 1
@@ -86,6 +87,8 @@ class funcionalidad_2(tk.Frame):
         self.frame_right.destroy()
         if viaje != None:
             self.boton_aceptar.config(command=lambda: self.tercer_paso(viaje))
+        else:
+            self.segundo_paso(self, viajes)
 
     def tercer_paso(self, viaje):
         asiento = reservar_tiquete.reservar_asiento(self.field, viaje)
@@ -93,11 +96,16 @@ class funcionalidad_2(tk.Frame):
             self.boton_aceptar.config(command=lambda: self.cuarto_paso(viaje, asiento))
 
     def cuarto_paso(self, viaje, asiento):
-        reservar_tiquete.imprimir_tiquete(
+        if (ae.excepcion_id(self.field.entries["Id"].get())!="ok" or 
+            ae.excepcion_telefono(self.field.entries["Teléfono"].get())!="ok" or
+            ae.excepcion_correo(self.field.entries["Correo"].get())!="ok"):
+            self.cuarto_paso(self, viaje, asiento)
+            
+        else:
+            reservar_tiquete.imprimir_tiquete(
             self.frame_superior, 
             self.field, 
             viaje, 
-            asiento
-        )
-        self.boton_aceptar.config(state="disabled")
-        self.boton_borrar.config(state="disabled")
+            asiento)
+            self.boton_aceptar.config(state="disabled")
+            self.boton_borrar.config(state="disabled")
