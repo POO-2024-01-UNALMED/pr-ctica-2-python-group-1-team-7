@@ -47,9 +47,9 @@ class funcionalidad_2(tk.Frame):
 
             self.field = field_frame(
                 scrollable_frame, 
-                "CRITERIO", 
+                "CONSULTAS", 
                 ["Ingrese el id del viaje"], 
-                "VALOR", 
+                "RESPUESTAS DEL CLIENTE", 
                 None
             )
             self.field.pack_forget()

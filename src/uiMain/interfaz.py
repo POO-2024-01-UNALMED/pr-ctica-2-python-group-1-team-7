@@ -7,6 +7,7 @@ from gestorAplicación.gestion.habitacion import Habitacion
 from gestorAplicación.transporte.asiento import Asiento
 from ventanas.ventana_inicio import ventana_inicio
 import auxiliar
+import auxiliar_excepciones as ae
 
 class Interfaz:
     @staticmethod
@@ -28,5 +29,6 @@ class Interfaz:
         ventana_inicio()
        
 if __name__ == "__main__":
-        Interfaz.main()
+        #Interfaz.main()
+        ae.excepcion_telefono("ldsjdskhdsk")
        
