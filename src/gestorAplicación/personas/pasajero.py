@@ -48,7 +48,7 @@ class Pasajero(Persona):
             return None
 
     #  Método para buscar un tiquete de acuerdo al viaje, usado en la funcionalidad 3
-    def buscar_tiquete_por_viaje(self, viaje: 'Viaje'):
+    def buscar_tiquete_por_viaje(self, viaje):
         # Devuelve el tiquete encontrado o None si no se encuentra.
         for tiquete in self.tiquetes:
             # Actualiza la información del viaje
@@ -67,12 +67,12 @@ class Pasajero(Persona):
         return None
 
     # Método para agregar un tiquete, usado en la funcionalidad 2
-    def agregar_tiquete(self, tiquete: 'Tiquete'):
+    def agregar_tiquete(self, tiquete):
         self.tiquetes.append(tiquete)   
 
     # Método que cancela un tiquete específico liberando el asiento y 
     # eliminando el tiquete de la lista.
-    def cancelar_tiquete(self, tiquete: 'Tiquete'):
+    def cancelar_tiquete(self, tiquete):
         for _tiquete in self.tiquetes:
             if _tiquete == tiquete:
                 _tiquete.liberar_asiento()  # Libera el asiento asociado

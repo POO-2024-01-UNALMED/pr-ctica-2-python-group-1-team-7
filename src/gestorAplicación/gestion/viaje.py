@@ -3,6 +3,7 @@ from typing import override
 
 class Viaje:
     ids = 1
+    viajes: list['Viaje'] = []  # Lista estática para almacenar todos los viajes
 
     def __init__(self, terminal_origen: 'Terminal', terminal_destino: 'Terminal', 
                     empresa: 'Empresa' = None, fecha: date = None, 

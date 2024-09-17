@@ -1,5 +1,5 @@
 from Excepciones.ErrorAplicacion import ErrorAplicacion
-from ExcepcionDatosIncorrectos import ExcepcionDatosIncorrectos
+from Excepciones.ExcepcionDatosIncorrectos import ExcepcionDatosIncorrectos
 
 class ExcepcionTiempo(ExcepcionDatosIncorrectos):
     mensaje=ExcepcionDatosIncorrectos.mensaje+" : El tiempo se debe ingresar en el formato (X minutos,Y horas o Z dias)"

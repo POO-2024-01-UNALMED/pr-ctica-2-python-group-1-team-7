@@ -6,6 +6,14 @@ from baseDatos import Serializador, Deserializador
 from gestorAplicación.gestion.habitacion import Habitacion
 from gestorAplicación.transporte.asiento import Asiento
 from ventanas.ventana_inicio import ventana_inicio
+
+from gestorAplicación.personas.pasajero import Pasajero
+from gestorAplicación.gestion.empresa import Empresa
+from gestorAplicación.gestion.viaje import Viaje
+from gestorAplicación.gestion.terminal import Terminal
+from gestorAplicación.gestion.hospedaje import Hospedaje
+from gestorAplicación.transporte.bus import Bus
+
 import auxiliar
 import auxiliar_excepciones as ae
 
@@ -30,5 +38,7 @@ class Interfaz:
        
 if __name__ == "__main__":
         #Interfaz.main()
-        ae.excepcion_telefono("ldsjdskhdsk")
+        auxiliar.instanciar_objetos()
+        bus1 = Bus(14, [3, 4])
+        ae.excepcion_asiento("12H",bus1)
        
