@@ -17,90 +17,56 @@ class funcionalidad_1(tk.Frame):
             self.frame_superior.pack(side="top", expand=True, fill="both")
             self.frame_superior.pack_propagate(False)
 
-            self.text_viajes = tk.Text(self.frame_superior, font=(("Consolas", 11)))
-            self.text_viajes.pack(expand=True, fill="both")
-
-            ver_viajes.mostrar_viajes(self.text_viajes)
-
-            botones=auxiliar.generar_botones(self)
-
             self.frame_centro = tk.Frame(self)
             self.frame_centro.pack( expand=True, fill="both")
             self.frame_centro.pack_propagate(False)
 
-            scrollable_frame=auxiliar.generar_scrollbar(self.frame_centro)
+            scrollable_frame = auxiliar.generar_scrollbar(self.frame_centro)
 
-            f1=field_frame(
+            self.botones = auxiliar.generar_botones(self)
+            self.boton_aceptar = self.botones[0]
+            self.boton_borrar = self.botones[1]
+
+            self.field_frame = field_frame(
                 scrollable_frame, 
-                "Preguntas", 
-                ["¿Desea filtrar por alguna categoría?",
-                 "¿Por cuál categoría desea filtrar?",
-                 "Ingrese la fecha en formato dd-mm-aaaa:",
-                 "Ingrese el origen: ",
-                 "Ingrese el destino: ",
-                 "Ingrese la hora de salida en formato 24 horas: ",
-                 "Ingrese el id del viaje: ",
-                 "Ingrese la placa del vehiculo: ",
-                 "¿Desea ver más detalles sobre un viaje? (si/no) ",
-                 "¿Qué desea hacer?",
-                 "¿Desea reservar un asiento por un cierto período de tiempo? (si/no) ",
-                 "Ingrese el número del asiento: ",
-                 "Ingrese otro número de asiento: ",
-                 "¿Por cuánto tiempo desea reservarlo? (minutos/horas/dias)",
-                 ], 
-                "Respuestas del Usuario", 
+                "Consultas", 
+                ["¿Desea ver más detalles sobre un viaje?"], 
+                "Respuestas del usuario", 
                 None
             )
 
-            f1.pack(fill="x", expand=True)
+            self.text = tk.Text(self.frame_superior, font=(("Consolas", 11)))
+            self.text.pack(expand=True, fill="both")
 
-            f1.ocultar_campos(["¿Por cuál categoría desea filtrar?",
-                 "Ingrese la fecha en formato dd-mm-aaaa:",
-                 "Ingrese el origen: ",
-                 "Ingrese el destino: ",
-                 "Ingrese la hora de salida en formato 24 horas: ",
-                 "Ingrese el id del viaje: ",
-                 "Ingrese la placa del vehiculo: ",
-                 "¿Desea ver más detalles sobre un viaje? (si/no) ",
-                 "¿Qué desea hacer?",
-                 "¿Desea reservar un asiento por un cierto período de tiempo? (si/no) ",
-                 "Ingrese el número del asiento: ",
-                 "Ingrese otro número de asiento: ",
-                 "¿Por cuánto tiempo desea reservarlo? (minutos/horas/dias)",
-                 ])
+            self.boton_aceptar.config(command=self.primer_paso)
+            self.boton_borrar.config(command=self.field_frame.clear_entries)
 
-            boton_aceptar=botones[0]
-
-            boton_borrar=botones[1]
-            boton_aceptar.bind("<Button-1>",lambda event: self.manejar_datos(event, f1))
-            boton_borrar.bind("<Button-1>", lambda event: self.borrar_datos(event, f1))
-            self.lista_respuestas=[]
-
-            #logica programa
-            if self.lista_respuestas:
-                if self.lista_respuestas[0].strip().lower()=="si":
-                    f1.activar_campo(["¿Por cuál categoría desea filtrar?"])
-                    respuesta_actual= self.lista_respuestas[1].strip().lower()
-                    match respuesta_actual:
-                        case 1:
-                            pass
-                else:
-                    pass
-            #self.ventana_principal.volver_principal()
-
-            
+            ver_viajes.mostrar_viajes(self)
         else:
             super().__init__()
 
         funcionalidad_1.numero_frames += 1
+    
+    def salir(self):
+        self.destroy()
+    
+    def primer_paso(self):
+        ver_viajes.primera_pregunta(self)
+        self.boton_aceptar.config(command=self.segundo_paso)
 
-    def borrar_datos(event,fieldframe:field_frame):
-        for key,entry in fieldframe.entries.items():
-            entry.delete(0,tk.END)
+    def segundo_paso(self):
+        ver_viajes.segunda_pregunta(self)
+        self.boton_aceptar.config(command=self.tercer_paso)
 
-    def guardar_datos(event,fieldframe:field_frame):
-        return [entry.get() for entry in fieldframe.entries.values()]
+    def tercer_paso(self):
+        ver_viajes.tercera_pregunta(self)
+        self.boton_aceptar.config(command=self.cuarto_paso)
 
-    def manejar_datos(event,self,fieldframe:field_frame):
-        self.lista_respuestas = funcionalidad_1.guardar_datos(event, fieldframe)
+    def cuarto_paso(self):
+        ver_viajes.cuarta_pregunta(self)
+        self.boton_aceptar.config(command=self.quinto_paso)
 
+    def quinto_paso(self):
+        ver_viajes.quinta_pregunta(self)
+        self.boton_aceptar.config(state="disabled")
+        self.boton_borrar.config(state="disabled")

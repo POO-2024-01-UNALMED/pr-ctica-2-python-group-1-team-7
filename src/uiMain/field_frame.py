@@ -66,34 +66,11 @@ class field_frame(tk.Frame):
                     pady=10
                 )
                 self.entries[criterio] = entry
- 
-    def activar_campo(self, lista_criterios):
-        for criterio in lista_criterios:
-            if criterio in self.labels and criterio in self.entries:
-                self.labels[criterio].grid(
-                    row=self.criterios.index(criterio)+1, 
-                    column=0, 
-                    sticky='news', 
-                    padx=10, 
-                    pady=10
-                )
-                self.entries[criterio].grid(
-                    row=self.criterios.index(criterio)+1, 
-                    column=1, 
-                    sticky='news', 
-                    padx=10, 
-                    pady=10
-                )
-
-    def ocultar_campos(self, lista_criterios):
-        for criterio in lista_criterios:
-            if criterio in self.labels and criterio in self.entries:
-                self.labels[criterio].grid_forget()
-                self.entries[criterio].grid_forget()
     
+    def getValue(self, criterio):
+        return self.entries[criterio].get()
+
     def agregar_campo(self, criterio, desabilitar_anterior):
-        if desabilitar_anterior:
-            self.labels[list(self.labels.keys())[-1]].config(state="disabled")
         label = tk.Label(self, text=criterio)
         label.grid(
             row=len(self.labels)+1, 
@@ -116,7 +93,8 @@ class field_frame(tk.Frame):
         )
         self.entries[criterio] = entry
 
-    
-    def getValue(self, criterio):
-        return self.entries[criterio].get()
+    def clear_entries(self):
+        for entry in self.entries.values():
+            entry.delete(0, "end")
+
 
