@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from baseDatos import Serializador, Deserializador
 from gestorAplicación.gestion.habitacion import Habitacion
 from gestorAplicación.transporte.asiento import Asiento
-from ventanas.ventana_inicio import ventana_inicio
+from uiMain.ventanas.ventana_inicio import ventana_inicio
 
 from gestorAplicación.personas.pasajero import Pasajero
 from gestorAplicación.gestion.empresa import Empresa
