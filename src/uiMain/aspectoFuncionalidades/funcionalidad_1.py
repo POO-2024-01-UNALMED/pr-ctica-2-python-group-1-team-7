@@ -1,5 +1,6 @@
 from uiMain.funcionalidades.funcionalidad1 import ver_viajes
 from uiMain.field_frame import field_frame
+import auxiliar_excepciones as ae
 #from uiMain.ventanas.ventana_principal import ventana_principal
 
 from uiMain import auxiliar
@@ -7,7 +8,7 @@ import tkinter as tk
 
 class funcionalidad_1(tk.Frame):
     numero_frames = 1
-    def __init__(self,ventana_principal:tk.Tk, frame):
+    def __init__(self,ventana_principal, frame):
         if funcionalidad_1.numero_frames == 1:
             super().__init__(frame)
             self.ventana_principal=ventana_principal
@@ -56,18 +57,16 @@ class funcionalidad_1(tk.Frame):
         if caso == -1:
             self.boton_aceptar.config(command=self.segundo_paso)
         elif caso == 0:
-            self.destroy()
-        else:
-            print("hola")
+            self.ventana_principal.volver_principal(self.ventana_principal)
+        
 
     def segundo_paso(self):
-        ver_viajes.segunda_pregunta(self)
+        caso=ver_viajes.segunda_pregunta(self)
         if caso == -1:
             self.boton_aceptar.config(command=self.tercer_paso)
-        elif caso == 0:
-            self.destroy()
         else:
-            print("hola")
+            self.ventana_principal.volver_principal(self.ventana_principal)
+
         
     def tercer_paso(self):
         boolean = ver_viajes.tercera_pregunta(self)
@@ -82,5 +81,12 @@ class funcionalidad_1(tk.Frame):
 
     def quinto_paso(self):
         ver_viajes.quinta_pregunta(self)
-        self.boton_aceptar.config(state="disabled")
-        self.boton_borrar.config(state="disabled")
+        if (ae.excepcion_tiempo!="ok"):
+            self.quinto_paso()
+        else:
+            self.field_frame.entries[
+            "¿Por cuánto tiempo desea reservarlo?"
+        ].config(state="disabled")
+            
+            self.boton_aceptar.config(state="disabled")
+            self.boton_borrar.config(state="disabled")

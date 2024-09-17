@@ -97,8 +97,8 @@ class funcionalidad_2(tk.Frame):
 
     def cuarto_paso(self, viaje, asiento):
         if (ae.excepcion_id(self.field.entries["Id"].get())!="ok" or 
-            ae.excepcion_telefono(self.field.entries["Teléfono"].get())!="ok" or
-            ae.excepcion_correo(self.field.entries["Correo"].get())!="ok"):
+            ae.excepcion_correo(self.field.entries["Correo"].get())!="ok" or
+            ae.excepcion_telefono(self.field.entries["Teléfono"].get())!="ok"):
             self.cuarto_paso(self, viaje, asiento)
             
         else:

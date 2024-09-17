@@ -2,9 +2,11 @@ from gestorAplicación.gestion.empresa import Empresa
 from gestorAplicación.gestion.viaje import Viaje
 from gestorAplicación.gestion.tiquete import Tiquete
 from gestorAplicación.personas.pasajero import Pasajero
+import auxiliar_excepciones as ae
 
 from uiMain import auxiliar
 import tkinter as tk
+from tkinter import messagebox
 
 class ver_viajes():
     @staticmethod
@@ -54,17 +56,23 @@ class ver_viajes():
         )
 
         try:
+            ae.excepcion_viaje(respuesta)
             viaje = Empresa.buscar_viaje_por_id(respuesta)
-        except:
-            print("error")
+            
 
+        except:
+            messagebox.showerror("Error inesperado",
+                                 "Se ha producido un error inesperado pero puede continuar navegando en el programa")
+            return 0
         frame_funcionalidad.text.pack_forget()
+
         auxiliar.asientos(frame_funcionalidad.frame_superior, viaje)
 
         frame_funcionalidad.field_frame.agregar_campo(
             "¿Desea reservar un asiento por un cierto período de tiempo?",
             True
         )
+        return -1
 
     @staticmethod
     def tercera_pregunta(frame_funcionalidad):
@@ -80,18 +88,24 @@ class ver_viajes():
             return True
         elif respuesta == "no":
             return False
+        else:
+            tk.messagebox.showwarning("Advertencia","Solo se admite (si/no)")
+            return False
 
     @staticmethod
     def cuarta_pregunta(frame_funcionalidad):
         respuesta = frame_funcionalidad.field_frame.getValue(
             "Ingrese el número del asiento"
         )
+        
+        indice=frame_funcionalidad.field_frame.getValue(
+                "Ingrese el id del viaje")
+        viaje = Empresa.buscar_viaje_por_id(indice)
+        ok=ae.excepcion_viaje(indice)
+        if ok=="ok":
+            ae.excepcion_asiento(respuesta,viaje.get_bus())
+    
 
-        viaje = Empresa.buscar_viaje_por_id(
-            frame_funcionalidad.field_frame.getValue(
-                "Ingrese el id del viaje"
-            )
-        )
     
         try:
             asiento = viaje.buscar_asiento(respuesta)
@@ -101,7 +115,8 @@ class ver_viajes():
                     True
                 )
         except:
-            print("error")
+            messagebox.showerror("Error inesperado",
+                                 "Se ha producido un error inesperado pero puede continuar navegando en el programa")
 
     @staticmethod
     def quinta_pregunta(frame_funcionalidad):
@@ -121,7 +136,8 @@ class ver_viajes():
                 tiempo = respuesta[0]
                 unidad_tiempo = respuesta[2:]
         except:
-            print("error")
+            messagebox.showerror("Error inesperado",
+                                 "Se ha producido un error inesperado pero puede continuar navegando en el programa")
 
         frame_funcionalidad.frame_superior.winfo_children()[-1].destroy()
 

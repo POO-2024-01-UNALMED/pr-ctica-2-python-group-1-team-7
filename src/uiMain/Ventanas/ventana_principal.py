@@ -1,5 +1,6 @@
 from uiMain.aspectoFuncionalidades.funcionalidad_1 import funcionalidad_1
 from uiMain.aspectoFuncionalidades.funcionalidad_2 import funcionalidad_2
+from uiMain.aspectoFuncionalidades.funcionalidad_3 import funcionalidad_3
 from uiMain.auxiliar import posicionar
 import os
 import tkinter as tk

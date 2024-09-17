@@ -3,9 +3,11 @@ from gestorAplicación.gestion.viaje import Viaje
 from gestorAplicación.gestion.tiquete import Tiquete
 from gestorAplicación.personas.pasajero import Pasajero
 import auxiliar_excepciones as ae
+import field_frame
 
 from uiMain import auxiliar
 import tkinter as tk
+from tkinter import messagebox
 
 class reservar_tiquete():
     @staticmethod
@@ -59,7 +61,7 @@ class reservar_tiquete():
         return viajes
 
     @staticmethod
-    def mostrar_asientos(frame_superior, text, field_frame, viajes):
+    def mostrar_asientos(frame_superior, text, field_frame:field_frame, viajes):
         text.config(state="normal")
         text.delete("1.0", "end")
         try:
@@ -73,7 +75,7 @@ class reservar_tiquete():
 
                 text.insert(
                     "end", 
-                    f"No se encontró ningún viaje con número de id {id}" 
+                    f"No se encontró ningún viaje con número de id {field_frame.entries["Ingrese el id del viaje"].get()}" 
                     + " disponible para reservar\n"
                 )
             else:
@@ -81,7 +83,7 @@ class reservar_tiquete():
                 field_frame.agregar_campo("Ingrese el número del asiento", True)
                 auxiliar.asientos(frame_superior, viaje)
         except:
-            pass
+            messagebox.showerror("Error inesperado","Se ha producido un error inesperado pero puede continuar navegando en el programa")
 
         return viaje
     
@@ -103,7 +105,7 @@ class reservar_tiquete():
                 ae.excepcion_asiento(numero_asiento,viaje.get_bus())
                 return None  
         except:
-            pass
+            messagebox.showerror("Error inesperado","Se ha producido un error inesperado pero puede continuar navegando en el programa")
        
     @staticmethod
     def imprimir_tiquete(frame_superior, field_frame, viaje, asiento):
@@ -153,4 +155,4 @@ class reservar_tiquete():
             )
             text.insert("end", "-" * 34 + "\n")
         except:
-            pass
+            messagebox.showerror("Error inesperado","Se ha producido un error inesperado pero puede continuar navegando en el programa")
