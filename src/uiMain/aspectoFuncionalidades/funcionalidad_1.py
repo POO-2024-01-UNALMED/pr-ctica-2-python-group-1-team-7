@@ -47,20 +47,23 @@ class funcionalidad_1(tk.Frame):
 
         funcionalidad_1.numero_frames += 1
     
-    def salir(self):
-        self.destroy()
-    
     def primer_paso(self):
-        ver_viajes.primera_pregunta(self)
-        self.boton_aceptar.config(command=self.segundo_paso)
+        boolean = ver_viajes.primera_pregunta(self)
+        if boolean:
+            self.boton_aceptar.config(command=self.segundo_paso)
+        else:
+            self.destroy()
 
     def segundo_paso(self):
         ver_viajes.segunda_pregunta(self)
         self.boton_aceptar.config(command=self.tercer_paso)
 
     def tercer_paso(self):
-        ver_viajes.tercera_pregunta(self)
-        self.boton_aceptar.config(command=self.cuarto_paso)
+        boolean = ver_viajes.tercera_pregunta(self)
+        if boolean:
+            self.boton_aceptar.config(command=self.cuarto_paso)
+        else:
+            self.destroy()
 
     def cuarto_paso(self):
         ver_viajes.cuarta_pregunta(self)

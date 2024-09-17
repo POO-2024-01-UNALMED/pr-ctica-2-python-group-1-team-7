@@ -37,8 +37,5 @@ class Interfaz:
         ventana_inicio()
        
 if __name__ == "__main__":
-        #Interfaz.main()
-        auxiliar.instanciar_objetos()
-        bus1 = Bus(14, [3, 4])
-        ae.excepcion_asiento("12H",bus1)
+        Interfaz.main()
        

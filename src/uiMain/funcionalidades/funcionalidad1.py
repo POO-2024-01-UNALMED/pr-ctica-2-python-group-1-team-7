@@ -40,8 +40,9 @@ class ver_viajes():
                 "Ingrese el id del viaje", 
                 True
             )
+            return True
         elif respuesta == "no":
-            frame_funcionalidad.salir()
+            return False
         else:
             pass
 
@@ -75,8 +76,9 @@ class ver_viajes():
                 "Ingrese el número del asiento", 
                 True
             )
+            return True
         elif respuesta == "no":
-            frame_funcionalidad.salir()
+            return False
 
     @staticmethod
     def cuarta_pregunta(frame_funcionalidad):
