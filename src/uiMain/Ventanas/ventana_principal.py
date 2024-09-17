@@ -131,6 +131,7 @@ class ventana_principal(tk.Tk):
         funcionalidad_2.numero_frames=1
         funcionalidad_3.numero_frames=1
 
+
     def generador_funcionalidades(self, funcionalidad):
         self.reiniciar_contador_frames()
         if self.frame_activo:
@@ -138,23 +139,25 @@ class ventana_principal(tk.Tk):
         match funcionalidad:
             case 1:
                 self.configurar_nombre_descripcion(
-                    "FUNCIONALIDAD 1", 
+                    "VER VIAJES", 
                     "descripción funcionalidad 1\n...\n..."
                 )
                 self.frame_activo = funcionalidad_1(self, self.frame_interno3)
             case 2:
                 self.configurar_nombre_descripcion(
-                    "FUNCIONALIDAD 2", 
+                    "RESERVAR TIQUETE", 
                     "descripción funcionalidad 2\n...\n..."
                 )
                 self.frame_activo = funcionalidad_2(self, self.frame_interno3)
             case 3:
                 self.configurar_nombre_descripcion(
-                    "FUNCIONALIDAD 3", 
+                    "GESTIONAR TIQUETES", 
                     "descripción funcionalidad 3\n...\n..."
                 )
                 self.frame_activo = funcionalidad_3(self, self.frame_interno3)
         
+
+
     def info_aplicacion(self):
         messagebox.showinfo(
             "Acerca de la Aplicación" , 
